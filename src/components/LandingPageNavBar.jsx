@@ -64,10 +64,10 @@ const LandingPageNavBar = () => {
           </li>
         </ul>
         <div className="third">
-          <a className="btn login-btn mx-2" href="/login">
+          <a className="btn login-btn mx-2" href="/signup">
             Join now
           </a>
-          <a className="btn signup-btn me-sm-5" href="/signup">
+          <a className="btn signup-btn me-sm-5" href="/login">
             Sign in
           </a>
         </div>
