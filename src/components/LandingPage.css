@@ -1,0 +1,87 @@
+.app-logo {
+  width: 4.5rem;
+  margin-left: 0.5rem;
+}
+
+.fs-sm {
+  font-size: 0.85rem !important;
+}
+
+.login-btn {
+  border: none;
+  padding: 12px;
+  border-radius: 50px;
+  font-size: 1.19rem;
+  font-weight: 500;
+  min-width: 7rem;
+}
+
+.login-btn:hover {
+  background: #f1f1f3;
+}
+
+.signup-btn {
+  border: 1px solid orange;
+  padding: 12px;
+  border-radius: 50px;
+  font-size: 1.19rem;
+  font-weight: 500;
+  min-width: 7rem;
+  color: orange;
+  margin-right: 1rem;
+}
+
+.signup-btn:hover {
+  color: rgb(109, 71, 0);
+  background: rgb(255, 248, 235);
+  border: 1px solid orange;
+}
+
+@media (max-width: 1071px) {
+  .custom-order {
+    display: flex;
+    flex-direction: row;
+  }
+  .custom-order .second {
+    order: 3;
+    margin: 1rem 0 !important;
+    width: 100%;
+    justify-content: space-evenly;
+  }
+  .custom-order .third {
+    order: 2;
+  }
+}
+
+@media (min-width: 1072px) {
+  .custom-order {
+    display: flex;
+    flex-direction: row;
+  }
+  .custom-order .second {
+    order: 1;
+  }
+  .custom-order .third {
+    order: 2;
+  }
+}
+
+@media (max-width: 600px) {
+  .custom-order .second {
+    max-width: 600px;
+    overflow-x: scroll;
+  }
+}
+
+@media (max-width: 374px) {
+  .custom-order .third {
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+  }
+  .login-btn,
+  .signup-btn {
+    margin-left: 0;
+    margin-right: 0;
+  }
+}
