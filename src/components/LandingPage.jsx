@@ -1,12 +1,14 @@
-import LandingPageNavBar from "./LandingPageNavBar";
 import "./LandingPage.css";
+import LandingPageNavBar from "./LandingPageNavBar";
 import Signup from "./Signup";
+import Login from "./Login";
 
 const LandingPage = () => {
   return (
     <>
-      {/* <LandingPageNavBar />; */}
-      <Signup />
+      <LandingPageNavBar />
+      {/* <Signup /> */}
+      {/* <Login /> */}
     </>
   );
 };

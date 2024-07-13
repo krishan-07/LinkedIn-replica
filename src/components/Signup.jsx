@@ -4,7 +4,7 @@ import SignupForm from "./SignupForm";
 
 const Signup = () => {
   return (
-    <div style={{ background: "#f6f6f6" }} className="signup-body">
+    <div style={{ background: "#f3f2f0" }} className="signup-body">
       <nav className="navbar flex p-0">
         <a
           className="navbar-brand order-1 "
