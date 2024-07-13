@@ -71,6 +71,9 @@
     max-width: 600px;
     overflow-x: scroll;
   }
+  .signup-body {
+    background-color: #ffffff !important;
+  }
 }
 
 @media (max-width: 374px) {
@@ -84,4 +87,23 @@
     margin-left: 0;
     margin-right: 0;
   }
+}
+
+.card {
+  max-width: 450px;
+  background-color: #ffffff;
+  border-radius: 10px;
+  margin: 0 auto;
+  border: none;
+}
+.btn-google {
+  border: 2px solid black;
+  padding: 0.4rem 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.btn-google:hover {
+  border: 2px solid black;
+  background: #f7fdff;
 }
