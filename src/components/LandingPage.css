@@ -1,12 +1,13 @@
+body {
+  overflow-x: hidden !important;
+}
 .app-logo {
   width: 4.5rem;
   margin-left: 0.5rem;
 }
-
 .fs-sm {
   font-size: 0.85rem !important;
 }
-
 .login-btn {
   border: none;
   padding: 12px;
@@ -15,11 +16,9 @@
   font-weight: 500;
   min-width: 7rem;
 }
-
 .login-btn:hover {
   background: #f1f1f3;
 }
-
 .signup-btn {
   border: 1px solid orange;
   padding: 12px;
@@ -30,7 +29,6 @@
   color: orange;
   margin-right: 1rem;
 }
-
 .signup-btn:hover {
   color: rgb(109, 71, 0);
   background: rgb(255, 248, 235);
@@ -51,8 +49,31 @@
   .custom-order .third {
     order: 2;
   }
+  .container-m {
+    flex-direction: column !important;
+  }
+  .left-container {
+    max-width: 80% !important;
+    margin: auto;
+  }
+  .left-container .heading {
+    font-size: 2rem !important;
+  }
+  .right-container {
+    max-width: 100% !important;
+  }
+  .right-container img {
+    height: 214px !important;
+    width: 374px !important;
+  }
+  .section {
+    flex-direction: column;
+  }
+  .section-title-box {
+    width: 100% !important;
+    margin-right: 0 !important;
+  }
 }
-
 @media (min-width: 1072px) {
   .custom-order {
     display: flex;
@@ -65,7 +86,6 @@
     order: 2;
   }
 }
-
 @media (max-width: 600px) {
   .custom-order .second {
     max-width: 600px;
@@ -81,8 +101,21 @@
   .app-logo {
     width: 60px !important;
   }
+  .left-container {
+    max-width: 100% !important;
+    padding: 1rem !important;
+  }
+  .left-container .heading {
+    font-size: 2rem !important;
+  }
+  .secondary-heading {
+    font-size: 2rem !important;
+    font-weight: 500 !important ;
+  }
+  .section-f {
+    font-size: 1.1rem !important;
+  }
 }
-
 @media (max-width: 374px) {
   .custom-order .third {
     width: 100%;
@@ -145,4 +178,41 @@
 .btn-login:hover {
   background-color: #0051a1;
   color: white;
+}
+.container-m {
+  display: flex;
+  max-width: 1270px;
+  margin: auto;
+}
+.left-container {
+  max-width: 55%;
+}
+.left-container .heading {
+  font-size: 3.5rem;
+  font-weight: 300;
+  color: rgb(237 117 36);
+}
+.right-container {
+  max-width: 40%;
+  margin: 0 auto;
+}
+.section {
+  width: 100%;
+  align-items: center;
+}
+.section-title-box {
+  width: 60%;
+  margin-right: 5rem;
+  align-self: flex-start;
+}
+.secondary-heading {
+  font-size: 3.4rem;
+  font-weight: 200;
+}
+.section-f {
+  font-size: 1.35rem;
+  font-weight: 200;
+}
+.fit-content {
+  width: fit-content !important;
 }
