@@ -1,0 +1,122 @@
+.search-bar {
+  background-color: #edf3f8;
+  display: block;
+  width: 75%;
+  padding: 0.375rem 0.75rem;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  border-radius: 5px;
+  border: none;
+}
+.search-bar:focus {
+  background-color: #edf3f8;
+  outline: 2px solid black;
+  animation: grow 1s cubic-bezier(0.07, 0.7, 0.19, 0.99) forwards;
+}
+@keyframes grow {
+  to {
+    width: 100%;
+  }
+}
+.on-active:active {
+  border-bottom: 2px solid black;
+}
+.dropdown {
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+  position: relative;
+}
+.img-container {
+  width: 30px;
+  height: 30px;
+  border-radius: 50px;
+  overflow: clip;
+}
+.img-container img {
+  width: 100%;
+}
+.dropdown-m {
+  background: #ffffff;
+  position: absolute;
+  z-index: 99;
+  top: 4rem;
+  right: 0;
+  width: 280px;
+  border-radius: 10px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  transform: scaleY(0);
+  transform-origin: top;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  animation: dropdown 0.2s ease forwards;
+}
+@keyframes dropdown {
+  to {
+    transform: scaleY(1);
+  }
+}
+.btn-view-profile {
+  width: 100%;
+  border: 1.5px solid orange;
+  border-radius: 25px;
+  color: orange;
+  padding: 4px;
+  box-sizing: border-box;
+  background-color: rgb(255, 255, 255);
+}
+.btn-view-profile:hover {
+  border: 2px solid rgb(245, 159, 0);
+  padding: 3px;
+  background-color: rgb(255, 246, 228);
+  color: rgb(245, 159, 0);
+}
+.btn-view-profile:active {
+  border: 2px solid rgb(226, 147, 0);
+  padding: 3px;
+  background-color: rgb(255, 243, 219);
+  color: rgb(230, 149, 0);
+}
+.dropdown-divider {
+  background-color: rgb(201, 201, 201);
+  height: 1px;
+  width: 100%;
+}
+.account-banner {
+  cursor: default;
+}
+.d-none {
+  display: none !important;
+}
+.v-divider {
+  min-height: 60px;
+  border-left: 1px solid rgb(201, 201, 201);
+}
+.fw-m {
+  font-weight: 500 !important;
+}
+@media (max-width: 992px) {
+  .container-fluid form {
+    display: none !important;
+  }
+  .search-icon {
+    display: flex !important;
+  }
+}
+
+@media (max-width: 772px) {
+  .fs-sm {
+    display: none !important;
+  }
+  .dropdown-toggle::after {
+    display: none !important;
+  }
+}
+.d-show {
+  display: flex !important;
+}
+@media (max-width: 443px) {
+  .end-icons {
+    display: none !important ;
+  }
+}

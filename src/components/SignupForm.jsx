@@ -15,7 +15,7 @@ const SignupForm = () => {
         </label>
         <input type="password" className="form-control" id="password" />
       </div>
-      <div class="form-text mb-3 text-center">
+      <div className="form-text mb-3 text-center">
         By clicking Agree & Join or Continue, you agree to the IAC
         <center>
           {" "}

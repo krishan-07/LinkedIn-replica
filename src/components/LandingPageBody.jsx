@@ -21,7 +21,7 @@ const LandingPageBody = () => {
               <FaApple size={25} />
               <span className="ms-1">Sign in with Apple</span>
             </button>
-            <div class="form-text mb-3 text-center my-3">
+            <div className="form-text mb-3 text-center my-3">
               By clicking Agree & Join or Continue, you agree to the IAC{" "}
               <span>
                 <a className="link-offset-2 link-underline link-underline-opacity-0">
