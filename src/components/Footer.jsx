@@ -1,6 +1,6 @@
 import { FaCloud } from "react-icons/fa6";
 
-const Footer = () => {
+const Footer = ({ className = "" }) => {
   const items = [
     "About",
     "Accessibility",
@@ -26,8 +26,7 @@ const Footer = () => {
           <li className="nav-item">
             <a
               href="#"
-              className="nav-link px-2 text-body-secondary"
-              style={{ fontSize: " 0.9rem" }}
+              className={`nav-link px-2 text-body-secondary ${className}`}
             >
               {item}
             </a>

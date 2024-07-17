@@ -85,9 +85,6 @@
 .account-banner {
   cursor: default;
 }
-.d-none {
-  display: none !important;
-}
 .v-divider {
   min-height: 60px;
   border-left: 1px solid rgb(201, 201, 201);
@@ -119,4 +116,75 @@
   .end-icons {
     display: none !important ;
   }
+}
+/* for feed */
+
+.profile-section {
+  display: flex;
+  flex-direction: column;
+  background-color: #ffffff;
+  overflow: hidden;
+  border-radius: 7px;
+}
+.banner-container {
+  width: 100%;
+  border-radius: 10px 10px 0 0;
+  height: 70px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+}
+.banner-container img {
+  width: 100%;
+}
+.image-container {
+  width: 74px;
+  height: 74px;
+  overflow: hidden;
+  margin: auto;
+  left: 0;
+  right: 0;
+  transform: translateY(-50%);
+  border-radius: 50px;
+  background: white;
+  padding: 2px;
+  display: flex;
+  justify-content: center;
+}
+.profile-name {
+  padding-top: 50px;
+}
+.post {
+  background-color: #ffffff;
+  border-radius: 7px;
+  width: 100%;
+  height: 900px;
+}
+.news {
+  background-color: #ffffff;
+  border-radius: 7px;
+  width: 100%;
+  height: 900px;
+}
+.fs-s {
+  font-size: 0.8rem !important;
+}
+.fs-m {
+  font-size: 1.1rem !important;
+}
+.post-photo-container img {
+  width: 100%;
+}
+.btn:active {
+  border: none;
+}
+.btn:focus {
+  border: none;
+}
+.post-input {
+  width: 100%;
+  background-color: #ffffff;
+}
+.post-input:hover {
+  background-color: #f1f1f2;
 }
