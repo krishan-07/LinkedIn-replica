@@ -23,7 +23,7 @@ const Footer = ({ className = "" }) => {
       </p>
       <ul className="nav justify-content-center">
         {items.map((item) => (
-          <li className="nav-item">
+          <li className="nav-item" key={item}>
             <a
               href="#"
               className={`nav-link px-2 text-body-secondary ${className}`}

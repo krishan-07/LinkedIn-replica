@@ -5,6 +5,8 @@ import { BiLike, BiSolidLike } from "react-icons/bi";
 import { useState } from "react";
 import { FaRegCommentDots } from "react-icons/fa6";
 import Footer from "./Footer.jsx";
+import { useDispatch } from "react-redux";
+import { createPostModalActions } from "../store/features/createPostModal.js";
 
 const card = {
   background: "white",
@@ -15,7 +17,7 @@ const card = {
   borderRadius: "7px",
 };
 
-const ProfileImg = ({ size }) => {
+export const ProfileImg = ({ size }) => {
   return (
     <a href="/sree-krishan-mondal">
       <img
@@ -72,12 +74,19 @@ const FeedProfile = () => {
 };
 
 const PostInput = () => {
+  const dispatch = useDispatch();
+  const handleClick = () => {
+    dispatch(createPostModalActions.openPopup());
+  };
   return (
     <>
       <div className="mb-4" style={card}>
         <div className="d-flex p-3 gap-3 ">
           <ProfileImg size={"50px"} />
-          <button className="btn-apple fw-m justify-content-start ps-3 text-secondary post-input">
+          <button
+            className="btn-apple fw-m justify-content-start ps-3 text-secondary post-input"
+            onClick={handleClick}
+          >
             Start a post
           </button>
         </div>
