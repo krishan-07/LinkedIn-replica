@@ -1,11 +1,10 @@
-import { Body, Column } from "./Body";
-import demoImg from "../assets/demoimg.jpeg";
+import { Body, Column, ProfileImg } from "./Utility.jsx";
 import banner from "../assets/banner.jpeg";
 import { BiLike, BiSolidLike } from "react-icons/bi";
 import { useState } from "react";
 import { FaRegCommentDots } from "react-icons/fa6";
 import Footer from "./Footer.jsx";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { createPostModalActions } from "../store/features/createPostModal.js";
 
 const card = {
@@ -15,18 +14,6 @@ const card = {
   flexDirection: "column",
   overflow: "hidden",
   borderRadius: "7px",
-};
-
-export const ProfileImg = ({ size }) => {
-  return (
-    <a href="/sree-krishan-mondal">
-      <img
-        src={demoImg}
-        alt="Profile picture"
-        style={{ height: `${size}`, width: `${size}`, borderRadius: "50px" }}
-      />
-    </a>
-  );
 };
 
 const FeedProfile = () => {
@@ -95,7 +82,7 @@ const PostInput = () => {
   );
 };
 
-const Post = () => {
+const Post = ({ name, bio, content, imgUrl, likes, profileImg }) => {
   const [like, setLike] = useState({
     text: "Like",
     btnColor: "primary",
@@ -113,17 +100,18 @@ const Post = () => {
   const handleFollow = () => {
     follow === "Follow" ? setFollow("Following") : setFollow("Follow");
   };
+
   return (
     <div className="mb-3 pb-3" style={card}>
       <div className="d-flex align-items-center gap-3 m-0 px-3 py-2">
-        <ProfileImg size={"50px"} />
+        {profileImg}
         <div className="d-flex flex-column">
-          <p className="fw-m m-0">Sree krishan mondal</p>
+          <p className="fw-m m-0">{name}</p>
           <p
             className="text-secondary m-0 fs-s text-truncate"
             style={{ maxWidth: "300px" }}
           >
-            Student | KMES | frontend developer | Contributor @ GSSoC'24
+            {bio}
           </p>
         </div>
         <button
@@ -135,18 +123,15 @@ const Post = () => {
           {follow}
         </button>
       </div>
-      <div className="content-container mb-3 px-3">
-        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Non, labore?
-        Corrupti tempore aperiam tenetur harum ad quo adipisci! Enim veniam vel
-      </div>
+      <div className="content-container mb-3 px-3">{content}</div>
       <div className="post-photo-container">
-        <img
-          src="https://images.unsplash.com/photo-1721069209981-d7b9081dfa42?q=80&w=1374&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-          alt="img"
-        />
+        <img src={imgUrl} alt="img" />
       </div>
-      <div className="my-3 fs-s px-3">
-        <BiSolidLike /> 23 people liked this post
+      <div className="my-3 fs-s px-3 d-flex align-items-center gap-1">
+        <span className="d-flex align-items-end">
+          <BiSolidLike size={15} />
+        </span>
+        <span className="lh-1">{likes} people liked this post</span>
       </div>
       <div className="row gx-2 px-3">
         <button
@@ -186,6 +171,9 @@ const News = () => {
 };
 
 const Feed = () => {
+  const posts = useSelector((state) => state.posts);
+  const usersData = useSelector((state) => state.usersData);
+
   return (
     <>
       <Body>
@@ -196,9 +184,31 @@ const Feed = () => {
           <div className="row">
             <Column className={"col-12 col-lg-8 pe-md-1"}>
               <PostInput />
-              <Post />
-              <Post />
-              <Post />
+              {posts.map((post) => {
+                const user = usersData.find(
+                  (user) => user.email === post.email
+                );
+                if (user) {
+                  return (
+                    <Post
+                      key={post.postId}
+                      name={user.name}
+                      bio={user.Bio}
+                      content={post.content}
+                      imgUrl={post.image}
+                      likes={post.likes}
+                      profileImg={
+                        <ProfileImg
+                          size={"50px"}
+                          image={user.profileImg}
+                          name={user.name}
+                        />
+                      }
+                    />
+                  );
+                }
+                return null;
+              })}
             </Column>
             <Column className={"col-12 col-lg-4 pe-md-0"}>
               <News />

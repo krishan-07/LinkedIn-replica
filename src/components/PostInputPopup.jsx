@@ -1,9 +1,9 @@
 import { IoCloseOutline } from "react-icons/io5";
-import { ProfileImg } from "./Feed";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { createPostModalActions } from "../store/features/createPostModal";
 import { FaImage } from "react-icons/fa6";
+import { ProfileImg } from "./Utility";
 
 const PostInputPopup = () => {
   const [imgUrl, setImgUrl] = useState(null);
