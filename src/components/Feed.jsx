@@ -6,6 +6,7 @@ import { FaRegCommentDots } from "react-icons/fa6";
 import Footer from "./Footer.jsx";
 import { useDispatch, useSelector } from "react-redux";
 import { createPostModalActions } from "../store/features/createPostModal.js";
+import { postsActions } from "../store/features/post.js";
 
 const card = {
   background: "white",
@@ -82,12 +83,13 @@ const PostInput = () => {
   );
 };
 
-const Post = ({ name, bio, content, imgUrl, likes, profileImg }) => {
+const Post = ({ name, bio, content, imgUrl, likes, profileImg, postId }) => {
   const [like, setLike] = useState({
     text: "Like",
     btnColor: "primary",
   });
   const [follow, setFollow] = useState("Follow");
+  const dispatch = useDispatch();
 
   const handleLike = () => {
     like.text === "Like"
@@ -96,7 +98,12 @@ const Post = ({ name, bio, content, imgUrl, likes, profileImg }) => {
           text: "Like",
           btnColor: "",
         });
+
+    like.text === "Liked"
+      ? dispatch(postsActions.removeLike(postId))
+      : dispatch(postsActions.updateLike(postId));
   };
+
   const handleFollow = () => {
     follow === "Follow" ? setFollow("Following") : setFollow("Follow");
   };
@@ -123,10 +130,12 @@ const Post = ({ name, bio, content, imgUrl, likes, profileImg }) => {
           {follow}
         </button>
       </div>
-      <div className="content-container mb-3 px-3">{content}</div>
-      <div className="post-photo-container">
-        <img src={imgUrl} alt="img" />
-      </div>
+      <div className="content-container px-3">{content}</div>
+      {imgUrl && (
+        <div className="post-photo-container mt-2">
+          <img src={imgUrl} alt="img" />
+        </div>
+      )}
       <div className="my-3 fs-s px-3 d-flex align-items-center gap-1">
         <span className="d-flex align-items-end">
           <BiSolidLike size={15} />
@@ -197,6 +206,7 @@ const Feed = () => {
                       content={post.content}
                       imgUrl={post.image}
                       likes={post.likes}
+                      postId={post.postId}
                       profileImg={
                         <ProfileImg
                           size={"50px"}

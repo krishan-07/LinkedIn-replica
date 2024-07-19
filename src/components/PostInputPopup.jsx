@@ -1,14 +1,16 @@
 import { IoCloseOutline } from "react-icons/io5";
-import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useRef, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { createPostModalActions } from "../store/features/createPostModal";
 import { FaImage } from "react-icons/fa6";
 import { ProfileImg } from "./Utility";
+import { postsActions } from "../store/features/post";
 
 const PostInputPopup = () => {
   const [imgUrl, setImgUrl] = useState(null);
   const [isImg, setIsImg] = useState(false);
   const dispatch = useDispatch();
+  const content = useRef(null);
 
   const closePopup = () => {
     dispatch(createPostModalActions.closePopup());
@@ -28,6 +30,16 @@ const PostInputPopup = () => {
     document.getElementById("img-input").value = null;
   };
 
+  const addPost = () => {
+    let currContent = content.current.value;
+    dispatch(
+      postsActions.addPost({
+        content: currContent,
+        imgUrl,
+      })
+    );
+    dispatch(createPostModalActions.closePopup());
+  };
   return (
     <div className="modal-overlay">
       <div className="modal-cont mx-2" style={{ maxWidth: "900px" }}>
@@ -58,6 +70,7 @@ const PostInputPopup = () => {
             className="text-area "
             rows="5"
             cols="70"
+            ref={content}
           />
 
           {isImg && (
@@ -82,7 +95,9 @@ const PostInputPopup = () => {
               id="img-input"
             />
           </span>
-          <button className="btn-post bg-primary">Post</button>
+          <button className="btn-post bg-primary" onClick={addPost}>
+            Post
+          </button>
         </div>
       </div>
     </div>
