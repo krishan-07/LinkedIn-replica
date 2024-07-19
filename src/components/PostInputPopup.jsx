@@ -1,7 +1,7 @@
 import { IoCloseOutline } from "react-icons/io5";
 import { useRef, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { createPostModalActions } from "../store/features/createPostModal";
+import { useDispatch } from "react-redux";
+import { createPostActions } from "../store/features/createPostModal";
 import { FaImage } from "react-icons/fa6";
 import { ProfileImg } from "./Utility";
 import { postsActions } from "../store/features/post";
@@ -13,7 +13,7 @@ const PostInputPopup = () => {
   const content = useRef(null);
 
   const closePopup = () => {
-    dispatch(createPostModalActions.closePopup());
+    dispatch(createPostActions.closePopup());
   };
 
   const handleOnChange = (e) => {
@@ -30,15 +30,28 @@ const PostInputPopup = () => {
     document.getElementById("img-input").value = null;
   };
 
+  const checkinput = (e) => {
+    if (e.target.value) content.current.style.border = "none";
+    content.current.placeholder = "What do you want to talk about?";
+  };
+
   const addPost = () => {
     let currContent = content.current.value;
-    dispatch(
-      postsActions.addPost({
-        content: currContent,
-        imgUrl,
-      })
-    );
-    dispatch(createPostModalActions.closePopup());
+    if (currContent) {
+      dispatch(
+        postsActions.addPost({
+          content: currContent,
+          imgUrl,
+        })
+      );
+      //making a delay effect
+      setTimeout(() => {
+        dispatch(createPostActions.closePopup());
+      }, 500);
+    } else {
+      content.current.style.border = "1px solid red";
+      content.current.placeholder = "enter something here to post";
+    }
   };
   return (
     <div className="modal-overlay">
@@ -67,10 +80,11 @@ const PostInputPopup = () => {
         <div className="input-field my-3">
           <textarea
             placeholder="What do you want to talk about?"
-            className="text-area "
+            className="text-area p-2"
             rows="5"
             cols="70"
             ref={content}
+            onChange={checkinput}
           />
 
           {isImg && (
@@ -91,7 +105,7 @@ const PostInputPopup = () => {
               type="file"
               accept="image/*"
               onChange={handleOnChange}
-              className="mb-3 "
+              className="mb-3"
               id="img-input"
             />
           </span>

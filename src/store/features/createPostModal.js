@@ -4,14 +4,10 @@ const createPostSlice = createSlice({
   name: "popup",
   initialState: false,
   reducers: {
-    openPopup: (state) => {
-      return (state = true);
-    },
-    closePopup: (state) => {
-      return (state = false);
-    },
+    openPopup: (state) => (state = true),
+    closePopup: (state) => (state = false),
   },
 });
 
 export default createPostSlice;
-export const createPostModalActions = createPostSlice.actions;
+export const createPostActions = createPostSlice.actions;

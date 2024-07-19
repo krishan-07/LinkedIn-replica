@@ -5,7 +5,7 @@ import { useState } from "react";
 import { FaRegCommentDots } from "react-icons/fa6";
 import Footer from "./Footer.jsx";
 import { useDispatch, useSelector } from "react-redux";
-import { createPostModalActions } from "../store/features/createPostModal.js";
+import { createPostActions } from "../store/features/createPostModal.js";
 import { postsActions } from "../store/features/post.js";
 
 const card = {
@@ -64,7 +64,7 @@ const FeedProfile = () => {
 const PostInput = () => {
   const dispatch = useDispatch();
   const handleClick = () => {
-    dispatch(createPostModalActions.openPopup());
+    dispatch(createPostActions.openPopup());
   };
   return (
     <>
