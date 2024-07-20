@@ -2,14 +2,19 @@ import { FcGoogle } from "react-icons/fc";
 import logo from "../assets/appLogo.png";
 import { FaApple } from "react-icons/fa";
 import Footer from "./Footer";
+import { Link, useNavigate } from "react-router-dom";
 
 const Login = () => {
+  const navigate = useNavigate();
+  const handleRedirect = () => {
+    navigate("/feed");
+  };
   return (
     <div>
       <nav className="navbar flex p-0">
-        <a
+        <Link
           className="navbar-brand order-1 "
-          href="#"
+          to="/"
           style={{ padding: "1rem 0" }}
         >
           <img
@@ -18,7 +23,7 @@ const Login = () => {
             className="app-logo mx-5"
             style={{ width: "80px" }}
           />
-        </a>
+        </Link>
       </nav>
 
       <form className="card card-shadow p-4 " style={{ maxWidth: "380px" }}>
@@ -27,12 +32,10 @@ const Login = () => {
         </h1>
 
         <button type="button" className="btn btn-google mt-3">
-          {" "}
           <FcGoogle size={25} />
           <span className="ms-1">Continue with Google</span>
         </button>
         <button type="button" className="btn btn-apple mt-3 ">
-          {" "}
           <FaApple size={25} />
           <span className="ms-1">Sign in with Apple</span>
         </button>
@@ -45,8 +48,10 @@ const Login = () => {
             className="form-control"
             id="floatingInput"
             placeholder="name@example.com"
+            autoComplete="username"
+            defaultValue={"krishan.mondal@gmail.com"}
           />
-          <label for="floatingInput">Email address</label>
+          <label htmlFor="floatingInput">Email address</label>
         </div>
         <div className="form-floating">
           <input
@@ -54,32 +59,40 @@ const Login = () => {
             className="form-control"
             id="floatingPassword"
             placeholder="Password"
+            autoComplete="current-password"
+            defaultValue={"12345678"}
           />
-          <label for="floatingPassword">Password</label>
+          <label htmlFor="floatingPassword">Password</label>
         </div>
         <div className=" my-3">
           <span>
-            <a
+            <Link
               className="link-offset-2 link-offset-1-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover"
               style={{ fontWeight: "500", fontSize: "1.1rem" }}
             >
               Forgot password?
-            </a>
+            </Link>
           </span>
         </div>
 
-        <button className="btn btn-login my-2">Sign in</button>
+        <button
+          type="button"
+          className="btn btn-login my-2"
+          onClick={handleRedirect}
+        >
+          Sign in
+        </button>
       </form>
       <div className="text-center my-4" style={{ fontSize: "1.1rem" }}>
-        {` Don't have an account?${" "}`}
-        <span>
-          <a
-            href="/signup"
+        Don't have an account?
+        <span className="ms-1">
+          <Link
+            to="/signup"
             className="link-offset-2 link-offset-1-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover"
             style={{ fontWeight: "500" }}
           >
             Sign Up
-          </a>
+          </Link>
         </span>
       </div>
       <Footer />

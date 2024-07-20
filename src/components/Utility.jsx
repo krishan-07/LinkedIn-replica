@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import demoImg from "../assets/demoimg.jpeg";
 
 export const Body = ({ children }) => {
@@ -14,12 +15,12 @@ export const Column = ({ className, children }) => {
 
 export const ProfileImg = ({ size, name = "", image = demoImg }) => {
   return (
-    <a href={`/${name}`}>
+    <Link to={`/${name}`}>
       <img
         src={image}
         alt={name}
         style={{ height: `${size}`, width: `${size}`, borderRadius: "50px" }}
       />
-    </a>
+    </Link>
   );
 };

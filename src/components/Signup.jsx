@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import logo from "../assets/appLogo.png";
 import Footer from "./Footer";
 import SignupForm from "./SignupForm";
@@ -6,9 +7,9 @@ const Signup = () => {
   return (
     <div style={{ background: "#f3f2f0" }} className="signup-body">
       <nav className="navbar flex p-0">
-        <a
+        <Link
           className="navbar-brand order-1 "
-          href="#"
+          to="/"
           style={{ padding: "1rem 0" }}
         >
           <img
@@ -17,7 +18,7 @@ const Signup = () => {
             className="app-logo mx-sm-5"
             style={{ width: "80px" }}
           />
-        </a>
+        </Link>
       </nav>
       <h1
         className="text-center"
@@ -31,12 +32,12 @@ const Signup = () => {
       <div className="text-center my-3">
         Looking to create a page for a business?{" "}
         <span>
-          <a
+          <Link
             className="link-offset-2 link-offset-1-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover"
             style={{ fontWeight: "500" }}
           >
             Get help
-          </a>
+          </Link>
         </span>
       </div>
       <div style={{ background: "white", padding: "0 2rem" }}>

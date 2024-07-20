@@ -7,6 +7,7 @@ import Footer from "./Footer.jsx";
 import { useDispatch, useSelector } from "react-redux";
 import { createPostActions } from "../store/features/createPostModal.js";
 import { postsActions } from "../store/features/post.js";
+import { Link } from "react-router-dom";
 
 const card = {
   background: "white",
@@ -31,13 +32,13 @@ const FeedProfile = () => {
         </div>
 
         <div className="text-center profile-name">
-          <a
-            href="/sree-krishan-mondal"
+          <Link
+            to="/sree-krishan-mondal"
             className="link-dark link-offset-1 link-offset-2-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover fw-m
         "
           >
             Sree krishan mondal
-          </a>
+          </Link>
         </div>
         <div
           className="profile-desc text-secondary text-center mt-2"

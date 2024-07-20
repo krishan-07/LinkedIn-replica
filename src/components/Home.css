@@ -178,12 +178,6 @@
 .post-photo-container img {
   width: 100%;
 }
-.btn:active {
-  border: none;
-}
-.btn:focus {
-  border: none;
-}
 .post-input {
   width: 100%;
   background-color: #ffffff;

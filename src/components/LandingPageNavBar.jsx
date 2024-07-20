@@ -6,6 +6,7 @@ import { BsCollectionPlay } from "react-icons/bs";
 import { PiBagFill } from "react-icons/pi";
 import { FaPuzzlePiece } from "react-icons/fa";
 import { FaLaptop } from "react-icons/fa6";
+import { Link } from "react-router-dom";
 
 const LandingPageNavBar = () => {
   const navItems = [
@@ -34,9 +35,9 @@ const LandingPageNavBar = () => {
   return (
     <nav className="navbar flex bg-white p-0">
       <div className="container-fluid bg-white py-2 custom-order">
-        <a className="navbar-brand order-1 " href="#">
+        <Link className="navbar-brand order-1 " to="/">
           <img src={logo} alt="logo" className="app-logo mx-sm-5" />
-        </a>
+        </Link>
         <ul className="navbar-nav ms-auto d-flex flex-row mt-1 second no-scrollbar">
           {navItems.map((navItem) => (
             <NavIcons
@@ -52,7 +53,7 @@ const LandingPageNavBar = () => {
               borderRight: "1px solid lightgrey",
             }}
           >
-            <a className="nav-link " href="#">
+            <Link className="nav-link " to="#">
               <div
                 className="d-flex flex-column justify-content-center align-items-center"
                 style={{ minWidth: "80px" }}
@@ -60,16 +61,16 @@ const LandingPageNavBar = () => {
                 <FaLaptop size={25} />
                 <p className="m-0 fs-sm">Get the app</p>
               </div>
-            </a>
+            </Link>
           </li>
         </ul>
         <div className="third">
-          <a className="btn login-btn mx-2" href="/signup">
+          <Link className="btn login-btn mx-2" to="/signup">
             Join now
-          </a>
-          <a className="btn signup-btn me-sm-5" href="/login">
+          </Link>
+          <Link className="btn signup-btn me-sm-5" to="/login">
             Sign in
-          </a>
+          </Link>
         </div>
       </div>
     </nav>

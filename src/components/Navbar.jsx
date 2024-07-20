@@ -8,6 +8,7 @@ import { AiFillMessage } from "react-icons/ai";
 import { FaBell } from "react-icons/fa6";
 import { CgMenuGridR } from "react-icons/cg";
 import { IoSearch } from "react-icons/io5";
+import { Link } from "react-router-dom";
 
 const Dropdown = () => {
   const toggleDropdown = () => {
@@ -90,13 +91,13 @@ const Dropdown = () => {
         </div>
         <hr className="dropdown-divider my-2" />
         <div className="account-banner px-3 mb-2">
-          <a
-            href="/"
+          <Link
+            to="/"
             className="link link-secondary"
             style={{ fontSize: ".9rem" }}
           >
             Sign out
-          </a>
+          </Link>
         </div>
       </ul>
     </div>
@@ -127,14 +128,14 @@ const Navbar = () => {
     >
       <div className="container-fluid d-flex flex-nowrap justify-content-evenly justify-content-xl-start justify-content-sm-center">
         <div className="ms-lg-5">
-          <a className="navbar-brand " href="#">
+          <Link className="navbar-brand " to="#">
             <img
               src={logo}
               alt="logo"
               className="app-logo ms-lg-5"
               style={{ width: "60px" }}
             />
-          </a>
+          </Link>
         </div>
         <form
           className="d-flex"
@@ -164,7 +165,7 @@ const Navbar = () => {
             <NavIcons
               icon={navItem.icon}
               name={navItem.name}
-              href={navItem.href}
+              to={navItem.href}
               key={navItem.name}
               className="px-sm-3 px-lg-2 px-2"
             />
@@ -176,14 +177,14 @@ const Navbar = () => {
 
           <ul className="navbar-nav d-flex flex-row no-scrollbar ms-sm-3 ms-1">
             <li className="nav-item">
-              <a className="nav-link " href="#">
+              <Link className="nav-link " to="#">
                 <div className="d-flex flex-column justify-content-center align-items-center">
                   <CgMenuGridR size={25} />
                   <p className="m-0 fs-sm" style={{ minWidth: "max-content" }}>
                     For Business
                   </p>
                 </div>
-              </a>
+              </Link>
             </li>
           </ul>
         </div>

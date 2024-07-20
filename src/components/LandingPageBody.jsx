@@ -3,6 +3,7 @@ import { FcGoogle } from "react-icons/fc";
 import { FaApple } from "react-icons/fa6";
 import Section from "./Section";
 import Footer from "./Footer";
+import { Link } from "react-router-dom";
 
 const LandingPageBody = () => {
   return (
@@ -12,7 +13,6 @@ const LandingPageBody = () => {
           <h1 className="heading">Welcome to your professional community</h1>
           <form className="card ms-lg-0">
             <button type="button" className="btn btn-google mt-3">
-              {" "}
               <FcGoogle size={25} />
               <span className="ms-1">Continue with Google</span>
             </button>
@@ -24,21 +24,21 @@ const LandingPageBody = () => {
             <div className="form-text mb-3 text-center my-3">
               By clicking Agree & Join or Continue, you agree to the IAC{" "}
               <span>
-                <a className="link-offset-2 link-underline link-underline-opacity-0">
+                <Link className="link-offset-2 link-underline link-underline-opacity-0">
                   User Agreement
-                </a>
+                </Link>
               </span>
               ,{" "}
               <span>
-                <a className="link-offset-2 link-underline link-underline-opacity-0">
+                <Link className="link-offset-2 link-underline link-underline-opacity-0">
                   Privacy Policy
-                </a>
+                </Link>
               </span>
               , and{" "}
               <span>
-                <a className="link-offset-2 link-underline link-underline-opacity-0">
+                <Link className="link-offset-2 link-underline link-underline-opacity-0">
                   Cookie Policy
-                </a>
+                </Link>
               </span>
             </div>
             <span
@@ -47,13 +47,13 @@ const LandingPageBody = () => {
             >
               Already on IAC?{" "}
               <span>
-                <a
-                  href="/login"
+                <Link
+                  to="/login"
                   className="link-offset-2 link-offset-1-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover"
                   style={{ fontWeight: "500" }}
                 >
                   Sign In
-                </a>
+                </Link>
               </span>
             </span>
           </form>

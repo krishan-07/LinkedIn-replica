@@ -9,6 +9,7 @@ const Section = ({ heading, body, tags, width }) => {
         <div className="d-flex flex-wrap mt-2 fit-content">
           {tags.map((tag) => (
             <button
+              key={tag}
               className="btn btn-apple fit-content py-3 px-4 text-secondary me-1 mb-2"
               style={{ fontSize: "1.1rem", fontWeight: "500" }}
             >
