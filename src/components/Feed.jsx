@@ -101,7 +101,6 @@ export const Post = ({ post, user, currUser, profileImg }) => {
     follow === "Follow" ? setFollow("Following") : setFollow("Follow");
   };
 
-  console.log(user);
   return (
     <div className="mb-3 pb-3" style={card}>
       <div className="d-flex align-items-center gap-3 m-0 px-3 py-2">

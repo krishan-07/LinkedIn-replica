@@ -99,6 +99,9 @@
   .search-icon {
     display: flex !important;
   }
+  .profile-image-container {
+    width: 130px !important;
+  }
 }
 
 @media (max-width: 772px) {
@@ -129,7 +132,7 @@
 .banner-container {
   width: 100%;
   border-radius: 10px 10px 0 0;
-  height: 70px;
+  /* height: 70px; */
   overflow: hidden;
   display: flex;
   align-items: center;
@@ -250,4 +253,16 @@ textarea {
 }
 .fs-l {
   font-size: 1.5rem;
+}
+.profile-image-container {
+  max-width: 170px;
+  left: 30px;
+  overflow: hidden;
+  margin: auto;
+  transform: translateY(-70%);
+  border-radius: 50%;
+  background: white;
+  padding: 4px;
+  display: flex;
+  justify-content: center;
 }

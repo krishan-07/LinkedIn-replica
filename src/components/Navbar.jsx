@@ -28,7 +28,6 @@ const Dropdown = () => {
     dropdownMenu.classList.toggle("d-none");
   };
   const directToProfile = () => {
-    console.log();
     navigate(`/${user.name.split(" ").join("").toLowerCase()}`);
   };
   const handleSignout = () => {
