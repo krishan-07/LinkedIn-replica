@@ -1,6 +1,6 @@
 import { IoCloseOutline } from "react-icons/io5";
 import { useRef, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { createPostActions } from "../store/features/createPostModal";
 import { FaImage } from "react-icons/fa6";
 import { ProfileImg } from "./Utility";
@@ -11,6 +11,9 @@ const PostInputPopup = () => {
   const [isImg, setIsImg] = useState(false);
   const dispatch = useDispatch();
   const content = useRef(null);
+  const usersData = useSelector((state) => state.usersData);
+  const currUser = useSelector((state) => state.currUser);
+  const user = usersData.find((user) => user.email === currUser);
 
   const closePopup = () => {
     dispatch(createPostActions.closePopup());
@@ -40,6 +43,8 @@ const PostInputPopup = () => {
     if (currContent) {
       dispatch(
         postsActions.addPost({
+          email: currUser,
+          date: new Date().toISOString(),
           content: currContent,
           imgUrl,
         })
@@ -50,7 +55,7 @@ const PostInputPopup = () => {
       }, 500);
     } else {
       content.current.style.border = "1px solid red";
-      content.current.placeholder = "enter something here to post";
+      content.current.placeholder = "Enter something here to post";
     }
   };
   return (
@@ -58,9 +63,9 @@ const PostInputPopup = () => {
       <div className="modal-cont mx-2" style={{ maxWidth: "900px" }}>
         <div className="d-flex justify-content-between align-items-center">
           <div className="d-flex align-items-center gap-3 m-0 py-2">
-            <ProfileImg size={"50px"} />
+            <ProfileImg size={"50px"} image={user.profileImg} />
             <div className="d-flex flex-column">
-              <p className="fw-m fs-m m-0">Sree krishan mondal</p>
+              <p className="fw-m fs-m m-0">{user.name}</p>
               <p
                 className="text-secondary m-0 fs-s text-truncate"
                 style={{ maxWidth: "300px" }}

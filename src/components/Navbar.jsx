@@ -8,9 +8,18 @@ import { AiFillMessage } from "react-icons/ai";
 import { FaBell } from "react-icons/fa6";
 import { CgMenuGridR } from "react-icons/cg";
 import { IoSearch } from "react-icons/io5";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { CurrUserActions } from "../store/features/currUser";
+import { ProfileImg } from "./Utility";
 
 const Dropdown = () => {
+  const dispatch = useDispatch();
+  const usersData = useSelector((state) => state.usersData);
+  const currUser = useSelector((state) => state.currUser);
+  const user = usersData.find((user) => user.email === currUser);
+  const navigate = useNavigate();
+
   const toggleDropdown = () => {
     const dropdown = document.querySelector(".dropdown");
     const dropdownMenu = document.querySelector(".dropdown-m");
@@ -18,9 +27,13 @@ const Dropdown = () => {
     dropdown.classList.toggle("active");
     dropdownMenu.classList.toggle("d-none");
   };
-
   const directToProfile = () => {
-    console.log("coming soon");
+    console.log();
+    navigate(`/${user.name.split(" ").join("").toLowerCase()}`);
+  };
+  const handleSignout = () => {
+    dispatch(CurrUserActions.addUser(null));
+    navigate("/", { replace: true });
   };
 
   return (
@@ -38,27 +51,26 @@ const Dropdown = () => {
       </div>
       {/* dropdown menu */}
       <ul className="dropdown-m p-0 d-none">
-        <div
-          className="d-flex justify-content-between gap-2 p-2"
-          onClick={() => {
-            directToProfile();
-          }}
-        >
+        <div className="d-flex justify-content-between gap-2 p-2">
           <div
             className="img-container"
             style={{ minWidth: "50px", minHeight: "50px" }}
           >
-            <img src={demoImg} alt="" />
+            <ProfileImg size={"100%"} image={user.profileImg} />
           </div>
           <div className="text-container pe-3 mt-1 ms-1">
-            <p className="mb-1 fw-m">Sree krishan mondal</p>
+            <p className="mb-1 fw-m">{user.name}</p>
             <p className="text-secondary " style={{ fontSize: ".9rem" }}>
-              Student | KMES | frontend developer | Contributor @ GSSoC'24
+              {user.bio}
             </p>
           </div>
         </div>
         <div className="px-2">
-          <button type="button" className="btn-view-profile">
+          <button
+            type="button"
+            className="btn-view-profile"
+            onClick={directToProfile}
+          >
             View profile
           </button>
         </div>
@@ -95,6 +107,7 @@ const Dropdown = () => {
             to="/"
             className="link link-secondary"
             style={{ fontSize: ".9rem" }}
+            onClick={handleSignout}
           >
             Sign out
           </Link>
@@ -128,7 +141,7 @@ const Navbar = () => {
     >
       <div className="container-fluid d-flex flex-nowrap justify-content-evenly justify-content-xl-start justify-content-sm-center">
         <div className="ms-lg-5">
-          <Link className="navbar-brand " to="#">
+          <Link className="navbar-brand " to="/feed">
             <img
               src={logo}
               alt="logo"
@@ -165,7 +178,7 @@ const Navbar = () => {
             <NavIcons
               icon={navItem.icon}
               name={navItem.name}
-              to={navItem.href}
+              href={navItem.href}
               key={navItem.name}
               className="px-sm-3 px-lg-2 px-2"
             />

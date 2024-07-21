@@ -3,12 +3,22 @@ import logo from "../assets/appLogo.png";
 import { FaApple } from "react-icons/fa";
 import Footer from "./Footer";
 import { Link, useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { CurrUserActions } from "../store/features/currUser";
+import { useRef } from "react";
 
 const Login = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const email = useRef(null);
+
   const handleRedirect = () => {
-    navigate("/feed");
+    dispatch(CurrUserActions.addUser(email.current.value));
+    setTimeout(() => {
+      navigate("/feed");
+    }, 1000);
   };
+
   return (
     <div>
       <nav className="navbar flex p-0">
@@ -50,6 +60,7 @@ const Login = () => {
             placeholder="name@example.com"
             autoComplete="username"
             defaultValue={"krishan.mondal@gmail.com"}
+            ref={email}
           />
           <label htmlFor="floatingInput">Email address</label>
         </div>

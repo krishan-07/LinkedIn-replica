@@ -196,13 +196,16 @@
   justify-content: center;
   align-items: center;
   z-index: 1000;
+  overflow-y: auto;
 }
 .modal-cont {
   background: white;
   padding: 10px 20px;
   border-radius: 5px;
   max-width: 600px;
-  position: relative;
+  max-width: 600px;
+  position: fixed;
+  top: 20px;
   border: none;
   outline: none;
 }
@@ -244,4 +247,7 @@ textarea {
   border-radius: 5px;
   border: none;
   color: white;
+}
+.fs-l {
+  font-size: 1.5rem;
 }
