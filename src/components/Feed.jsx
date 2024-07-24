@@ -111,7 +111,7 @@ export const Post = ({ post, user, currUser, profileImg }) => {
           </p>
           <p
             className="text-secondary m-0 fs-s text-truncate"
-            style={{ maxWidth: "300px" }}
+            style={{ maxWidth: "200px" }}
           >
             {user.bio}
           </p>
@@ -190,10 +190,10 @@ const Feed = () => {
   return (
     <>
       <Body>
-        <Column className={"col-12 col-md-3 px-5 px-md-0"}>
+        <Column className={"col-12 col-md-3 px-2 px-md-0"}>
           <FeedProfile user={user} />
         </Column>
-        <Column className={"col-12 col-md-9 my-4 my-md-0 px-5 px-md-3"}>
+        <Column className={"col-12 col-md-9 my-4 my-md-0 px-2 px-md-3"}>
           <div className="row">
             <Column className={"col-12 col-lg-8 pe-md-1"}>
               <PostInput user={user} />

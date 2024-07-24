@@ -4,7 +4,7 @@ import demoImg from "../assets/defaultPfp.jpeg";
 export const Body = ({ children }) => {
   return (
     <div className="container-md">
-      <div className="row mt-4">{children}</div>
+      <div className="row my-sm-4">{children}</div>
     </div>
   );
 };
@@ -47,3 +47,50 @@ export function timeAgo(postTimestamp) {
     return `${seconds} second${seconds > 1 ? "s" : ""} ago`;
   }
 }
+
+export function convertMonthYear(dateString) {
+  // Split the dateString to extract year and month
+  const [year, month] = dateString.split("-");
+
+  // Create a new Date object using the year and month
+  const date = new Date(year, month - 1); // month - 1 because Date month is zero-based
+
+  // Format the date to 'MMM yyyy' using Intl.DateTimeFormat
+  const options = { year: "numeric", month: "short" };
+  const formatter = new Intl.DateTimeFormat("en-US", options);
+
+  return formatter.format(date);
+}
+
+export const formatDateToYYYYMMM = () => {
+  // Get the current date and time in milliseconds since the epoch
+  const now = Date.now();
+
+  // Create a new Date object using the current date and time
+  const date = new Date(now);
+
+  // Extract the year using the getFullYear() method
+  const year = date.getFullYear();
+
+  // Define an array of month names
+  const months = [
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "Jun",
+    "Jul",
+    "Aug",
+    "Sep",
+    "Oct",
+    "Nov",
+    "Dec",
+  ];
+
+  // Extract the month using the getMonth() method and get the corresponding month name from the array
+  const month = months[date.getMonth()];
+
+  // Return the formatted string in "yyyy mmm" format
+  return `${month} ${year}`;
+};

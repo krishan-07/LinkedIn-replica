@@ -3,6 +3,7 @@ import postSlice from "./features/post.js";
 import createPostSlice from "./features/createPostModal.js";
 import usersData from "./features/users.js";
 import currUser from "./features/currUser.js";
+import profilePopupSlice from "./features/profileEditPopup.js";
 
 const store = configureStore({
   reducer: {
@@ -10,6 +11,7 @@ const store = configureStore({
     popup: createPostSlice.reducer,
     usersData: usersData.reducer,
     currUser: currUser.reducer,
+    profilePopup: profilePopupSlice.reducer,
   },
 });
 

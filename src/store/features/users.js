@@ -3,6 +3,7 @@ import defaultbanner from "../../assets/defaultBanner.svg";
 import demoImg from "../../assets/demoimg.jpeg";
 import banner from "../../assets/banner.jpeg";
 import { createSlice } from "@reduxjs/toolkit";
+import { formatDateToYYYYMMM } from "../../components/Utility";
 
 const USERS_DATA = [
   {
@@ -11,13 +12,14 @@ const USERS_DATA = [
     pronouns: "He/him",
     profileImg: demoImg,
     profileBanner: banner,
-    bio: "Student | KMES | frontend developer | Contributor @ GSSoC'24",
+    bio: "Student | KMES | frontend developer | Contributor @ GSSoC'24 | intern @ Cloud Clounselage pvt. ltd.",
     skills: ["Web Development", "React"],
     location: "Hyderabad, Telangana, India",
     connections: 65,
     education: [
       {
-        name: "keshav Memorial Institute of Commerce and Sciences",
+        school: "keshav Memorial Institute of Commerce and Sciences",
+        degree: "BCOM [Computer Applications]",
         from: "Apr 2022",
         to: "June 2025",
       },
@@ -26,6 +28,7 @@ const USERS_DATA = [
       {
         companyName: "Cloud Counselage pvt. ltd.",
         type: "Internship",
+        mode: "Remote",
         from: "June 2024",
         to: "present",
       },
@@ -104,6 +107,62 @@ const usersData = createSlice({
   reducers: {
     addUserData: (state) => {
       console.log(state);
+    },
+    updateUserData: (state, action) => {
+      const { id, data } = action.payload;
+      const index = state.findIndex((user) => user.email === id);
+
+      state[index].name = data.name === "" ? state[index].name : data.name;
+      state[index].pronouns =
+        data.pronouns === "" ? state[index].pronouns : data.pronouns;
+      state[index].bio = data.bio === "" ? state[index].bio : data.bio;
+      state[index].location =
+        data.location === "" ? state[index].location : data.location;
+    },
+    updateSkills: (state, action) => {
+      const { id, skill } = action.payload;
+      const index = state.findIndex((user) => user.email === id);
+
+      state[index].skills.push(skill);
+    },
+    deleteSkill: (state, action) => {
+      const { id, skillIndex } = action.payload;
+      const index = state.findIndex((user) => user.email === id);
+
+      state[index].skills.splice(skillIndex, 1);
+    },
+    updateEducation: (state, action) => {
+      const { id, education } = action.payload;
+      const index = state.findIndex((user) => user.email === id);
+
+      state[index].education.push(education);
+    },
+    deleteEducation: (state, action) => {
+      const { id, eduIndex } = action.payload;
+      const index = state.findIndex((user) => user.email === id);
+
+      state[index].education.splice(eduIndex, 1);
+    },
+    updateExperience: (state, action) => {
+      const { id, exp, checkedData } = action.payload;
+      const index = state.findIndex((user) => user.email === id);
+
+      state[index].experience.unshift(exp);
+
+      if (checkedData.length !== 0) {
+        checkedData.forEach((item) => {
+          const i = state[index].experience.findIndex(
+            (data) => data.companyName === item
+          );
+          state[index].experience[i].to = formatDateToYYYYMMM();
+        });
+      }
+    },
+    deleteExperience: (state, action) => {
+      const { id, expIndex } = action.payload;
+      const index = state.findIndex((user) => user.email === id);
+
+      state[index].experience.splice(expIndex, 1);
     },
   },
 });

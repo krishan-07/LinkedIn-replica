@@ -1,5 +1,5 @@
 import { IoCloseOutline } from "react-icons/io5";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { createPostActions } from "../store/features/createPostModal";
 import { FaImage } from "react-icons/fa6";
@@ -58,6 +58,14 @@ const PostInputPopup = () => {
       content.current.placeholder = "Enter something here to post";
     }
   };
+  useEffect(() => {
+    document.body.classList.add("no-scroll");
+
+    return () => {
+      document.body.classList.remove("no-scroll");
+    };
+  }, []);
+
   return (
     <div className="modal-overlay">
       <div className="modal-cont mx-2" style={{ maxWidth: "900px" }}>

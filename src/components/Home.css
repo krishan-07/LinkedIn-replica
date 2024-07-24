@@ -102,6 +102,9 @@
   .profile-image-container {
     width: 130px !important;
   }
+  .space-container {
+    min-height: 30px !important;
+  }
 }
 
 @media (max-width: 772px) {
@@ -111,6 +114,12 @@
   .dropdown-toggle::after {
     display: none !important;
   }
+  .modal-cont {
+    min-width: 400px !important;
+  }
+  .fs-l {
+    font-size: 1.25rem !important;
+  }
 }
 .d-show {
   display: flex !important;
@@ -118,6 +127,15 @@
 @media (max-width: 443px) {
   .end-icons {
     display: none !important ;
+  }
+  .modal-cont {
+    min-width: 350px !important;
+  }
+  .profile-image-container {
+    width: 100px !important;
+  }
+  .space-container {
+    min-height: 20px !important;
   }
 }
 /* for feed */
@@ -206,9 +224,7 @@
   padding: 10px 20px;
   border-radius: 5px;
   max-width: 600px;
-  max-width: 600px;
-  position: fixed;
-  top: 20px;
+  min-width: 600px;
   border: none;
   outline: none;
 }
@@ -265,4 +281,19 @@ textarea {
   padding: 4px;
   display: flex;
   justify-content: center;
+}
+.w-fc {
+  width: fit-content !important;
+}
+.cursor-p {
+  cursor: pointer !important;
+}
+.cursor-d {
+  cursor: default !important;
+}
+.space-container {
+  min-height: 50px;
+}
+.no-scroll {
+  overflow-y: hidden !important;
 }
