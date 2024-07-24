@@ -81,6 +81,11 @@ const postSlice = createSlice({
 
       state.unshift(newPost);
     },
+    deletePost: (state, action) => {
+      const index = state.findIndex((post) => post.postId === action.payload);
+
+      state.splice(index, 1);
+    },
     updateLike: (state, action) => {
       const postIndex = state.findIndex(
         (post) => post.postId === action.payload

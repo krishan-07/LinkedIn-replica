@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { createPostActions } from "../store/features/createPostModal.js";
 import { postsActions } from "../store/features/post.js";
 import { Link } from "react-router-dom";
+import { CiMenuKebab } from "react-icons/ci";
 
 const card = {
   background: "white",
@@ -100,6 +101,14 @@ export const Post = ({ post, user, currUser, profileImg }) => {
   const handleFollow = () => {
     follow === "Follow" ? setFollow("Following") : setFollow("Follow");
   };
+  const toggleDropdown = (postId) => {
+    const dropdownparent = document.querySelector(`[data-post-id="${postId}"]`);
+    const dropdown = dropdownparent.querySelector(".dropdown-m");
+    dropdown.classList.toggle("d-none");
+  };
+  const deletePost = () => {
+    dispatch(postsActions.deletePost(post.postId));
+  };
 
   return (
     <div className="mb-3 pb-3" style={card}>
@@ -121,7 +130,7 @@ export const Post = ({ post, user, currUser, profileImg }) => {
         </div>
         {currUser !== user.email && (
           <div
-            className="text-primary ms-auto me-1 "
+            className="text-primary ms-auto"
             onClick={() => {
               handleFollow();
             }}
@@ -130,6 +139,41 @@ export const Post = ({ post, user, currUser, profileImg }) => {
             {follow}
           </div>
         )}
+        <div
+          className={`position-relative ${
+            currUser === user.email && "ms-auto"
+          }`}
+          data-post-id={post.postId}
+          onClick={() => {
+            toggleDropdown(post.postId);
+          }}
+        >
+          <div data-post-id={`${post.postId}`}>
+            <div className="d-flex align-items-center">
+              <CiMenuKebab />
+            </div>
+          </div>
+
+          <div
+            className="dropdown-m d-none"
+            style={{
+              top: "25px",
+              width: "100px",
+              borderRadius: "0px",
+              boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
+            }}
+          >
+            {currUser === user.email ? (
+              <div className="py-1 px-2 cursor-p item" onClick={deletePost}>
+                Delete post
+              </div>
+            ) : (
+              <div className="py-1 px-2 cursor-p item" onClick={deletePost}>
+                Hide post
+              </div>
+            )}
+          </div>
+        </div>
       </div>
       <div className="content-container px-3">{post.content}</div>
       {post.image && (
