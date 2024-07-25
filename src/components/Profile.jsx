@@ -31,7 +31,7 @@ const ProfileBanner = ({ user, open }) => {
       </div>
       <div className="position-relative">
         <div className="position-absolute profile-image-container">
-          <ProfileImg size={"100%"} image={user.profileImg} />
+          <ProfileImg size={"100%"} image={user.profileImg} name={user.name} />
         </div>
       </div>
       <div className="space-container"></div>
@@ -240,7 +240,6 @@ const ExperienceSection = ({ user, open }) => {
 };
 
 const Profile = () => {
-  const popup = useSelector((state) => state.popup);
   const posts = useSelector((state) => state.posts);
   const usersData = useSelector((state) => state.usersData);
   const currUser = useSelector((state) => state.currUser);
@@ -271,7 +270,6 @@ const Profile = () => {
 
   return (
     <div style={{ background: "#f3f2f0" }}>
-      {popup && <PostInputPopup />}
       {editPopup && allowPopup.profile && (
         <EditUserDataPopup user={user} close={close} />
       )}
@@ -284,7 +282,6 @@ const Profile = () => {
       {editPopup && allowPopup.experience && (
         <EditExperiencePopup user={user} close={close} />
       )}
-      <Navbar />
       <Body>
         <Column className={"col-12 col-md-9 my-4 my-md-0 px-2 px-md-5 px-md-3"}>
           <ProfileBanner user={user} open={open} />

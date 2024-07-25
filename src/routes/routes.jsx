@@ -5,6 +5,8 @@ import Login from "../components/Login.jsx";
 import ScrollToTop from "../components/ScollToTop.jsx";
 import Home from "../components/Home.jsx";
 import Profile from "../components/Profile.jsx";
+import Notifications from "../components/Notifications.jsx";
+import Feed from "../components/Feed.jsx";
 
 const routes = [
   {
@@ -30,22 +32,27 @@ const routes = [
     ),
   },
   {
-    path: "/feed",
+    path: "/in",
     element: (
       <>
         <Home />
         <ScrollToTop />
       </>
     ),
-  },
-  {
-    path: "sreekrishanmondal",
-    element: (
-      <>
-        <Profile />
-        <ScrollToTop />
-      </>
-    ),
+    children: [
+      {
+        path: "/in",
+        element: <Feed />,
+      },
+      {
+        path: "sreekrishanmondal",
+        element: <Profile />,
+      },
+      {
+        path: "notifications",
+        element: <Notifications />,
+      },
+    ],
   },
 ];
 

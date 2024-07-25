@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import demoImg from "../assets/defaultPfp.jpeg";
 
 export const Body = ({ children }) => {
@@ -14,17 +14,23 @@ export const Column = ({ className, children }) => {
 };
 
 export const ProfileImg = ({ size, name = "", image = demoImg }) => {
-  const linkName = name;
-  const link = linkName.split(" ").join("").toLowerCase();
+  const link = nameToLink(name);
+  const navigate = useNavigate();
+  const directToProfile = () => {
+    navigate(`/in/${link}`);
+  };
   return (
-    <Link to={link === "" ? "#" : `/${link}`}>
-      <img
-        src={image}
-        alt={name}
-        style={{ height: `${size}`, width: `${size}`, borderRadius: "50%" }}
-      />
-    </Link>
+    <img
+      src={image}
+      alt={name}
+      style={{ height: `${size}`, width: `${size}`, borderRadius: "50%" }}
+      onClick={directToProfile}
+    />
   );
+};
+
+export const nameToLink = (name) => {
+  return name.split(" ").join("").toLowerCase();
 };
 
 export function timeAgo(postTimestamp) {

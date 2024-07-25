@@ -28,7 +28,7 @@ const Dropdown = () => {
     dropdownMenu.classList.toggle("d-none");
   };
   const directToProfile = () => {
-    navigate(`/${user.name.split(" ").join("").toLowerCase()}`);
+    navigate(`${user.name.split(" ").join("").toLowerCase()}`);
   };
   const handleSignout = () => {
     dispatch(CurrUserActions.addUser(null));
@@ -37,7 +37,7 @@ const Dropdown = () => {
 
   return (
     <div
-      className="dropdown mx-2 mx-sm-3 "
+      className="dropdown mx-2 mx-sm-3"
       onClick={() => {
         toggleDropdown();
       }}
@@ -118,29 +118,29 @@ const Dropdown = () => {
 
 const Navbar = () => {
   const navItems = [
-    { icon: <IoMdHome size={25} />, name: "Home", href: "/feed" },
-    { icon: <MdPeopleAlt size={25} />, name: "My Network", href: "/mynetwork" },
-    { icon: <PiBagFill size={25} />, name: "Jobs", href: "/jobs" },
+    { icon: <IoMdHome size={25} />, name: "Home", href: "/in" },
+    { icon: <MdPeopleAlt size={25} />, name: "My Network", href: "mynetwork" },
+    { icon: <PiBagFill size={25} />, name: "Jobs", href: "jobs" },
     {
       icon: <AiFillMessage size={25} />,
       name: "Messaging",
-      href: "/messaging",
+      href: "messaging",
     },
     {
       icon: <FaBell size={25} />,
       name: "notifications",
-      href: "/notifications",
+      href: "notifications",
     },
   ];
 
   return (
     <nav
-      className="navbar navbar-expand-lg p-0 position-sticky top-0 mt-1 mt-sm-0 z-1"
+      className="navbar navbar-expand-lg p-0 position-sticky top-0 mt-1 mt-sm-0"
       style={{ background: "white" }}
     >
       <div className="container-fluid d-flex flex-nowrap justify-content-evenly justify-content-xl-start justify-content-sm-center">
         <div className="ms-lg-5">
-          <Link className="navbar-brand " to="/feed">
+          <Link className="navbar-brand " to="/in">
             <img
               src={logo}
               alt="logo"

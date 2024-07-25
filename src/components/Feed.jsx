@@ -1,4 +1,4 @@
-import { Body, Column, ProfileImg, timeAgo } from "./Utility.jsx";
+import { Body, Column, nameToLink, ProfileImg, timeAgo } from "./Utility.jsx";
 import { BiLike, BiSolidLike } from "react-icons/bi";
 import { useState } from "react";
 import { FaRegCommentDots } from "react-icons/fa6";
@@ -37,7 +37,7 @@ const FeedProfile = ({ user }) => {
 
         <div className="text-center profile-name">
           <Link
-            to="/sreekrishanmondal"
+            to={`/in/${nameToLink(user.name)}`}
             className="link-dark link-offset-1 link-offset-2-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover fw-m
         "
           >

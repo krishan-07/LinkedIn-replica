@@ -15,7 +15,7 @@ const Login = () => {
   const handleRedirect = () => {
     dispatch(CurrUserActions.addUser(email.current.value));
     setTimeout(() => {
-      navigate("/feed");
+      navigate("/in");
     }, 1000);
   };
 
