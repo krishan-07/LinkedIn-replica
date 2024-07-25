@@ -5,6 +5,7 @@ import { createPostActions } from "../store/features/createPostModal";
 import { FaImage } from "react-icons/fa6";
 import { ProfileImg } from "./Utility";
 import { postsActions } from "../store/features/post";
+import { notificationsActions } from "../store/features/notifications";
 
 const PostInputPopup = () => {
   const [imgUrl, setImgUrl] = useState(null);
@@ -47,6 +48,13 @@ const PostInputPopup = () => {
           date: new Date().toISOString(),
           content: currContent,
           imgUrl,
+        })
+      );
+      dispatch(
+        notificationsActions.push({
+          email: currUser,
+          type: "post",
+          createdAt: new Date().toISOString(),
         })
       );
       //making a delay effect

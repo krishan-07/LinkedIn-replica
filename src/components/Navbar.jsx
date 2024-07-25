@@ -11,7 +11,7 @@ import { IoSearch } from "react-icons/io5";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { CurrUserActions } from "../store/features/currUser";
-import { ProfileImg } from "./Utility";
+import { nameToLink, ProfileImg } from "./Utility";
 
 const Dropdown = () => {
   const dispatch = useDispatch();
@@ -28,7 +28,7 @@ const Dropdown = () => {
     dropdownMenu.classList.toggle("d-none");
   };
   const directToProfile = () => {
-    navigate(`${user.name.split(" ").join("").toLowerCase()}`);
+    navigate(`${nameToLink(user.name)}`);
   };
   const handleSignout = () => {
     dispatch(CurrUserActions.addUser(null));
@@ -117,6 +117,8 @@ const Dropdown = () => {
 };
 
 const Navbar = () => {
+  const notifications = useSelector((state) => state.notifications);
+  let unReadNotifications = 0;
   const navItems = [
     { icon: <IoMdHome size={25} />, name: "Home", href: "/in" },
     { icon: <MdPeopleAlt size={25} />, name: "My Network", href: "mynetwork" },
@@ -126,16 +128,11 @@ const Navbar = () => {
       name: "Messaging",
       href: "messaging",
     },
-    {
-      icon: <FaBell size={25} />,
-      name: "notifications",
-      href: "notifications",
-    },
   ];
 
   return (
     <nav
-      className="navbar navbar-expand-lg p-0 position-sticky top-0 mt-1 mt-sm-0"
+      className="navbar navbar-expand-lg p-0 position-sticky top-0 mt-1 mt-sm-0 z-1"
       style={{ background: "white" }}
     >
       <div className="container-fluid d-flex flex-nowrap justify-content-evenly justify-content-xl-start justify-content-sm-center">
@@ -182,6 +179,28 @@ const Navbar = () => {
               className="px-sm-3 px-lg-2 px-2"
             />
           ))}
+          <li className="nav-item px-sm-2 px-lg-1 px-2">
+            <Link className="nav-link " to="notifications">
+              <div className="d-flex flex-column justify-content-center align-items-center">
+                <div className="position-relative">
+                  <FaBell size={25} />
+                  {!notifications.every((element) => element.read === true) && (
+                    <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                      {notifications.forEach((element) => {
+                        if (!element.read) {
+                          unReadNotifications++;
+                        }
+                      })}
+                      {unReadNotifications}
+                    </span>
+                  )}
+                </div>
+                <p className="m-0 fs-sm" style={{ minWidth: "max-content" }}>
+                  Notifications
+                </p>
+              </div>
+            </Link>
+          </li>
         </ul>
         <Dropdown />
         <div className="end-icons d-flex align-items-center">

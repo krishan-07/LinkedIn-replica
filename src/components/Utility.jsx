@@ -4,7 +4,7 @@ import demoImg from "../assets/defaultPfp.jpeg";
 export const Body = ({ children }) => {
   return (
     <div className="container-md">
-      <div className="row my-sm-4">{children}</div>
+      <div className="row mt-sm-4">{children}</div>
     </div>
   );
 };
@@ -16,16 +16,14 @@ export const Column = ({ className, children }) => {
 export const ProfileImg = ({ size, name = "", image = demoImg }) => {
   const link = nameToLink(name);
   const navigate = useNavigate();
-  const directToProfile = () => {
-    navigate(`/in/${link}`);
-  };
   return (
-    <img
-      src={image}
-      alt={name}
-      style={{ height: `${size}`, width: `${size}`, borderRadius: "50%" }}
-      onClick={directToProfile}
-    />
+    <Link to={`/in/${link}`}>
+      <img
+        src={image}
+        alt={name}
+        style={{ height: `${size}`, width: `${size}`, borderRadius: "50%" }}
+      />
+    </Link>
   );
 };
 
