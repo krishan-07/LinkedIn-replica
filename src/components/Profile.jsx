@@ -4,8 +4,6 @@ import { FaPen, FaPlus } from "react-icons/fa6";
 import { Post } from "./Feed";
 import { useDispatch, useSelector } from "react-redux";
 import { createPostActions } from "../store/features/createPostModal";
-import Navbar from "./Navbar";
-import PostInputPopup from "./PostInputPopup";
 import {
   EditEducationPopup,
   EditExperiencePopup,
@@ -60,7 +58,7 @@ const ProfileBanner = ({ user, open }) => {
             to="#"
             className="link-offset-1-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover"
           >
-            {user.connections} connections
+            {user.connections.length} connections
           </Link>
         </div>
       </div>
@@ -269,7 +267,7 @@ const Profile = () => {
   };
 
   return (
-    <div style={{ background: "#f3f2f0" }}>
+    <div style={{ height: "100%" }}>
       {editPopup && allowPopup.profile && (
         <EditUserDataPopup user={user} close={close} />
       )}

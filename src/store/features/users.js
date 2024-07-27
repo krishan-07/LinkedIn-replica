@@ -15,7 +15,6 @@ const USERS_DATA = [
     bio: "Student | KMES | frontend developer | Contributor @ GSSoC'24 | intern @ Cloud Clounselage pvt. ltd.",
     skills: ["Web Development", "React"],
     location: "Hyderabad, Telangana, India",
-    connections: 65,
     education: [
       {
         school: "keshav Memorial Institute of Commerce and Sciences",
@@ -33,6 +32,8 @@ const USERS_DATA = [
         to: "present",
       },
     ],
+    requests: ["jane.smith@example.com", "alice.jones@example.com"],
+    connections: [],
   },
   {
     email: "john.doe@example.com",
@@ -43,9 +44,10 @@ const USERS_DATA = [
     bio: "Software Engineer | Tech Enthusiast | Blogger",
     skills: ["JavaScript", "Node.js"],
     location: "Hyderabad, Telangana, India",
-    connections: 65,
     education: [],
     experience: [],
+    requests: [],
+    connections: [],
   },
   {
     email: "jane.smith@example.com",
@@ -56,9 +58,10 @@ const USERS_DATA = [
     bio: "Graphic Designer | Artist | Creative Thinker",
     skills: ["UI/UX Design", "Photoshop"],
     location: "Hyderabad, Telangana, India",
-    connections: 65,
     education: [],
     experience: [],
+    requests: [],
+    connections: [],
   },
   {
     email: "alice.jones@example.com",
@@ -69,9 +72,10 @@ const USERS_DATA = [
     bio: "Data Scientist | AI Researcher | Speaker",
     skills: ["Data Science", "Machine Learning"],
     location: "Hyderabad, Telangana, India",
-    connections: 65,
     education: [],
     experience: [],
+    requests: [],
+    connections: [],
   },
   {
     email: "michael.brown@example.com",
@@ -82,9 +86,10 @@ const USERS_DATA = [
     bio: "Entrepreneur | Innovator | Mentor",
     skills: ["Entrepreneurship", "Business Development"],
     location: "Hyderabad, Telangana, India",
-    connections: 65,
     education: [],
     experience: [],
+    requests: [],
+    connections: [],
   },
   {
     email: "emma.white@example.com",
@@ -95,9 +100,10 @@ const USERS_DATA = [
     bio: "Photographer | Travel Blogger | Adventure Seeker",
     skills: ["Photography", "Travel Writing"],
     location: "Hyderabad, Telangana, India",
-    connections: 65,
     education: [],
     experience: [],
+    requests: [],
+    connections: [],
   },
 ];
 
@@ -163,6 +169,29 @@ const usersData = createSlice({
       const index = state.findIndex((user) => user.email === id);
 
       state[index].experience.splice(expIndex, 1);
+    },
+    removeRequest: (state, action) => {
+      const { id, email } = action.payload;
+      const index = state.findIndex((user) => user.email === id);
+
+      state[index].requests = state[index].requests.filter(
+        (request) => request !== email
+      );
+    },
+    acceptRequest: (state, action) => {
+      const { id, email } = action.payload;
+      const index = state.findIndex((user) => user.email === id);
+
+      state[index].requests = state[index].requests.filter(
+        (request) => request !== email
+      );
+      state[index].connections.push(email);
+    },
+    sendRequest: (state, action) => {
+      const { id, email } = action.payload;
+      const index = state.findIndex((user) => user.email === id);
+
+      state[index].requests.push(email);
     },
   },
 });

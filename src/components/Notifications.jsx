@@ -3,8 +3,9 @@ import { Body, Column, ProfileImg, timeAgo } from "./Utility";
 import { notificationsActions } from "../store/features/notifications";
 
 const card = {
-  borderRadius: "10px",
+  borderRadius: "6px",
   background: "white",
+  overflow: "clip",
 };
 
 const Notifications = () => {

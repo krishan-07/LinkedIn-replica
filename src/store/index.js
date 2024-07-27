@@ -5,6 +5,7 @@ import usersData from "./features/users.js";
 import currUser from "./features/currUser.js";
 import profilePopupSlice from "./features/profileEditPopup.js";
 import notifications from "./features/notifications.js";
+import groups from "./features/groups.js";
 
 const store = configureStore({
   reducer: {
@@ -14,6 +15,7 @@ const store = configureStore({
     currUser: currUser.reducer,
     profilePopup: profilePopupSlice.reducer,
     notifications: notifications.reducer,
+    groups: groups.reducer,
   },
 });
 

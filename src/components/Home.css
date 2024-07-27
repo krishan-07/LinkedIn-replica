@@ -61,19 +61,16 @@
   border: 1.5px solid orange;
   border-radius: 25px;
   color: orange;
-  padding: 4px;
   box-sizing: border-box;
   background-color: rgb(255, 255, 255);
 }
 .btn-view-profile:hover {
-  border: 2px solid rgb(245, 159, 0);
-  padding: 3px;
+  border: 1.5px solid rgb(245, 159, 0);
   background-color: rgb(255, 246, 228);
   color: rgb(245, 159, 0);
 }
 .btn-view-profile:active {
-  border: 2px solid rgb(226, 147, 0);
-  padding: 3px;
+  border: 1.5px solid rgb(226, 147, 0);
   background-color: rgb(255, 243, 219);
   color: rgb(230, 149, 0);
 }
@@ -136,6 +133,9 @@
   }
   .space-container {
     min-height: 20px !important;
+  }
+  .connection-card {
+    min-width: 150px !important;
   }
 }
 /* for feed */
@@ -320,4 +320,35 @@ textarea {
 .badge {
   --bs-badge-padding-x: 0.35em;
   --bs-badge-padding-y: 0.2em;
+}
+
+.connection-card {
+  border-radius: 12px;
+  border: 1px solid #e4e4e4;
+  overflow: clip;
+  position: relative;
+  min-width: 180px;
+  max-width: 200px;
+  background-color: white;
+  margin: auto;
+}
+.connection-card:hover {
+  box-shadow: 0 0 0 1px rgba(140, 140, 140, 0.2), 0 4px 4px rgba(0, 0, 0, 0.3);
+}
+.connection-img {
+  position: absolute;
+  top: 20px;
+}
+.btn-disabled {
+  width: 100%;
+  border: 1.5px solid rgb(63, 63, 63);
+  border-radius: 25px;
+  color: rgb(54, 54, 54);
+  box-sizing: border-box;
+  background-color: rgb(245, 245, 245);
+}
+.btn-disabled:hover {
+  border: 1.5px solid rgb(0, 0, 0);
+  background-color: rgb(228, 228, 228);
+  color: rgb(0, 0, 0);
 }

@@ -7,6 +7,7 @@ import Home from "../components/Home.jsx";
 import Profile from "../components/Profile.jsx";
 import Notifications from "../components/Notifications.jsx";
 import Feed from "../components/Feed.jsx";
+import Network from "../components/Network.jsx";
 
 const routes = [
   {
@@ -51,6 +52,10 @@ const routes = [
       {
         path: "notifications",
         element: <Notifications />,
+      },
+      {
+        path: "mynetwork",
+        element: <Network />,
       },
     ],
   },
