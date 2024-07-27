@@ -30,14 +30,14 @@ const FeedProfile = ({ user }) => {
             <ProfileImg
               size={"100%"}
               image={user.profileImg}
-              name={user.name}
+              name={user.userName}
             />
           </div>
         </div>
 
         <div className="text-center profile-name">
           <Link
-            to={`/in/${nameToLink(user.name)}`}
+            to={`/in/${user.userName}`}
             className="link-dark link-offset-1 link-offset-2-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover fw-m
         "
           >
@@ -86,8 +86,7 @@ const PostInput = ({ user }) => {
   );
 };
 
-export const Post = ({ post, user, currUser, profileImg }) => {
-  const [follow, setFollow] = useState("Follow");
+export const Post = ({ post, user, currUser, profileImg, currUserEmail }) => {
   const dispatch = useDispatch();
   const daysPostedAgo = timeAgo(post.date);
 
@@ -98,9 +97,7 @@ export const Post = ({ post, user, currUser, profileImg }) => {
       dispatch(postsActions.removeLike(post.postId));
     }
   };
-  const handleFollow = () => {
-    follow === "Follow" ? setFollow("Following") : setFollow("Follow");
-  };
+
   const toggleDropdown = (postId) => {
     const dropdownparent = document.querySelector(`[data-post-id="${postId}"]`);
     const dropdown = dropdownparent.querySelector(".dropdown-m");
@@ -109,9 +106,13 @@ export const Post = ({ post, user, currUser, profileImg }) => {
   const deletePost = () => {
     dispatch(postsActions.deletePost(post.postId));
   };
+  const filterPost = (postId) => {
+    const post = document.querySelector(`[data-post="${postId}"]`);
+    post.classList.add("d-none");
+  };
 
   return (
-    <div className="mb-3 pb-3" style={card}>
+    <div className="mb-3 pb-3" style={card} data-post={post.postId}>
       <div className="d-flex align-items-center gap-3 m-0 px-3 py-2">
         {profileImg}
         <div className="d-flex flex-column mt-1">
@@ -128,21 +129,8 @@ export const Post = ({ post, user, currUser, profileImg }) => {
             {daysPostedAgo}
           </p>
         </div>
-        {currUser !== user.email && (
-          <div
-            className="text-primary ms-auto"
-            onClick={() => {
-              handleFollow();
-            }}
-            style={{ cursor: "pointer" }}
-          >
-            {follow}
-          </div>
-        )}
         <div
-          className={`position-relative ${
-            currUser === user.email && "ms-auto"
-          }`}
+          className="position-relative ms-auto"
           data-post-id={post.postId}
           onClick={() => {
             toggleDropdown(post.postId);
@@ -163,12 +151,17 @@ export const Post = ({ post, user, currUser, profileImg }) => {
               boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
             }}
           >
-            {currUser === user.email ? (
+            {currUser && user.email === currUserEmail ? (
               <div className="py-1 px-2 cursor-p item" onClick={deletePost}>
                 Delete post
               </div>
             ) : (
-              <div className="py-1 px-2 cursor-p item" onClick={deletePost}>
+              <div
+                className="py-1 px-2 cursor-p item"
+                onClick={() => {
+                  filterPost(post.postId);
+                }}
+              >
                 Hide post
               </div>
             )}
@@ -252,11 +245,12 @@ const Feed = () => {
                       post={post}
                       user={user}
                       currUser={currUser}
+                      currUserEmail={currUser}
                       profileImg={
                         <ProfileImg
                           size={"50px"}
                           image={user.profileImg}
-                          name={user.name}
+                          name={user.userName}
                         />
                       }
                     />

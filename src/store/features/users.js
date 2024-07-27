@@ -8,6 +8,7 @@ import { formatDateToYYYYMMM } from "../../components/Utility";
 const USERS_DATA = [
   {
     email: "krishan.mondal@gmail.com",
+    userName: "sreekrishanmondal",
     name: "Sree Krishan Mondal",
     pronouns: "He/him",
     profileImg: demoImg,
@@ -38,6 +39,7 @@ const USERS_DATA = [
   {
     email: "john.doe@example.com",
     name: "John Doe",
+    userName: "johndoe",
     pronouns: "He/him",
     profileImg: defaultProfilePicture,
     profileBanner: defaultbanner,
@@ -52,6 +54,7 @@ const USERS_DATA = [
   {
     email: "jane.smith@example.com",
     name: "Jane Smith",
+    userName: "janesmith",
     pronouns: "She/her",
     profileImg: defaultProfilePicture,
     profileBanner: defaultbanner,
@@ -66,6 +69,7 @@ const USERS_DATA = [
   {
     email: "alice.jones@example.com",
     name: "Alice Jones",
+    userName: "alicejones",
     pronouns: "She/her",
     profileImg: defaultProfilePicture,
     profileBanner: defaultbanner,
@@ -80,6 +84,7 @@ const USERS_DATA = [
   {
     email: "michael.brown@example.com",
     name: "Michael Brown",
+    userName: "michaelbrown",
     pronouns: "He/him",
     profileImg: defaultProfilePicture,
     profileBanner: defaultbanner,
@@ -94,6 +99,7 @@ const USERS_DATA = [
   {
     email: "emma.white@example.com",
     name: "Emma White",
+    userName: "emmawhite",
     pronouns: "She/her",
     profileImg: defaultProfilePicture,
     profileBanner: defaultbanner,

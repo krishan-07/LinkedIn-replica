@@ -1,5 +1,5 @@
 import { Body, Column, ProfileImg } from "./Utility";
-import { Link } from "react-router-dom";
+import { Link, useLoaderData } from "react-router-dom";
 import { FaPen, FaPlus } from "react-icons/fa6";
 import { Post } from "./Feed";
 import { useDispatch, useSelector } from "react-redux";
@@ -18,7 +18,7 @@ const card = {
   borderRadius: "7px",
 };
 
-const ProfileBanner = ({ user, open }) => {
+const ProfileBanner = ({ user, open, currUser }) => {
   const openPopup = () => {
     open("profile");
   };
@@ -29,7 +29,11 @@ const ProfileBanner = ({ user, open }) => {
       </div>
       <div className="position-relative">
         <div className="position-absolute profile-image-container">
-          <ProfileImg size={"100%"} image={user.profileImg} name={user.name} />
+          <ProfileImg
+            size={"100%"}
+            image={user.profileImg}
+            name={user.userName}
+          />
         </div>
       </div>
       <div className="space-container"></div>
@@ -42,9 +46,11 @@ const ProfileBanner = ({ user, open }) => {
               {`(${user.pronouns})`}
             </span>
           </div>
-          <div className="me-3 cursor-p" onClick={openPopup}>
-            <FaPen size={15} />
-          </div>
+          {currUser && (
+            <div className="me-3 cursor-p" onClick={openPopup}>
+              <FaPen size={15} />
+            </div>
+          )}
         </div>
 
         <div className="lh-1 col-9">
@@ -66,7 +72,7 @@ const ProfileBanner = ({ user, open }) => {
   );
 };
 
-const MyPosts = ({ usersData, currUser, posts }) => {
+const MyPosts = ({ user, currUser, posts, currUserEmail }) => {
   const dispatch = useDispatch();
   const handleClick = () => {
     dispatch(createPostActions.openPopup());
@@ -75,21 +81,24 @@ const MyPosts = ({ usersData, currUser, posts }) => {
   return (
     <div className="p-4 mt-2" style={card}>
       <div className="d-flex mb-4 justify-centent-between align-items-center">
-        <h6 className="w-100">My Activity</h6>
-        <button
-          className="btn-google fw-m justify-content-center text-secondary post-input w-50"
-          onClick={handleClick}
-        >
-          Add Post
-        </button>
+        {currUser ? (
+          <>
+            <h6 className="w-100">My Activity</h6>
+            <button
+              className="btn-google fw-m justify-content-center text-secondary post-input w-50"
+              onClick={handleClick}
+            >
+              Add Post
+            </button>
+          </>
+        ) : (
+          <h6 className="w-100">Posts</h6>
+        )}
       </div>
       <div className="row">
         <div className="col col-lg-9">
           {posts.map((post) => {
-            const user = usersData.find(
-              (user) => user.email === post.email && currUser === user.email
-            );
-            if (user) {
+            if (post.email === user.email) {
               return (
                 <div
                   className="col mb-2 pt-1"
@@ -103,11 +112,12 @@ const MyPosts = ({ usersData, currUser, posts }) => {
                     post={post}
                     user={user}
                     currUser={currUser}
+                    currUserEmail={currUserEmail}
                     profileImg={
                       <ProfileImg
                         size={"50px"}
                         image={user.profileImg}
-                        name={user.name}
+                        name={user.userName}
                       />
                     }
                   />
@@ -122,7 +132,7 @@ const MyPosts = ({ usersData, currUser, posts }) => {
   );
 };
 
-const SkillsSection = ({ user, open }) => {
+const SkillsSection = ({ user, open, currUser }) => {
   const openPopup = () => {
     open("skills");
   };
@@ -130,9 +140,11 @@ const SkillsSection = ({ user, open }) => {
     <div className="p-3 mb-2" style={card}>
       <div className="d-flex justify-content-between mb-1">
         <div className="h5">Skills</div>
-        <div className="me-1 cursor-p" onClick={openPopup}>
-          <FaPlus size={15} />
-        </div>
+        {currUser && (
+          <div className="me-1 cursor-p" onClick={openPopup}>
+            <FaPlus size={15} />
+          </div>
+        )}
       </div>
 
       {user.skills.length > 0 ? (
@@ -144,19 +156,26 @@ const SkillsSection = ({ user, open }) => {
             <div key={skill}>{skill}</div>
           ))}
         </div>
-      ) : (
+      ) : currUser ? (
         <div
           className="w-100 text-secondary d-flex justify-content-center align-items-center mb-4"
           style={{ minHeight: "80px" }}
         >
           Add skills
         </div>
+      ) : (
+        <div
+          className="w-100 text-secondary d-flex justify-content-center align-items-center mb-4"
+          style={{ minHeight: "80px" }}
+        >
+          No skills
+        </div>
       )}
     </div>
   );
 };
 
-const EducationSection = ({ user, open }) => {
+const EducationSection = ({ user, open, currUser }) => {
   const openPopup = () => {
     open("education");
   };
@@ -164,9 +183,11 @@ const EducationSection = ({ user, open }) => {
     <div className="p-3 mb-2" style={card}>
       <div className="d-flex justify-content-between mb-1">
         <div className="h5">Education</div>
-        <div className="me-1 cursor-p" onClick={openPopup}>
-          <FaPlus size={15} />
-        </div>
+        {currUser && (
+          <div className="me-1 cursor-p" onClick={openPopup}>
+            <FaPlus size={15} />
+          </div>
+        )}
       </div>
 
       {user.education.length > 0 ? (
@@ -183,19 +204,26 @@ const EducationSection = ({ user, open }) => {
             </div>
           ))}
         </div>
-      ) : (
+      ) : currUser ? (
         <div
           className="w-100 text-secondary d-flex justify-content-center align-items-center mb-4"
           style={{ minHeight: "80px" }}
         >
           Add Education
         </div>
+      ) : (
+        <div
+          className="w-100 text-secondary d-flex justify-content-center align-items-center mb-4"
+          style={{ minHeight: "80px" }}
+        >
+          No Education
+        </div>
       )}
     </div>
   );
 };
 
-const ExperienceSection = ({ user, open }) => {
+const ExperienceSection = ({ user, open, currUser }) => {
   const openPopup = () => {
     open("experience");
   };
@@ -203,9 +231,11 @@ const ExperienceSection = ({ user, open }) => {
     <div className="p-3" style={card}>
       <div className="d-flex justify-content-between mb-1">
         <div className="h5">Experience</div>
-        <div className="me-1 cursor-p" onClick={openPopup}>
-          <FaPlus size={15} />
-        </div>
+        {currUser && (
+          <div className="me-1 cursor-p" onClick={openPopup}>
+            <FaPlus size={15} />
+          </div>
+        )}
       </div>
 
       {user.experience.length > 0 ? (
@@ -225,12 +255,19 @@ const ExperienceSection = ({ user, open }) => {
             </div>
           ))}
         </div>
-      ) : (
+      ) : currUser ? (
         <div
           className="w-100 text-secondary d-flex justify-content-center align-items-center mb-4"
           style={{ minHeight: "80px" }}
         >
           Add Experience
+        </div>
+      ) : (
+        <div
+          className="w-100 text-secondary d-flex justify-content-center align-items-center mb-4"
+          style={{ minHeight: "80px" }}
+        >
+          No Experience
         </div>
       )}
     </div>
@@ -238,10 +275,16 @@ const ExperienceSection = ({ user, open }) => {
 };
 
 const Profile = () => {
+  const dispatch = useDispatch();
   const posts = useSelector((state) => state.posts);
   const usersData = useSelector((state) => state.usersData);
-  const currUser = useSelector((state) => state.currUser);
-  const user = usersData.find((user) => user.email === currUser);
+  const currUserEmail = useSelector((state) => state.currUser);
+  const currUserData = usersData.find((user) => user.email === currUserEmail);
+
+  const userEmail = useLoaderData();
+  const user = usersData.find((user) => user.email === userEmail);
+  const isCurrUser = user.email === currUserEmail;
+
   const editPopup = useSelector((state) => state.profilePopup);
   const [allowPopup, setAllowPopup] = useState({
     profile: false,
@@ -249,7 +292,6 @@ const Profile = () => {
     education: false,
     experience: false,
   });
-  const dispatch = useDispatch();
 
   const open = (name) => {
     dispatch(profileEdit.openPopup());
@@ -269,30 +311,46 @@ const Profile = () => {
   return (
     <div style={{ height: "100%" }}>
       {editPopup && allowPopup.profile && (
-        <EditUserDataPopup user={user} close={close} />
+        <EditUserDataPopup user={currUserData} close={close} />
       )}
       {editPopup && allowPopup.skills && (
-        <EditSkillsPopup user={user} close={close} />
+        <EditSkillsPopup user={currUserData} close={close} />
       )}
       {editPopup && allowPopup.education && (
-        <EditEducationPopup user={user} close={close} />
+        <EditEducationPopup user={currUserData} close={close} />
       )}
       {editPopup && allowPopup.experience && (
-        <EditExperiencePopup user={user} close={close} />
+        <EditExperiencePopup user={currUserData} close={close} />
       )}
       <Body>
         <Column className={"col-12 col-md-9 my-4 my-md-0 px-2 px-md-5 px-md-3"}>
-          <ProfileBanner user={user} open={open} />
-          <MyPosts usersData={usersData} posts={posts} currUser={currUser} />
+          <ProfileBanner user={user} open={open} currUser={isCurrUser} />
+          <MyPosts
+            user={user}
+            posts={posts}
+            currUser={isCurrUser}
+            currUserEmail={currUserEmail}
+          />
         </Column>
         <Column className={"col-12 col-md-3 px-2 px-md-0"}>
-          <SkillsSection user={user} open={open} />
-          <EducationSection user={user} open={open} />
-          <ExperienceSection user={user} open={open} />
+          <SkillsSection user={user} open={open} currUser={isCurrUser} />
+          <EducationSection user={user} open={open} currUser={isCurrUser} />
+          <ExperienceSection user={user} open={open} currUser={isCurrUser} />
         </Column>
       </Body>
     </div>
   );
 };
+
+export const Loader =
+  (store) =>
+  async ({ params }) => {
+    const state = store.getState();
+    const usersData = state.usersData;
+    const user = usersData.find((data) =>
+      params.userName.includes(data.userName)
+    );
+    return user.email;
+  };
 
 export default Profile;

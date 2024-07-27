@@ -15,7 +15,6 @@ const Notifications = () => {
   const dispatch = useDispatch();
 
   const markAsRead = (id) => {
-    console.log("hiiii");
     dispatch(notificationsActions.markAsRead(id));
   };
 
@@ -47,7 +46,7 @@ const Notifications = () => {
                       <ProfileImg
                         size={"40px"}
                         image={user.profileImg}
-                        name={user.name}
+                        name={user.userName}
                       />
                       {notification.type === "post" && (
                         <div className="ms-3">

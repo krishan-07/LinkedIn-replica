@@ -28,7 +28,7 @@ const Dropdown = () => {
     dropdownMenu.classList.toggle("d-none");
   };
   const directToProfile = () => {
-    navigate(`${nameToLink(user.name)}`);
+    navigate(`/in/${user.userName}`);
   };
   const handleSignout = () => {
     dispatch(CurrUserActions.addUser(null));

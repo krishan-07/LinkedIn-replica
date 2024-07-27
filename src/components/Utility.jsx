@@ -14,10 +14,8 @@ export const Column = ({ className, children }) => {
 };
 
 export const ProfileImg = ({ size, name = "", image = demoImg }) => {
-  const link = nameToLink(name);
-  const navigate = useNavigate();
   return (
-    <Link to={`/in/${link}`}>
+    <Link to={`/in/${name}`}>
       <img
         src={image}
         alt={name}

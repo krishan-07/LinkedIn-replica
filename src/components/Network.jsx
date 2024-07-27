@@ -24,7 +24,6 @@ const Invitations = ({ currUser, users }) => {
     );
   };
   const acceptRequest = (email) => {
-    console.log("2");
     dispatch(
       usersDataAction.acceptRequest({
         id: currUser.email,
@@ -51,7 +50,7 @@ const Invitations = ({ currUser, users }) => {
               <div className="profile col-12 col-sm-8 d-flex px-3">
                 <ProfileImg
                   size={"50px"}
-                  name={user.name}
+                  name={user.userName}
                   image={user.profileImg}
                 />
                 <div className="ms-3">
@@ -72,7 +71,6 @@ const Invitations = ({ currUser, users }) => {
                   className="btn btn-view-profile text-center col"
                   onClick={() => {
                     acceptRequest(user.email);
-                    console.log("1");
                   }}
                 >
                   Accept
@@ -132,7 +130,7 @@ const FindPeople = ({ currUser, users }) => {
                     <div className="connection-img">
                       <ProfileImg
                         size={"90px"}
-                        name={user.name}
+                        name={user.userName}
                         image={user.profileImg}
                       />
                     </div>
@@ -140,7 +138,7 @@ const FindPeople = ({ currUser, users }) => {
                   <div style={{ height: "65px" }}></div>
                   <div className="text-center text-truncate fw-m px-2">
                     <Link
-                      to={`/in/${nameToLink(user.name)}`}
+                      to={`/in/${user.userName}`}
                       className="link-dark link-offset-1 link-offset-2-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover fw-m"
                     >
                       {user.name}

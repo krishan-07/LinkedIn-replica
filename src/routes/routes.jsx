@@ -4,10 +4,11 @@ import Signup from "../components/Signup.jsx";
 import Login from "../components/Login.jsx";
 import ScrollToTop from "../components/ScollToTop.jsx";
 import Home from "../components/Home.jsx";
-import Profile from "../components/Profile.jsx";
+import Profile, { Loader } from "../components/Profile.jsx";
 import Notifications from "../components/Notifications.jsx";
 import Feed from "../components/Feed.jsx";
 import Network from "../components/Network.jsx";
+import store from "../store/index.js";
 
 const routes = [
   {
@@ -46,8 +47,9 @@ const routes = [
         element: <Feed />,
       },
       {
-        path: "sreekrishanmondal",
+        path: "/in/:userName",
         element: <Profile />,
+        loader: Loader(store),
       },
       {
         path: "notifications",
