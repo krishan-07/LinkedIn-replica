@@ -8,6 +8,7 @@ import { formatDateToYYYYMMM } from "../../components/Utility";
 const USERS_DATA = [
   {
     email: "krishan.mondal@gmail.com",
+    password: "12345678",
     userName: "sreekrishanmondal",
     name: "Sree Krishan Mondal",
     pronouns: "He/him",
@@ -38,8 +39,9 @@ const USERS_DATA = [
   },
   {
     email: "john.doe@example.com",
-    name: "John Doe",
+    password: "12345678",
     userName: "johndoe",
+    name: "John Doe",
     pronouns: "He/him",
     profileImg: defaultProfilePicture,
     profileBanner: defaultbanner,
@@ -53,6 +55,7 @@ const USERS_DATA = [
   },
   {
     email: "jane.smith@example.com",
+    password: "12345678",
     name: "Jane Smith",
     userName: "janesmith",
     pronouns: "She/her",
@@ -68,6 +71,7 @@ const USERS_DATA = [
   },
   {
     email: "alice.jones@example.com",
+    password: "12345678",
     name: "Alice Jones",
     userName: "alicejones",
     pronouns: "She/her",
@@ -83,6 +87,7 @@ const USERS_DATA = [
   },
   {
     email: "michael.brown@example.com",
+    password: "12345678",
     name: "Michael Brown",
     userName: "michaelbrown",
     pronouns: "He/him",
@@ -98,6 +103,7 @@ const USERS_DATA = [
   },
   {
     email: "emma.white@example.com",
+    password: "12345678",
     name: "Emma White",
     userName: "emmawhite",
     pronouns: "She/her",
@@ -117,8 +123,20 @@ const usersData = createSlice({
   name: "usersData",
   initialState: USERS_DATA,
   reducers: {
-    addUserData: (state) => {
-      console.log(state);
+    addUserData: (state, action) => {
+      state.push({
+        ...action.payload,
+        pronouns: "",
+        profileImg: defaultProfilePicture,
+        profileBanner: defaultbanner,
+        bio: "",
+        skills: [],
+        location: "",
+        education: [],
+        experience: [],
+        requests: [],
+        connections: [],
+      });
     },
     updateUserData: (state, action) => {
       const { id, data } = action.payload;

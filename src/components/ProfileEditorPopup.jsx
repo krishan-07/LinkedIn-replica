@@ -27,7 +27,10 @@ export const EditUserDataPopup = ({ user, close }) => {
     dispatch(
       usersDataAction.updateUserData({
         id: user.email,
-        data: formData,
+        data: {
+          ...formData,
+          pronouns: formData.pronouns === "default" ? "" : formData.pronouns,
+        },
       })
     );
     close("profile");
@@ -75,15 +78,18 @@ export const EditUserDataPopup = ({ user, close }) => {
             <label htmlFor="pronouns" className="form-label fs-s">
               Pronouns
             </label>
-            <input
-              type="input"
-              className="form-control form-control-sm text-secondary"
-              id="pronouns"
-              placeholder={user.pronouns}
-              value={formData.pronouns}
+            <select
               name="pronouns"
+              id="pronouns"
+              className="form-select form-select-sm text-secondary"
+              value={user.pronouns}
               onChange={handleOnChange}
-            />
+            >
+              <option value="default">Choose pronouns</option>
+              <option value="He/him">He/him</option>
+              <option value="She/her">She/her</option>
+              <option value="They/them">They/them</option>
+            </select>
           </div>
           <div className="mb-3">
             <label htmlFor="bio" className="form-label fs-s">

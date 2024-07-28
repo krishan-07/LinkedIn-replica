@@ -1,6 +1,5 @@
 import logo from "../assets/appLogo.png";
 import NavIcons from "./NavIcons";
-import demoImg from "../assets/demoimg.jpeg";
 import { IoMdHome } from "react-icons/io";
 import { MdPeopleAlt } from "react-icons/md";
 import { PiBagFill } from "react-icons/pi";
@@ -11,7 +10,7 @@ import { IoSearch } from "react-icons/io5";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { CurrUserActions } from "../store/features/currUser";
-import { nameToLink, ProfileImg } from "./Utility";
+import { ProfileImg } from "./Utility";
 
 const Dropdown = () => {
   const dispatch = useDispatch();
@@ -43,14 +42,14 @@ const Dropdown = () => {
       }}
     >
       <div className="img-container">
-        <img src={demoImg} alt="" />
+        <img src={user.profileImg} alt="" />
       </div>
       <div className="dropdown-toggle d-flex align-items-center">
         <span className="text-secondary fs-sm">Me</span>
       </div>
       {/* dropdown menu */}
       <ul className="dropdown-m p-0 d-none">
-        <div className="d-flex justify-content-between gap-2 p-2">
+        <div className="d-flex justify-content-start gap-2 p-2">
           <div
             className="img-container"
             style={{ minWidth: "50px", minHeight: "50px" }}

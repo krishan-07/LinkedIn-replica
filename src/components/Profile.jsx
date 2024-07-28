@@ -42,9 +42,11 @@ const ProfileBanner = ({ user, open, currUser }) => {
         <div className="d-flex justify-content-between">
           <div className="d-flex align-items-center">
             <span className="fw-m fs-l mt-2">{user.name}</span>
-            <span className="text-secondary align-self-end mb-1 ps-2">
-              {`(${user.pronouns})`}
-            </span>
+            {user.pronouns.length !== 0 && (
+              <span className="text-secondary align-self-end mb-1 ps-2">
+                {`(${user.pronouns})`}
+              </span>
+            )}
           </div>
           {currUser && (
             <div className="me-3 cursor-p" onClick={openPopup}>

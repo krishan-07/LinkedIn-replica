@@ -3,20 +3,39 @@ import logo from "../assets/appLogo.png";
 import { FaApple } from "react-icons/fa";
 import Footer from "./Footer";
 import { Link, useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { CurrUserActions } from "../store/features/currUser";
-import { useRef } from "react";
+import { useState } from "react";
 
 const Login = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const email = useRef(null);
+  const usersData = useSelector((state) => state.usersData);
+  const [data, setData] = useState({
+    email: "krishan.mondal@gmail.com",
+    password: "12345678",
+  });
 
-  const handleRedirect = () => {
-    dispatch(CurrUserActions.addUser(email.current.value));
+  const handleOnChange = (e) => {
+    const { name, value } = e.target;
+    setData({ ...data, [name]: value });
+  };
+  const handleRedirect = (email) => {
+    dispatch(CurrUserActions.addUser(email));
     setTimeout(() => {
       navigate("/in");
     }, 1000);
+  };
+  const authenticateUser = () => {
+    const user = usersData.find((user) => {
+      if (user.email === data.email) return user.password === data.password;
+    });
+    const errorText = document.getElementById("error-text");
+
+    if (user) {
+      handleRedirect(user.email);
+      errorText.classList.add("d-none");
+    } else errorText.classList.remove("d-none");
   };
 
   return (
@@ -55,25 +74,31 @@ const Login = () => {
         <div className="form-floating mb-3">
           <input
             type="email"
+            name="email"
             className="form-control"
             id="floatingInput"
             placeholder="name@example.com"
-            autoComplete="username"
-            defaultValue={"krishan.mondal@gmail.com"}
-            ref={email}
+            autoComplete="mail"
+            value={data.email}
+            onChange={handleOnChange}
           />
           <label htmlFor="floatingInput">Email address</label>
         </div>
         <div className="form-floating">
           <input
             type="password"
+            name="password"
             className="form-control"
             id="floatingPassword"
             placeholder="Password"
             autoComplete="current-password"
-            defaultValue={"12345678"}
+            value={data.password}
+            onChange={handleOnChange}
           />
           <label htmlFor="floatingPassword">Password</label>
+          <div id="error-text" className="form-text d-none ms-1 text-danger">
+            Incorrect password or email
+          </div>
         </div>
         <div className=" my-3">
           <span>
@@ -89,7 +114,7 @@ const Login = () => {
         <button
           type="button"
           className="btn btn-login my-2"
-          onClick={handleRedirect}
+          onClick={authenticateUser}
         >
           Sign in
         </button>

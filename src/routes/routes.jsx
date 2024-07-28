@@ -13,7 +13,12 @@ import store from "../store/index.js";
 const routes = [
   {
     path: "/",
-    element: <LandingPage />,
+    element: (
+      <>
+        <LandingPage />,
+        <ScrollToTop />
+      </>
+    ),
   },
   {
     path: "/signup",

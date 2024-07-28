@@ -144,12 +144,16 @@ const FindPeople = ({ currUser, users }) => {
                       {user.name}
                     </Link>
                   </div>
-                  <div
-                    className="text-center text-secondary px-1"
-                    style={{ fontSize: ".9rem" }}
-                  >
-                    {user.bio.substring(0, 45) + " ..."}
-                  </div>
+                  {user.bio !== "" ? (
+                    <div
+                      className="text-center text-secondary px-1"
+                      style={{ fontSize: ".9rem" }}
+                    >
+                      {user.bio.substring(0, 45) + " ..."}
+                    </div>
+                  ) : (
+                    <div style={{ height: "42px" }}></div>
+                  )}
                   <div className="my-3 text-center fs-s text-secondary">
                     Based on your profile
                   </div>

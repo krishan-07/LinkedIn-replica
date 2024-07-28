@@ -11,7 +11,7 @@ const POSTS_DATA = [
       "Just finished a fantastic book on JavaScript patterns. Highly recommend 'JavaScript: The Good Parts' to anyone looking to deepen their understanding of the language.",
     image:
       "https://plus.unsplash.com/premium_photo-1690303193655-db7040673780?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTd8fHdlYnNpdGUlMjBidWlsZGluZ3xlbnwwfHwwfHx8MA%3D%3D",
-    likes: { count: 45, isliked: false, text: "Like", btnColor: "" },
+    likes: { count: 45, likedBy: [] },
   },
   {
     email: "jane.smith@example.com",
@@ -21,7 +21,7 @@ const POSTS_DATA = [
       "Had an amazing time at the design workshop this weekend. Learned so much about UI/UX principles and met some incredible designers. Can't wait to apply these new skills to my projects!",
     image:
       "https://plus.unsplash.com/premium_photo-1661713210744-f5be3c3491fe?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8d29ya3Nob3B8ZW58MHx8MHx8fDA%3D",
-    likes: { count: 102, isliked: false, text: "Like", btnColor: "" },
+    likes: { count: 102, likedBy: [] },
   },
   {
     email: "alice.jones@example.com",
@@ -31,7 +31,7 @@ const POSTS_DATA = [
       "Excited to announce that I will be speaking at the upcoming AI conference in San Francisco! I'll be discussing the latest trends in machine learning and data science.",
     image:
       "https://images.unsplash.com/photo-1505373877841-8d25f7d46678?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OXx8YWklMjBjb25mZXJlbmNlfGVufDB8fDB8fHww",
-    likes: { count: 78, isliked: false, text: "Like", btnColor: "" },
+    likes: { count: 78, likedBy: [] },
   },
   {
     email: "michael.brown@example.com",
@@ -41,7 +41,7 @@ const POSTS_DATA = [
       "Startup life is intense but rewarding. Just secured our first round of funding, and we're ready to take our product to the next level. Stay tuned for updates!",
     image:
       "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    likes: { count: 156, isliked: false, text: "Like", btnColor: "" },
+    likes: { count: 156, likedBy: [] },
   },
   {
     email: "emma.white@example.com",
@@ -51,7 +51,7 @@ const POSTS_DATA = [
       "Traveling through the Swiss Alps has been a dream come true. The landscapes are breathtaking, and I’ve captured some stunning photos. Check out my blog for the full adventure!",
     image:
       "https://images.unsplash.com/photo-1511765224389-37f0e77cf0eb?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    likes: { count: 230, isliked: false, text: "Like", btnColor: "" },
+    likes: { count: 230, likedBy: [] },
   },
   {
     email: "krishan.mondal@gmail.com",
@@ -61,7 +61,7 @@ const POSTS_DATA = [
       "Exploring the beauty of web development! Recently built a dynamic website with React and Node.js. Loving the process and the challenges that come with it.",
     image:
       "https://images.unsplash.com/photo-1448932223592-d1fc686e76ea?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTZ8fHdlYnNpdGUlMjBidWlsZGluZ3xlbnwwfHwwfHx8MA%3D%3D",
-    likes: { count: 7, isliked: false, text: "Like", btnColor: "" },
+    likes: { count: 7, likedBy: [] },
   },
 ];
 
@@ -76,7 +76,7 @@ const postSlice = createSlice({
         date: action.payload.date,
         content: action.payload.content,
         image: action.payload.imgUrl,
-        likes: { count: 0, isliked: false, text: "Like", btnColor: "" },
+        likes: { count: 0, likedBy: [] },
       };
 
       state.unshift(newPost);
@@ -87,23 +87,20 @@ const postSlice = createSlice({
       state.splice(index, 1);
     },
     updateLike: (state, action) => {
-      const postIndex = state.findIndex(
-        (post) => post.postId === action.payload
-      );
+      const { postId, userEmail } = action.payload;
+      const postIndex = state.findIndex((post) => post.postId === postId);
+
       state[postIndex].likes.count++;
-      state[postIndex].likes.isliked = true;
-      state[postIndex].likes.text = "Liked";
-      state[postIndex].likes.btnColor = "btn-primary";
+      state[postIndex].likes.likedBy.push(userEmail);
     },
     removeLike: (state, action) => {
-      const postIndex = state.findIndex(
-        (post) => post.postId === action.payload
-      );
+      const { postId, userEmail } = action.payload;
+      const postIndex = state.findIndex((post) => post.postId === postId);
 
       state[postIndex].likes.count--;
-      state[postIndex].likes.isliked = false;
-      state[postIndex].likes.text = "Like";
-      state[postIndex].likes.btnColor = "";
+      state[postIndex].likes.likedBy = state[postIndex].likes.likedBy.filter(
+        (user) => user !== userEmail
+      );
     },
   },
 });

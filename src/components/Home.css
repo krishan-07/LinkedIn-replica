@@ -98,6 +98,7 @@
   }
   .profile-image-container {
     width: 130px !important;
+    height: 130px !important;
   }
   .space-container {
     min-height: 30px !important;
@@ -130,6 +131,7 @@
   }
   .profile-image-container {
     width: 100px !important;
+    height: 100px !important;
   }
   .space-container {
     min-height: 20px !important;

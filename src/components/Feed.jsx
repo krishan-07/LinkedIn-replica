@@ -18,7 +18,7 @@ const card = {
   borderRadius: "7px",
 };
 
-const FeedProfile = ({ user }) => {
+const FeedProfile = ({ user, posts }) => {
   return (
     <>
       <div className="profile-section position-sticky" style={{ top: "87px" }}>
@@ -51,12 +51,14 @@ const FeedProfile = ({ user }) => {
           <p className="mb-2 px-2">{user.bio}</p>
           <div className="dropdown-divider my-4 d-none d-md-block"></div>
           <div className="mb-2 d-flex justify-content-between align-items-center px-2 fs-sm">
-            <p className="m-0">Profile Views</p>
-            <p className="text-primary fw-m m-0">26</p>
+            <p className="m-0">Connections</p>
+            <p className="text-primary fw-m m-0">{user.connections.length}</p>
           </div>
           <div className="mb-5 d-flex justify-content-between align-items-center px-2 fs-sm">
             <p className="m-0">Posts</p>
-            <p className="text-primary m-0 fw-m">2</p>
+            <p className="text-primary m-0 fw-m">
+              {posts.filter((post) => post.email === user.email).length}
+            </p>
           </div>
         </div>
       </div>
@@ -91,10 +93,20 @@ export const Post = ({ post, user, currUser, profileImg, currUserEmail }) => {
   const daysPostedAgo = timeAgo(post.date);
 
   const handleLike = () => {
-    if (!post.likes.isliked) {
-      dispatch(postsActions.updateLike(post.postId));
+    if (!post.likes.likedBy.includes(currUserEmail)) {
+      dispatch(
+        postsActions.updateLike({
+          postId: post.postId,
+          userEmail: currUserEmail,
+        })
+      );
     } else {
-      dispatch(postsActions.removeLike(post.postId));
+      dispatch(
+        postsActions.removeLike({
+          postId: post.postId,
+          userEmail: currUserEmail,
+        })
+      );
     }
   };
 
@@ -182,14 +194,17 @@ export const Post = ({ post, user, currUser, profileImg, currUserEmail }) => {
       </div>
       <div className="row gx-2 px-3">
         <button
-          className={`btn col mx-2 ${post.likes.btnColor}`}
+          className={`btn col mx-2 ${
+            post.likes.likedBy.includes(currUserEmail) ? "btn-primary" : ""
+          }`}
           id="like-btn"
           onClick={() => {
             handleLike();
           }}
         >
           <p className="d-flex align-items-center justify-content-center m-0 gap-2">
-            <BiLike /> {post.likes.text}
+            <BiLike />
+            {post.likes.likedBy.includes(currUserEmail) ? "Liked" : "Like"}
           </p>
         </button>
         <button className="btn col mx-2">
@@ -228,7 +243,7 @@ const Feed = () => {
     <>
       <Body>
         <Column className={"col-12 col-md-3 px-2 px-md-0"}>
-          <FeedProfile user={user} />
+          <FeedProfile user={user} posts={posts} />
         </Column>
         <Column className={"col-12 col-md-9 my-4 my-md-0 px-2 px-md-3"}>
           <div className="row">
