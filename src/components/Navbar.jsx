@@ -116,8 +116,9 @@ const Dropdown = () => {
 };
 
 const Navbar = () => {
-  const notifications = useSelector((state) => state.notifications);
-  let unReadNotifications = 0;
+  const usersData = useSelector((state) => state.usersData);
+  const currUserEmail = useSelector((state) => state.currUser);
+  const user = usersData.find((data) => data.email === currUserEmail);
   const navItems = [
     { icon: <IoMdHome size={25} />, name: "Home", href: "/in" },
     { icon: <MdPeopleAlt size={25} />, name: "My Network", href: "mynetwork" },
@@ -183,14 +184,15 @@ const Navbar = () => {
               <div className="d-flex flex-column justify-content-center align-items-center">
                 <div className="position-relative">
                   <FaBell size={25} />
-                  {!notifications.every((element) => element.read === true) && (
+                  {!user.notifications.every(
+                    (element) => element.read === true
+                  ) && (
                     <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                      {notifications.forEach((element) => {
-                        if (!element.read) {
-                          unReadNotifications++;
-                        }
-                      })}
-                      {unReadNotifications}
+                      {
+                        user.notifications.filter(
+                          (element) => element.read === false
+                        ).length
+                      }
                     </span>
                   )}
                 </div>

@@ -5,7 +5,7 @@ import { createPostActions } from "../store/features/createPostModal";
 import { FaImage } from "react-icons/fa6";
 import { ProfileImg } from "./Utility";
 import { postsActions } from "../store/features/post";
-import { notificationsActions } from "../store/features/notifications";
+import { usersDataAction } from "../store/features/users";
 
 const PostInputPopup = () => {
   const [imgUrl, setImgUrl] = useState(null);
@@ -13,8 +13,9 @@ const PostInputPopup = () => {
   const dispatch = useDispatch();
   const content = useRef(null);
   const usersData = useSelector((state) => state.usersData);
-  const currUser = useSelector((state) => state.currUser);
-  const user = usersData.find((user) => user.email === currUser);
+  const currUserEmail = useSelector((state) => state.currUser);
+  const posts = useSelector((state) => state.posts);
+  const user = usersData.find((user) => user.email === currUserEmail);
 
   const closePopup = () => {
     dispatch(createPostActions.closePopup());
@@ -44,19 +45,25 @@ const PostInputPopup = () => {
     if (currContent) {
       dispatch(
         postsActions.addPost({
-          email: currUser,
+          email: currUserEmail,
           date: new Date().toISOString(),
           content: currContent,
           imgUrl,
         })
       );
       dispatch(
-        notificationsActions.push({
-          email: currUser,
-          type: "post",
-          createdAt: new Date().toISOString(),
+        usersDataAction.pushNotification({
+          id: currUserEmail,
+          data: {
+            id: posts.length + 1,
+            email: currUserEmail,
+            type: "post",
+            read: false,
+            createdAt: new Date().toISOString(),
+          },
         })
       );
+
       //making a delay effect
       setTimeout(() => {
         dispatch(createPostActions.closePopup());

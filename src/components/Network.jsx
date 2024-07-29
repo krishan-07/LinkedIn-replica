@@ -18,16 +18,28 @@ const Invitations = ({ currUser, users }) => {
   const removeRequest = (email) => {
     dispatch(
       usersDataAction.removeRequest({
-        id: currUser.email,
-        email,
+        currUserEmail: currUser.email,
+        userEmail: email,
       })
     );
   };
   const acceptRequest = (email) => {
     dispatch(
       usersDataAction.acceptRequest({
-        id: currUser.email,
-        email,
+        currUserEmail: currUser.email,
+        userEmail: email,
+      })
+    );
+    dispatch(
+      usersDataAction.pushNotification({
+        id: email,
+        data: {
+          id: currUser.email + "/acr", //acr: accepted connection request
+          email: currUser.email,
+          type: "connectionAccepted",
+          read: false,
+          createdAt: new Date().toISOString(),
+        },
       })
     );
   };
@@ -100,6 +112,18 @@ const FindPeople = ({ currUser, users }) => {
       usersDataAction.sendRequest({
         id: email,
         email: currUser.email,
+      })
+    );
+    dispatch(
+      usersDataAction.pushNotification({
+        id: email,
+        data: {
+          id: currUser.email,
+          email: currUser.email,
+          type: "connection",
+          read: false,
+          createdAt: new Date().toISOString(),
+        },
       })
     );
   };

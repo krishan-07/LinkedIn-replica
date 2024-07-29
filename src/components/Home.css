@@ -321,7 +321,7 @@ textarea {
   background-color: rgb(221, 221, 221);
 }
 .badge {
-  --bs-badge-padding-x: 0.35em;
+  --bs-badge-padding-x: 0.4em;
   --bs-badge-padding-y: 0.2em;
 }
 

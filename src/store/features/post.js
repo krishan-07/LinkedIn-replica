@@ -61,7 +61,7 @@ const POSTS_DATA = [
       "Exploring the beauty of web development! Recently built a dynamic website with React and Node.js. Loving the process and the challenges that come with it.",
     image:
       "https://images.unsplash.com/photo-1448932223592-d1fc686e76ea?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTZ8fHdlYnNpdGUlMjBidWlsZGluZ3xlbnwwfHwwfHx8MA%3D%3D",
-    likes: { count: 7, likedBy: [] },
+    likes: { count: 7, likedBy: ["john.doe@example.com"] },
   },
 ];
 

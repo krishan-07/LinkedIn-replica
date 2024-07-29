@@ -34,8 +34,24 @@ const USERS_DATA = [
         to: "present",
       },
     ],
-    requests: ["jane.smith@example.com", "alice.jones@example.com"],
-    connections: [],
+    requests: ["john.doe@example.com"],
+    connections: ["jane.smith@example.com"],
+    notifications: [
+      {
+        id: 1,
+        email: "john.doe@example.com",
+        type: "like",
+        read: false,
+        createdAt: "2024-07-21T08:22:54.783Z",
+      },
+      {
+        id: "john.doe@example.com",
+        email: "john.doe@example.com",
+        type: "connection",
+        read: false,
+        createdAt: "2024-07-21T08:22:54.783Z",
+      },
+    ],
   },
   {
     email: "john.doe@example.com",
@@ -52,6 +68,7 @@ const USERS_DATA = [
     experience: [],
     requests: [],
     connections: [],
+    notifications: [],
   },
   {
     email: "jane.smith@example.com",
@@ -67,7 +84,8 @@ const USERS_DATA = [
     education: [],
     experience: [],
     requests: [],
-    connections: [],
+    connections: ["krishan.mondal@gmail.com"],
+    notifications: [],
   },
   {
     email: "alice.jones@example.com",
@@ -84,6 +102,7 @@ const USERS_DATA = [
     experience: [],
     requests: [],
     connections: [],
+    notifications: [],
   },
   {
     email: "michael.brown@example.com",
@@ -100,6 +119,7 @@ const USERS_DATA = [
     experience: [],
     requests: [],
     connections: [],
+    notifications: [],
   },
   {
     email: "emma.white@example.com",
@@ -116,6 +136,7 @@ const USERS_DATA = [
     experience: [],
     requests: [],
     connections: [],
+    notifications: [],
   },
 ];
 
@@ -136,6 +157,7 @@ const usersData = createSlice({
         experience: [],
         requests: [],
         connections: [],
+        notifications: [],
       });
     },
     updateUserData: (state, action) => {
@@ -203,19 +225,59 @@ const usersData = createSlice({
       );
     },
     acceptRequest: (state, action) => {
-      const { id, email } = action.payload;
-      const index = state.findIndex((user) => user.email === id);
+      const { currUserEmail, userEmail } = action.payload;
+      const index = state.findIndex((user) => user.email === currUserEmail);
+      const i = state.findIndex((user) => user.email === userEmail);
 
       state[index].requests = state[index].requests.filter(
-        (request) => request !== email
+        (request) => request !== userEmail
       );
-      state[index].connections.push(email);
+      state[index].connections.push(userEmail);
+      state[i].connections.push(currUserEmail);
     },
     sendRequest: (state, action) => {
       const { id, email } = action.payload;
       const index = state.findIndex((user) => user.email === id);
 
       state[index].requests.push(email);
+    },
+    pushNotification: (state, action) => {
+      const { id, data } = action.payload;
+
+      if (data.type === "post") {
+        state.forEach((obj) => {
+          if (obj.email !== id) {
+            if (obj.connections.includes(id)) {
+              obj.notifications.unshift(data);
+            }
+          }
+        });
+      } else {
+        state.forEach((obj) => {
+          if (obj.email === id) {
+            obj.notifications.unshift(data);
+          }
+        });
+      }
+    },
+    popNotification: (state, action) => {
+      const { id, postEmail } = action.payload;
+
+      state.forEach((obj) => {
+        if (obj.email === postEmail) {
+          const a = obj.notifications.filter(
+            (notification) => notification.id !== id
+          );
+          obj.notifications = a;
+        }
+      });
+    },
+    markAsRead: (state, action) => {
+      const { userEmail, id } = action.payload;
+      const index = state.findIndex((obj) => obj.email === userEmail);
+      const i = state[index].notifications.findIndex((obj) => obj.id === id);
+
+      state[index].notifications[i].read = true;
     },
   },
 });

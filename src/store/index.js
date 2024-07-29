@@ -4,7 +4,6 @@ import createPostSlice from "./features/createPostModal.js";
 import usersData from "./features/users.js";
 import currUser from "./features/currUser.js";
 import profilePopupSlice from "./features/profileEditPopup.js";
-import notifications from "./features/notifications.js";
 import groups from "./features/groups.js";
 
 const store = configureStore({
@@ -14,7 +13,6 @@ const store = configureStore({
     usersData: usersData.reducer,
     currUser: currUser.reducer,
     profilePopup: profilePopupSlice.reducer,
-    notifications: notifications.reducer,
     groups: groups.reducer,
   },
 });

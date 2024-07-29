@@ -1,6 +1,5 @@
-import { Body, Column, nameToLink, ProfileImg, timeAgo } from "./Utility.jsx";
+import { Body, Column, ProfileImg, timeAgo } from "./Utility.jsx";
 import { BiLike, BiSolidLike } from "react-icons/bi";
-import { useState } from "react";
 import { FaRegCommentDots } from "react-icons/fa6";
 import Footer from "./Footer.jsx";
 import { useDispatch, useSelector } from "react-redux";
@@ -8,6 +7,7 @@ import { createPostActions } from "../store/features/createPostModal.js";
 import { postsActions } from "../store/features/post.js";
 import { Link } from "react-router-dom";
 import { CiMenuKebab } from "react-icons/ci";
+import { usersDataAction } from "../store/features/users.js";
 
 const card = {
   background: "white",
@@ -75,7 +75,11 @@ const PostInput = ({ user }) => {
     <>
       <div className="mb-4" style={card}>
         <div className="d-flex p-3 gap-3 ">
-          <ProfileImg size={"50px"} image={user.profileImg} name={user.name} />
+          <ProfileImg
+            size={"50px"}
+            image={user.profileImg}
+            name={user.userName}
+          />
           <button
             className="btn-apple fw-m justify-content-start ps-3 text-secondary post-input"
             onClick={handleClick}
@@ -100,11 +104,29 @@ export const Post = ({ post, user, currUser, profileImg, currUserEmail }) => {
           userEmail: currUserEmail,
         })
       );
+      dispatch(
+        usersDataAction.pushNotification({
+          id: post.email,
+          data: {
+            id: post.postId + currUserEmail,
+            email: currUserEmail,
+            type: "like",
+            read: false,
+            createdAt: new Date().toISOString(),
+          },
+        })
+      );
     } else {
       dispatch(
         postsActions.removeLike({
           postId: post.postId,
           userEmail: currUserEmail,
+        })
+      );
+      dispatch(
+        usersDataAction.popNotification({
+          postEmail: post.email,
+          id: post.postId + currUserEmail,
         })
       );
     }
