@@ -7,10 +7,11 @@ import { AiFillMessage } from "react-icons/ai";
 import { FaBell } from "react-icons/fa6";
 import { CgMenuGridR } from "react-icons/cg";
 import { IoSearch } from "react-icons/io5";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { CurrUserActions } from "../store/features/currUser";
 import { ProfileImg } from "./Utility";
+import { useEffect, useState } from "react";
 
 const Dropdown = () => {
   const dispatch = useDispatch();
@@ -18,14 +19,23 @@ const Dropdown = () => {
   const currUser = useSelector((state) => state.currUser);
   const user = usersData.find((user) => user.email === currUser);
   const navigate = useNavigate();
+  let dropdownMenu = document.querySelector(".dropdown-m");
+  const [dropdown, setDropdown] = useState(false);
+  const { pathname } = useLocation();
 
   const toggleDropdown = () => {
-    const dropdown = document.querySelector(".dropdown");
-    const dropdownMenu = document.querySelector(".dropdown-m");
-
-    dropdown.classList.toggle("active");
-    dropdownMenu.classList.toggle("d-none");
+    if (dropdown) dropdownMenu.classList.add("d-none");
+    else dropdownMenu.classList.remove("d-none");
+    dropdown ? setDropdown(false) : setDropdown(true);
   };
+  useEffect(() => {
+    if (dropdown) {
+      dropdownMenu.classList.add("d-none");
+      setDropdown(false); //removing the dropdown while navigating to different page
+    }
+    dropdownMenu = document.querySelector(".dropdown-m"); // catching the element after loading
+  }, [pathname]);
+
   const directToProfile = () => {
     navigate(`/in/${user.userName}`);
   };

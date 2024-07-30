@@ -62,16 +62,12 @@ const Notifications = () => {
                         />
                         {obj.type === "post" && (
                           <div className="ms-3">
-                            {user.name}
-                            <span className="m-0 ms-1">
-                              created a new post.
-                            </span>
+                            {user.name} added a new post.
                           </div>
                         )}
                         {obj.type === "like" && (
                           <div className="ms-3">
-                            {obj.email === currUser.email ? "You" : user.name}
-                            <span className="m-0 ms-1">liked your post.</span>
+                            {user.name} liked your post.
                           </div>
                         )}
                         {obj.type === "connection" && (
@@ -86,8 +82,7 @@ const Notifications = () => {
                         )}
                         {obj.type === "comment" && (
                           <div className="ms-3">
-                            {user.name}
-                            commented your post.
+                            {user.name} commented your post.
                           </div>
                         )}
                         <div className="ms-auto fs-s text-secondary">

@@ -8,6 +8,7 @@ import { postsActions } from "../store/features/post.js";
 import { Link } from "react-router-dom";
 import { CiMenuKebab } from "react-icons/ci";
 import { usersDataAction } from "../store/features/users.js";
+import { useState } from "react";
 
 const card = {
   background: "white",
@@ -92,9 +93,18 @@ const PostInput = ({ user }) => {
   );
 };
 
-export const Post = ({ post, user, currUser, profileImg, currUserEmail }) => {
+export const Post = ({
+  post,
+  user,
+  usersData,
+  currUser,
+  profileImg,
+  currUserEmail,
+}) => {
   const dispatch = useDispatch();
   const daysPostedAgo = timeAgo(post.date);
+  const [comments, setComment] = useState(false);
+  const [text, setText] = useState("");
 
   const handleLike = () => {
     if (!post.likes.likedBy.includes(currUserEmail)) {
@@ -104,18 +114,19 @@ export const Post = ({ post, user, currUser, profileImg, currUserEmail }) => {
           userEmail: currUserEmail,
         })
       );
-      dispatch(
-        usersDataAction.pushNotification({
-          id: post.email,
-          data: {
-            id: post.postId + currUserEmail,
-            email: currUserEmail,
-            type: "like",
-            read: false,
-            createdAt: new Date().toISOString(),
-          },
-        })
-      );
+      if (post.email !== currUserEmail)
+        dispatch(
+          usersDataAction.pushNotification({
+            id: post.email,
+            data: {
+              id: post.postId + currUserEmail,
+              email: currUserEmail,
+              type: "like",
+              read: false,
+              createdAt: new Date().toISOString(),
+            },
+          })
+        );
     } else {
       dispatch(
         postsActions.removeLike({
@@ -131,7 +142,6 @@ export const Post = ({ post, user, currUser, profileImg, currUserEmail }) => {
       );
     }
   };
-
   const toggleDropdown = (postId) => {
     const dropdownparent = document.querySelector(`[data-post-id="${postId}"]`);
     const dropdown = dropdownparent.querySelector(".dropdown-m");
@@ -144,7 +154,46 @@ export const Post = ({ post, user, currUser, profileImg, currUserEmail }) => {
     const post = document.querySelector(`[data-post="${postId}"]`);
     post.classList.add("d-none");
   };
-
+  const toggleComments = (postId) => {
+    if (!comments) {
+      document
+        .querySelector(`[data-comments="${postId}"]`)
+        .classList.remove("d-none");
+      setComment(true);
+    } else {
+      document
+        .querySelector(`[data-comments="${postId}"]`)
+        .classList.add("d-none");
+      setComment(false);
+    }
+  };
+  const addComment = () => {
+    dispatch(
+      postsActions.addComment({
+        postId: post.postId,
+        data: {
+          id: currUserEmail + new Date().toISOString(),
+          email: currUserEmail,
+          text,
+          createdAt: new Date().toISOString(),
+        },
+      })
+    );
+    if (post.email !== currUserEmail)
+      dispatch(
+        usersDataAction.pushNotification({
+          id: post.email,
+          data: {
+            id: post.email + new Date().toISOString(),
+            email: currUserEmail,
+            type: "comment",
+            read: false,
+            createdAt: new Date().toISOString(),
+          },
+        })
+      );
+    setText("");
+  };
   return (
     <div className="mb-3 pb-3" style={card} data-post={post.postId}>
       <div className="d-flex align-items-center gap-3 m-0 px-3 py-2">
@@ -185,7 +234,7 @@ export const Post = ({ post, user, currUser, profileImg, currUserEmail }) => {
               boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
             }}
           >
-            {currUser && user.email === currUserEmail ? (
+            {user.email === currUserEmail ? (
               <div className="py-1 px-2 cursor-p item" onClick={deletePost}>
                 Delete post
               </div>
@@ -229,11 +278,71 @@ export const Post = ({ post, user, currUser, profileImg, currUserEmail }) => {
             {post.likes.likedBy.includes(currUserEmail) ? "Liked" : "Like"}
           </p>
         </button>
-        <button className="btn col mx-2">
+        <button
+          className="btn col mx-2"
+          onClick={() => {
+            toggleComments(post.postId);
+          }}
+        >
           <p className="d-flex align-items-center justify-content-center m-0 gap-2">
             <FaRegCommentDots /> comment
           </p>
         </button>
+      </div>
+      <div className="comments px-3 d-none" data-comments={`${post.postId}`}>
+        <div className="d-flex gap-2 mt-4 align-items-conter">
+          <ProfileImg
+            size={"42px"}
+            name={currUser.userName}
+            image={currUser.profileImg}
+          />
+
+          <input
+            type="text"
+            className="btn-apple w-75 px-3"
+            placeholder="Add a comment"
+            value={text}
+            onChange={(e) => {
+              setText(e.target.value);
+            }}
+          />
+          <button
+            className={`btn btn-light w-25 ${text === "" ? "disabled" : ""}`}
+            style={{ width: "15%", borderRadius: "50px" }}
+            onClick={addComment}
+          >
+            Post
+          </button>
+        </div>
+        {post.comments.map((comment) => {
+          const user = usersData.find((data) => data.email === comment.email);
+          return (
+            <div className="mt-4 d-flex gap-2" key={comment.id}>
+              <div>
+                <ProfileImg
+                  size={"42px"}
+                  name={user.userName}
+                  image={user.profileImg}
+                />
+              </div>
+              <div className="text px-3 py-2">
+                <div className="mb-2">
+                  <div className="d-flex justify-content-between">
+                    <div className="fw-m">{user.name}</div>
+                    <div className="text-secondary fs-s">
+                      {timeAgo(comment.createdAt)}
+                    </div>
+                  </div>
+                  <div className="text-secondary fs-s lh-1">
+                    {user.bio.substring(0, 50) + "..."}
+                  </div>
+                </div>
+
+                <div style={{ fontSize: ".9rem" }}>{comment.text}</div>
+              </div>
+            </div>
+          );
+        })}
       </div>
     </div>
   );
@@ -258,19 +367,19 @@ const News = () => {
 const Feed = () => {
   const posts = useSelector((state) => state.posts);
   const usersData = useSelector((state) => state.usersData);
-  const currUser = useSelector((state) => state.currUser);
-  const user = usersData.find((user) => user.email === currUser);
+  const currUserEmail = useSelector((state) => state.currUser);
+  const currUser = usersData.find((user) => user.email === currUserEmail);
 
   return (
     <>
       <Body>
         <Column className={"col-12 col-md-3 px-2 px-md-0"}>
-          <FeedProfile user={user} posts={posts} />
+          <FeedProfile user={currUser} posts={posts} />
         </Column>
         <Column className={"col-12 col-md-9 my-4 my-md-0 px-2 px-md-3"}>
           <div className="row">
             <Column className={"col-12 col-lg-8 pe-md-1"}>
-              <PostInput user={user} />
+              <PostInput user={currUser} />
               {posts.map((post) => {
                 const user = usersData.find(
                   (user) => user.email === post.email
@@ -281,8 +390,9 @@ const Feed = () => {
                       key={post.postId}
                       post={post}
                       user={user}
+                      usersData={usersData}
                       currUser={currUser}
-                      currUserEmail={currUser}
+                      currUserEmail={currUserEmail}
                       profileImg={
                         <ProfileImg
                           size={"50px"}

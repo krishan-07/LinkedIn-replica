@@ -12,6 +12,14 @@ const POSTS_DATA = [
     image:
       "https://plus.unsplash.com/premium_photo-1690303193655-db7040673780?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTd8fHdlYnNpdGUlMjBidWlsZGluZ3xlbnwwfHwwfHx8MA%3D%3D",
     likes: { count: 45, likedBy: [] },
+    comments: [
+      {
+        id: 1,
+        email: "jane.smith@example.com",
+        text: " Lorem ipsum dolor sit amet consectetur adipisicing elit. At qui temporibus odit, unde fugit sit in. Ad obcaecati quaerat alias.",
+        createdAt: "2024-07-05T14:23:35.000Z",
+      },
+    ],
   },
   {
     email: "jane.smith@example.com",
@@ -22,6 +30,7 @@ const POSTS_DATA = [
     image:
       "https://plus.unsplash.com/premium_photo-1661713210744-f5be3c3491fe?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8d29ya3Nob3B8ZW58MHx8MHx8fDA%3D",
     likes: { count: 102, likedBy: [] },
+    comments: [],
   },
   {
     email: "alice.jones@example.com",
@@ -32,6 +41,7 @@ const POSTS_DATA = [
     image:
       "https://images.unsplash.com/photo-1505373877841-8d25f7d46678?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OXx8YWklMjBjb25mZXJlbmNlfGVufDB8fDB8fHww",
     likes: { count: 78, likedBy: [] },
+    comments: [],
   },
   {
     email: "michael.brown@example.com",
@@ -42,6 +52,7 @@ const POSTS_DATA = [
     image:
       "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     likes: { count: 156, likedBy: [] },
+    comments: [],
   },
   {
     email: "emma.white@example.com",
@@ -52,6 +63,7 @@ const POSTS_DATA = [
     image:
       "https://images.unsplash.com/photo-1511765224389-37f0e77cf0eb?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     likes: { count: 230, likedBy: [] },
+    comments: [],
   },
   {
     email: "krishan.mondal@gmail.com",
@@ -62,6 +74,7 @@ const POSTS_DATA = [
     image:
       "https://images.unsplash.com/photo-1448932223592-d1fc686e76ea?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTZ8fHdlYnNpdGUlMjBidWlsZGluZ3xlbnwwfHwwfHx8MA%3D%3D",
     likes: { count: 7, likedBy: ["john.doe@example.com"] },
+    comments: [],
   },
 ];
 
@@ -77,6 +90,7 @@ const postSlice = createSlice({
         content: action.payload.content,
         image: action.payload.imgUrl,
         likes: { count: 0, likedBy: [] },
+        comments: [],
       };
 
       state.unshift(newPost);
@@ -101,6 +115,12 @@ const postSlice = createSlice({
       state[postIndex].likes.likedBy = state[postIndex].likes.likedBy.filter(
         (user) => user !== userEmail
       );
+    },
+    addComment: (state, action) => {
+      const { postId, data } = action.payload;
+      const postIndex = state.findIndex((post) => post.postId === postId);
+
+      state[postIndex].comments.unshift(data);
     },
   },
 });

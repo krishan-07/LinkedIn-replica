@@ -68,7 +68,15 @@ const USERS_DATA = [
     experience: [],
     requests: [],
     connections: [],
-    notifications: [],
+    notifications: [
+      {
+        id: 1,
+        email: "jane.smith@example.com",
+        type: "comment",
+        read: true,
+        createdAt: "2024-07-05T14:23:35.000Z",
+      },
+    ],
   },
   {
     email: "jane.smith@example.com",

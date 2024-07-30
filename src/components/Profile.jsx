@@ -12,16 +12,59 @@ import {
 } from "./ProfileEditorPopup";
 import { profileEdit } from "../store/features/profileEditPopup";
 import { useState } from "react";
+import { usersDataAction } from "../store/features/users";
 
 const card = {
   background: "white",
   borderRadius: "7px",
 };
 
-const ProfileBanner = ({ user, open, currUser }) => {
+const ProfileBanner = ({ user, open, isCurrUser, currUserData }) => {
   const openPopup = () => {
     open("profile");
   };
+  const dispatch = useDispatch();
+  const sendRequest = (email) => {
+    dispatch(
+      usersDataAction.sendRequest({
+        id: email,
+        email: currUserData.email,
+      })
+    );
+    dispatch(
+      usersDataAction.pushNotification({
+        id: email,
+        data: {
+          id: currUserData.email,
+          email: currUserData.email,
+          type: "connection",
+          read: false,
+          createdAt: new Date().toISOString(),
+        },
+      })
+    );
+  };
+  const acceptRequest = (email) => {
+    dispatch(
+      usersDataAction.acceptRequest({
+        currUserEmail: currUserData.email,
+        userEmail: email,
+      })
+    );
+    dispatch(
+      usersDataAction.pushNotification({
+        id: email,
+        data: {
+          id: currUserData.email + "/acr", //acr: accepted connection request
+          email: currUserData.email,
+          type: "connectionAccepted",
+          read: false,
+          createdAt: new Date().toISOString(),
+        },
+      })
+    );
+  };
+
   return (
     <div className="profile-section w-100 position-relative pb-2">
       <div className="banner-container">
@@ -48,13 +91,57 @@ const ProfileBanner = ({ user, open, currUser }) => {
               </span>
             )}
           </div>
-          {currUser && (
+          {isCurrUser && (
             <div className="me-3 cursor-p" onClick={openPopup}>
               <FaPen size={15} />
             </div>
           )}
+          {!isCurrUser && !currUserData.connections.includes(user.email) && (
+            <div className="me-3">
+              {user.requests.includes(currUserData.email) && (
+                <button
+                  className="btn-disabled px-3 py-2 fs-s"
+                  style={{ transform: "translateY(25%)" }}
+                >
+                  Requested
+                </button>
+              )}
+              {currUserData.requests.includes(user.email) && (
+                <button
+                  className="btn-disabled px-3 py-2 fs-s"
+                  style={{ transform: "translateY(25%)" }}
+                  onClick={() => {
+                    acceptRequest(user.email);
+                  }}
+                >
+                  Accept
+                </button>
+              )}
+              {!user.requests.includes(currUserData.email) &&
+                !currUserData.requests.includes(user.email) && (
+                  <button
+                    className="btn-view-profile px-3 py-2 fs-s"
+                    style={{ transform: "translateY(25%)" }}
+                    onClick={() => {
+                      sendRequest(user.email);
+                    }}
+                  >
+                    Connect
+                  </button>
+                )}
+            </div>
+          )}
+          {!isCurrUser && currUserData.connections.includes(user.email) && (
+            <div className="me-3">
+              <button
+                className="btn-disabled px-3 py-2 fs-s"
+                style={{ transform: "translateY(25%)" }}
+              >
+                Message
+              </button>
+            </div>
+          )}
         </div>
-
         <div className="lh-1 col-9">
           <p className="mb-2 ">{user.bio}</p>
         </div>
@@ -74,7 +161,14 @@ const ProfileBanner = ({ user, open, currUser }) => {
   );
 };
 
-const MyPosts = ({ user, currUser, posts, currUserEmail }) => {
+const MyPosts = ({
+  user,
+  usersData,
+  isCurrUser,
+  posts,
+  currUserEmail,
+  currUserData,
+}) => {
   const dispatch = useDispatch();
   const handleClick = () => {
     dispatch(createPostActions.openPopup());
@@ -83,7 +177,7 @@ const MyPosts = ({ user, currUser, posts, currUserEmail }) => {
   return (
     <div className="p-4 mt-2" style={card}>
       <div className="d-flex mb-4 justify-centent-between align-items-center">
-        {currUser ? (
+        {isCurrUser ? (
           <>
             <h6 className="w-100">My Activity</h6>
             <button
@@ -113,7 +207,8 @@ const MyPosts = ({ user, currUser, posts, currUserEmail }) => {
                   <Post
                     post={post}
                     user={user}
-                    currUser={currUser}
+                    usersData={usersData}
+                    currUser={currUserData}
                     currUserEmail={currUserEmail}
                     profileImg={
                       <ProfileImg
@@ -134,7 +229,7 @@ const MyPosts = ({ user, currUser, posts, currUserEmail }) => {
   );
 };
 
-const SkillsSection = ({ user, open, currUser }) => {
+const SkillsSection = ({ user, open, isCurrUser }) => {
   const openPopup = () => {
     open("skills");
   };
@@ -142,7 +237,7 @@ const SkillsSection = ({ user, open, currUser }) => {
     <div className="p-3 mb-2" style={card}>
       <div className="d-flex justify-content-between mb-1">
         <div className="h5">Skills</div>
-        {currUser && (
+        {isCurrUser && (
           <div className="me-1 cursor-p" onClick={openPopup}>
             <FaPlus size={15} />
           </div>
@@ -158,7 +253,7 @@ const SkillsSection = ({ user, open, currUser }) => {
             <div key={skill}>{skill}</div>
           ))}
         </div>
-      ) : currUser ? (
+      ) : isCurrUser ? (
         <div
           className="w-100 text-secondary d-flex justify-content-center align-items-center mb-4"
           style={{ minHeight: "80px" }}
@@ -177,7 +272,7 @@ const SkillsSection = ({ user, open, currUser }) => {
   );
 };
 
-const EducationSection = ({ user, open, currUser }) => {
+const EducationSection = ({ user, open, isCurrUser }) => {
   const openPopup = () => {
     open("education");
   };
@@ -185,7 +280,7 @@ const EducationSection = ({ user, open, currUser }) => {
     <div className="p-3 mb-2" style={card}>
       <div className="d-flex justify-content-between mb-1">
         <div className="h5">Education</div>
-        {currUser && (
+        {isCurrUser && (
           <div className="me-1 cursor-p" onClick={openPopup}>
             <FaPlus size={15} />
           </div>
@@ -206,7 +301,7 @@ const EducationSection = ({ user, open, currUser }) => {
             </div>
           ))}
         </div>
-      ) : currUser ? (
+      ) : isCurrUser ? (
         <div
           className="w-100 text-secondary d-flex justify-content-center align-items-center mb-4"
           style={{ minHeight: "80px" }}
@@ -225,7 +320,7 @@ const EducationSection = ({ user, open, currUser }) => {
   );
 };
 
-const ExperienceSection = ({ user, open, currUser }) => {
+const ExperienceSection = ({ user, open, isCurrUser }) => {
   const openPopup = () => {
     open("experience");
   };
@@ -233,7 +328,7 @@ const ExperienceSection = ({ user, open, currUser }) => {
     <div className="p-3" style={card}>
       <div className="d-flex justify-content-between mb-1">
         <div className="h5">Experience</div>
-        {currUser && (
+        {isCurrUser && (
           <div className="me-1 cursor-p" onClick={openPopup}>
             <FaPlus size={15} />
           </div>
@@ -257,7 +352,7 @@ const ExperienceSection = ({ user, open, currUser }) => {
             </div>
           ))}
         </div>
-      ) : currUser ? (
+      ) : isCurrUser ? (
         <div
           className="w-100 text-secondary d-flex justify-content-center align-items-center mb-4"
           style={{ minHeight: "80px" }}
@@ -326,18 +421,25 @@ const Profile = () => {
       )}
       <Body>
         <Column className={"col-12 col-md-9 my-4 my-md-0 px-2 px-md-5 px-md-3"}>
-          <ProfileBanner user={user} open={open} currUser={isCurrUser} />
+          <ProfileBanner
+            user={user}
+            open={open}
+            isCurrUser={isCurrUser}
+            currUserData={currUserData}
+          />
           <MyPosts
+            usersData={usersData}
             user={user}
             posts={posts}
-            currUser={isCurrUser}
+            isCurrUser={isCurrUser}
             currUserEmail={currUserEmail}
+            currUserData={currUserData}
           />
         </Column>
         <Column className={"col-12 col-md-3 px-2 px-md-0"}>
-          <SkillsSection user={user} open={open} currUser={isCurrUser} />
-          <EducationSection user={user} open={open} currUser={isCurrUser} />
-          <ExperienceSection user={user} open={open} currUser={isCurrUser} />
+          <SkillsSection user={user} open={open} isCurrUser={isCurrUser} />
+          <EducationSection user={user} open={open} isCurrUser={isCurrUser} />
+          <ExperienceSection user={user} open={open} isCurrUser={isCurrUser} />
         </Column>
       </Body>
     </div>
