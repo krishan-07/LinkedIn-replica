@@ -359,3 +359,6 @@ textarea {
   background: #f1f1f2;
   border-radius: 7px;
 }
+.job-img img {
+  width: 50px;
+}

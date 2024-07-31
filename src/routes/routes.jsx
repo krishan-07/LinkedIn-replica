@@ -9,6 +9,7 @@ import Notifications from "../components/Notifications.jsx";
 import Feed from "../components/Feed.jsx";
 import Network from "../components/Network.jsx";
 import store from "../store/index.js";
+import Jobs from "../components/Jobs.jsx";
 
 const routes = [
   {
@@ -63,6 +64,10 @@ const routes = [
       {
         path: "mynetwork",
         element: <Network />,
+      },
+      {
+        path: "jobs",
+        element: <Jobs />,
       },
     ],
   },
