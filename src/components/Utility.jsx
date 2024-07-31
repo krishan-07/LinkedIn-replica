@@ -1,5 +1,6 @@
-import { Link, Navigate, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import demoImg from "../assets/defaultPfp.jpeg";
+import store from "./../store/index.js";
 
 export const Body = ({ children }) => {
   return (
@@ -96,4 +97,21 @@ export const formatDateToYYYYMMM = () => {
 
   // Return the formatted string in "yyyy mmm" format
   return `${month} ${year}`;
+};
+
+export const searchData = (data) => {
+  if (data === "") return [];
+
+  const state = store.getState();
+  const usersData = state.usersData;
+  const startsWithData = usersData.filter(
+    (user) =>
+      user.name.toLowerCase().startsWith(data) ||
+      user.userName.toLowerCase().startsWith(data)
+  );
+  const containsData = usersData.filter(
+    (user) =>
+      !startsWithData.includes(user) && user.name.toLowerCase().includes(data)
+  );
+  return [...startsWithData, ...containsData];
 };
