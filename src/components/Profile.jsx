@@ -175,8 +175,8 @@ const MyPosts = ({
   };
 
   return (
-    <div className="p-4 mt-2" style={card}>
-      <div className="d-flex mb-4 justify-centent-between align-items-center">
+    <div className="px-2 px-md-4 py-2 py-md-4 mt-2" style={card}>
+      <div className="d-flex mb-4 justify-centent-between align-items-center mx-2 mx-md-0 my-1 my-md-0">
         {isCurrUser ? (
           <>
             <h6 className="w-100">My Activity</h6>

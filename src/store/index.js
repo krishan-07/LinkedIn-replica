@@ -6,6 +6,7 @@ import currUser from "./features/currUser.js";
 import profilePopupSlice from "./features/profileEditPopup.js";
 import groups from "./features/groups.js";
 import jobs from "./features/jobs.js";
+import messages from "./features/messages.js";
 
 const store = configureStore({
   reducer: {
@@ -16,6 +17,7 @@ const store = configureStore({
     profilePopup: profilePopupSlice.reducer,
     groups: groups.reducer,
     jobs: jobs.reducer,
+    messages: messages.reducer,
   },
 });
 

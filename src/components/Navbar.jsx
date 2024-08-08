@@ -186,7 +186,7 @@ const Navbar = () => {
   return (
     <>
       <nav
-        className="navbar navbar-expand-lg p-0 position-sticky top-0 mt-0 mt-md-1 mt-sm-0"
+        className="navbar navbar-expand-lg p-0 position-sticky top-0 mt-0 "
         style={{ background: "white", zIndex: "100" }}
       >
         <div className="container-fluid d-flex flex-nowrap justify-content-evenly justify-content-xl-start justify-content-sm-center">

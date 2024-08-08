@@ -10,6 +10,8 @@ import Feed from "../components/Feed.jsx";
 import Network from "../components/Network.jsx";
 import store from "../store/index.js";
 import Jobs from "../components/Jobs.jsx";
+import Messages from "../components/Messages.jsx";
+import ChatBox, { ChatBoxLoader } from "../components/ChatBox.jsx";
 
 const routes = [
   {
@@ -68,6 +70,17 @@ const routes = [
       {
         path: "jobs",
         element: <Jobs />,
+      },
+      {
+        path: "messaging",
+        element: <Messages />,
+        children: [
+          {
+            path: ":userName",
+            element: <ChatBox />,
+            loader: ChatBoxLoader,
+          },
+        ],
       },
     ],
   },

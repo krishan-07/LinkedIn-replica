@@ -384,3 +384,35 @@ textarea {
   z-index: 101;
   box-shadow: 0 0 0 1px rgba(140, 140, 140, 0.2);
 }
+.mssg-card:hover {
+  background-color: rgb(233, 233, 233);
+}
+.mssg-search {
+  width: 100%;
+  border-radius: 50px;
+  outline: none;
+  border: 2px solid black;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+.border-bottom-light {
+  border-bottom: 1px solid rgb(201, 201, 201);
+}
+.hover-bg:hover {
+  background: rgb(233, 233, 233);
+}
+#chatArea {
+  border-radius: 6px;
+  resize: none;
+  flex-grow: 1;
+}
+.chatbox-text {
+  max-width: 80%;
+  min-width: fit-content;
+  background: rgb(233, 233, 233);
+  border-radius: 5px;
+}
+
+.chatbox-text-right {
+  background: rgb(247, 247, 247);
+}
