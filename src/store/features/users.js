@@ -38,17 +38,24 @@ const USERS_DATA = [
     connections: ["jane.smith@example.com"],
     notifications: [
       {
+        id: "john.doe@example.com2024-07-21T08:22:54.783Z",
+        email: "john.doe@example.com",
+        type: "message",
+        read: false,
+        createdAt: "2024-07-21T08:22:54.783Z",
+      },
+      {
         id: 1,
         email: "john.doe@example.com",
         type: "like",
-        read: false,
+        read: true,
         createdAt: "2024-07-21T08:22:54.783Z",
       },
       {
         id: "john.doe@example.com",
         email: "john.doe@example.com",
         type: "connection",
-        read: false,
+        read: true,
         createdAt: "2024-07-21T08:22:54.783Z",
       },
     ],
@@ -69,6 +76,13 @@ const USERS_DATA = [
     requests: [],
     connections: [],
     notifications: [
+      {
+        id: 2,
+        email: "krishan.mondal@gmail.com",
+        type: "message",
+        read: true,
+        createdAt: "2024-07-21T08:22:54.783Z",
+      },
       {
         id: 1,
         email: "jane.smith@example.com",

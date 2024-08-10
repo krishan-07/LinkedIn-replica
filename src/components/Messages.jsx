@@ -1,10 +1,12 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Body, Column, ProfileImg, searchData } from "./Utility";
 import { FiEdit } from "react-icons/fi";
 import { useEffect, useState } from "react";
 import { TbGhost3 } from "react-icons/tb";
 import { Outlet, useNavigate } from "react-router-dom";
 import { FaArrowLeft } from "react-icons/fa";
+import { messagesActions } from "../store/features/messages";
+import { usersDataAction } from "../store/features/users";
 
 const card = {
   borderRadius: "6px",
@@ -16,6 +18,8 @@ const card = {
 const SearchForMessages = ({ show, currUser }) => {
   const [searchQuery, setSearchQuery] = useState("");
   const [filteredData, setFilteredData] = useState(null);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleOnChange = (e) => {
     const { value } = e.target;
@@ -23,8 +27,16 @@ const SearchForMessages = ({ show, currUser }) => {
     setFilteredData(searchData(value));
   };
 
-  const addMessage = () => {
+  const addMessage = (userEmail, userName) => {
+    dispatch(
+      messagesActions.addMessage({
+        currUser,
+        userEmail,
+        userName,
+      })
+    );
     show(false);
+    navigate(`/in/messaging/${userName}`);
   };
 
   return (
@@ -52,7 +64,7 @@ const SearchForMessages = ({ show, currUser }) => {
                   className="d-flex px-2 py-1 align-items-center cursor-p hover-bg border-bottom-light"
                   key={user.email}
                   onClick={() => {
-                    addMessage(user.userName);
+                    addMessage(user.email, user.userName);
                   }}
                 >
                   <div className="profile d-flex align-items-center">
@@ -139,7 +151,10 @@ const Messages = () => {
                   {inbox.length !== 0 ? (
                     inbox.map((obj) => (
                       <div
-                        className="mssg-card d-flex align-items-center px-3 gap-2 py-2 cursor-p border-bottom-light"
+                        className={`mssg-card d-flex align-items-center px-3 gap-2 py-2 cursor-p border-bottom-light ${
+                          window.location.href.includes(obj.userName) &&
+                          "active"
+                        }`}
                         key={obj.email}
                         onClick={() => {
                           setShowSearch(false);
@@ -162,7 +177,8 @@ const Messages = () => {
                       <div className="d-flex flex-column align-items-center gap-2">
                         <div>Find people to message</div>
                         <button
-                          className="btn-view-profile w-fc"
+                          className="btn-view-profile"
+                          style={{ width: "80px" }}
                           onClick={() => {
                             setShowSearch(true);
                           }}
@@ -239,7 +255,8 @@ const Messages = () => {
                         <div className="d-flex flex-column align-items-center gap-2">
                           <div>Find people to message</div>
                           <button
-                            className="btn-view-profile w-fc"
+                            className="btn-view-profile"
+                            style={{ width: "80px" }}
                             onClick={() => {
                               setShowSearch(true);
                             }}

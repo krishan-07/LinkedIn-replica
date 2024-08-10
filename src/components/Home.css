@@ -412,7 +412,9 @@ textarea {
   background: rgb(233, 233, 233);
   border-radius: 5px;
 }
-
 .chatbox-text-right {
   background: rgb(247, 247, 247);
+}
+.mssg-card.active {
+  background-color: #d7e9fb;
 }

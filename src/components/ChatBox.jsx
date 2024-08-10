@@ -1,12 +1,15 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useLoaderData } from "react-router-dom";
 import { IoSend } from "react-icons/io5";
 import { useEffect, useState } from "react";
+import { messagesActions } from "../store/features/messages";
+import { usersDataAction } from "../store/features/users";
 
 const ChatBox = () => {
   const userName = useLoaderData();
   const currUserEmail = useSelector((state) => state.currUser);
   const usersData = useSelector((state) => state.usersData);
+  const currUserData = usersData.find((obj) => obj.email === currUserEmail);
   const messages = useSelector((state) => state.messages);
   const currInbox = messages.find((obj) => obj.email === currUserEmail);
 
@@ -14,7 +17,32 @@ const ChatBox = () => {
   const currMssgUserData = usersData.find((obj) => obj.userName === userName);
 
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  const [messageData, setMessageData] = useState();
+  const dispatch = useDispatch();
 
+  const handleSend = () => {
+    dispatch(
+      messagesActions.send({
+        currUserEmail: currUserEmail,
+        currUserName: currUserData.userName,
+        userEmail: currMssgUserData.email,
+        message: messageData,
+      })
+    );
+    setMessageData("");
+    dispatch(
+      usersDataAction.pushNotification({
+        id: currMssgUserData.email,
+        data: {
+          id: currUserEmail + new Date().toISOString(),
+          email: currUserEmail,
+          type: "message",
+          read: false,
+          createdAt: new Date().toISOString(),
+        },
+      })
+    );
+  };
   useEffect(() => {
     const handleResize = () => {
       setWindowWidth(window.innerWidth);
@@ -51,9 +79,9 @@ const ChatBox = () => {
             <div
               className="position-relative my-2"
               key={mssg.message}
-              style={{ height: "20px" }}
+              style={{ height: "23px" }}
             >
-              <div className="position-absolute start-0">
+              <div className="position-absolute end-0">
                 <span
                   className="chatbox-text px-2 py-1 mx-2"
                   style={{ fontSize: ".9rem" }}
@@ -66,9 +94,9 @@ const ChatBox = () => {
             <div
               className="position-relative my-2"
               key={mssg.message}
-              style={{ height: "20px" }}
+              style={{ height: "23px" }}
             >
-              <div className="position-absolute end-0">
+              <div className="position-absolute start-0">
                 <span
                   className="chatbox-text-right px-2 py-1 mx-2"
                   style={{ fontSize: ".9rem" }}
@@ -91,9 +119,13 @@ const ChatBox = () => {
             name="chatArea"
             id="chatArea"
             className="chat-area fs-s ms-2 px-1 my-2"
+            value={messageData}
+            onChange={(e) => {
+              setMessageData(e.target.value);
+            }}
           />
 
-          <div className="px-2 cursor-p">
+          <div className="px-2 cursor-p" onClick={handleSend}>
             <IoSend size={20} />
           </div>
         </div>

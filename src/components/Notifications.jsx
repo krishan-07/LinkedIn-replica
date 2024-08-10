@@ -17,8 +17,9 @@ const Notifications = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const handleNavigate = (type) => {
+  const handleNavigate = (type, userName) => {
     if (type === "connection") navigate("/in/mynetwork");
+    if (type === "message") navigate(`/in/messaging/${userName}`);
   };
   const markAsRead = (id) => {
     dispatch(
@@ -52,7 +53,7 @@ const Notifications = () => {
                         key={obj.id}
                         onClick={() => {
                           markAsRead(obj.id);
-                          handleNavigate(obj.type);
+                          handleNavigate(obj.type, user.userName);
                         }}
                       >
                         <ProfileImg
@@ -83,6 +84,11 @@ const Notifications = () => {
                         {obj.type === "comment" && (
                           <div className="ms-3">
                             {user.name} commented your post.
+                          </div>
+                        )}
+                        {obj.type === "message" && (
+                          <div className="ms-3">
+                            {user.name} sent a new message.
                           </div>
                         )}
                         <div className="ms-auto fs-s text-secondary">

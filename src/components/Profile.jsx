@@ -191,7 +191,7 @@ const MyPosts = ({
           <h6 className="w-100">Posts</h6>
         )}
       </div>
-      <div className="row">
+      <div className="row mt-3">
         <div className="col col-lg-9">
           {posts.map((post) => {
             if (post.email === user.email) {

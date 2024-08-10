@@ -39,8 +39,11 @@ export function timeAgo(postTimestamp) {
   const minutes = Math.floor(seconds / 60);
   const hours = Math.floor(minutes / 60);
   const days = Math.floor(hours / 24);
+  const weeks = Math.floor(days / 7);
 
-  if (days > 0) {
+  if (weeks > 0) {
+    return `${weeks}w`;
+  } else if (days > 0) {
     return `${days}d`;
   } else if (hours > 0) {
     return `${hours}h`;
