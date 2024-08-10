@@ -42,7 +42,6 @@ const Dropdown = () => {
   };
   const handleSignout = () => {
     dispatch(CurrUserActions.addUser(null));
-    navigate("/", { replace: true });
   };
 
   return (

@@ -418,3 +418,11 @@ textarea {
 .mssg-card.active {
   background-color: #d7e9fb;
 }
+.loading-page {
+  width: 100dvw;
+  height: 100dvh;
+  background: #f1f2f3;
+}
+.fs-vl {
+  font-size: 2rem;
+}
