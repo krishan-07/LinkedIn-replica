@@ -188,7 +188,7 @@ const Navbar = () => {
         className="navbar navbar-expand-lg p-0 position-sticky top-0 mt-0 "
         style={{ background: "white", zIndex: "100" }}
       >
-        <div className="container-fluid d-flex flex-nowrap justify-content-evenly justify-content-xl-start justify-content-sm-center py-3 py-sm-1">
+        <div className="container-fluid d-flex flex-nowrap justify-content-evenly justify-content-xl-start justify-content-sm-center pt-2 pb-1 pt-sm-1">
           <div className="ms-lg-5">
             <Link className="navbar-brand " to="/in">
               <img

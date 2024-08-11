@@ -113,7 +113,7 @@
     font-size: 1.25rem !important;
   }
   .search-card {
-    top: 53px !important;
+    top: 72px !important;
     left: 0px !important;
   }
 }
@@ -138,8 +138,14 @@
     min-width: 150px !important;
   }
   .search-card {
-    top: 38px !important;
+    top: 56px !important;
     left: 0px !important;
+  }
+  .profile-section {
+    position: static !important;
+  }
+  .footer {
+    position: static !important;
   }
 }
 /* for feed */
@@ -379,7 +385,7 @@ textarea {
   background: white;
   overflow: clip;
   position: relative;
-  top: 60px;
+  top: 68px;
   left: 180px;
   z-index: 101;
   box-shadow: 0 0 0 1px rgba(140, 140, 140, 0.2);
