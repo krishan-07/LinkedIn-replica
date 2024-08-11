@@ -1,7 +1,7 @@
 const LoadingPage = () => {
   return (
     <div className="loading-page d-flex justify-content-center align-items-center">
-      <div className="fs-vl fw-m">
+      <div className="fs-vl fw-m d-flex flex-wrap justify-content-center ">
         <span className="me-1" style={{ color: "#2da5da" }}>
           Welcome to
         </span>
