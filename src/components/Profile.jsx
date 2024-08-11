@@ -1,5 +1,5 @@
 import { Body, Column, ProfileImg } from "./Utility";
-import { Link, useLoaderData } from "react-router-dom";
+import { Link, useLoaderData, useNavigate } from "react-router-dom";
 import { FaPen, FaPlus } from "react-icons/fa6";
 import { Post } from "./Feed";
 import { useDispatch, useSelector } from "react-redux";
@@ -15,6 +15,7 @@ import { useState } from "react";
 import { usersDataAction } from "../store/features/users";
 import ProfilePictureEditPopup from "./ProfilePictureEditPopup";
 import ProfilePictureViewPopup from "./ProfilePictureViewPopup";
+import { messagesActions } from "../store/features/messages";
 
 const card = {
   background: "white",
@@ -26,6 +27,8 @@ const ProfileBanner = ({ user, open, isCurrUser, currUserData }) => {
     open("profile");
   };
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const sendRequest = (email) => {
     dispatch(
       usersDataAction.sendRequest({
@@ -71,6 +74,16 @@ const ProfileBanner = ({ user, open, isCurrUser, currUserData }) => {
   };
   const viewProfilePicture = () => {
     open("viewPfp");
+  };
+  const addMessage = (userEmail, userName) => {
+    dispatch(
+      messagesActions.addMessage({
+        currUser: currUserData.email,
+        userEmail,
+        userName,
+      })
+    );
+    navigate(`/in/messaging/${userName}`);
   };
 
   return (
@@ -148,6 +161,9 @@ const ProfileBanner = ({ user, open, isCurrUser, currUserData }) => {
               <button
                 className="btn-disabled px-3 py-2 fs-s"
                 style={{ transform: "translateY(25%)" }}
+                onClick={() => {
+                  addMessage(user.email, user.userName);
+                }}
               >
                 Message
               </button>
