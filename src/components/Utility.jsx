@@ -14,15 +14,30 @@ export const Column = ({ className, children }) => {
   return <div className={`${className}`}>{children}</div>;
 };
 
-export const ProfileImg = ({ size, name = "", image = demoImg }) => {
+export const ProfileImg = ({
+  size,
+  name = "",
+  image = demoImg,
+  disable = "",
+}) => {
   return (
-    <Link to={`/in/${name}`}>
-      <img
-        src={image}
-        alt={name}
-        style={{ height: `${size}`, width: `${size}`, borderRadius: "50%" }}
-      />
-    </Link>
+    <>
+      {disable !== true ? (
+        <Link to={`/in/${name}`}>
+          <img
+            src={image}
+            alt={name}
+            style={{ height: `${size}`, width: `${size}`, borderRadius: "50%" }}
+          />
+        </Link>
+      ) : (
+        <img
+          src={image}
+          alt={name}
+          style={{ height: `${size}`, width: `${size}`, borderRadius: "50%" }}
+        />
+      )}
+    </>
   );
 };
 

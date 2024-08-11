@@ -426,3 +426,7 @@ textarea {
 .fs-vl {
   font-size: 2rem;
 }
+.button {
+  border: none;
+  background: transparent;
+}

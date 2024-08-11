@@ -238,6 +238,11 @@ const usersData = createSlice({
 
       state[index].experience.splice(expIndex, 1);
     },
+    updateProfilePicture: (state, action) => {
+      const { id } = action.payload;
+      const index = state.findIndex((obj) => obj.email === id);
+      state[index].profileImg = action.payload.imgUrl;
+    },
     removeRequest: (state, action) => {
       const { id, email } = action.payload;
       const index = state.findIndex((user) => user.email === id);

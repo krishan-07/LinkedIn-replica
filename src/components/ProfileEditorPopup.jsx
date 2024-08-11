@@ -45,13 +45,13 @@ export const EditUserDataPopup = ({ user, close }) => {
 
   return (
     <div className="modal-overlay">
-      <div className="modal-cont px-0" style={{ maxWidth: "790px" }}>
+      <div className="modal-cont px-0 pt-1" style={{ maxWidth: "790px" }}>
         <div className="d-flex justify-content-between align-items-center px-3">
           <div className="fw-m fs-m">Edit Profile</div>
           <div>
             <button
               type="button"
-              className="btn js-e pe-0 pe-lg-1"
+              className="button p-2 pe-0"
               onClick={closePopup}
             >
               <IoCloseOutline size={30} />
@@ -174,13 +174,13 @@ export const EditSkillsPopup = ({ user, close }) => {
 
   return (
     <div className="modal-overlay">
-      <div className="modal-cont px-0">
+      <div className="modal-cont px-0 pt-1">
         <div className="d-flex justify-content-between align-items-center px-3">
           <div className="fw-m fs-m">Add skills</div>
           <div className="cursor-p">
             <button
               type="button"
-              className="btn js-e pe-0 pe-lg-1"
+              className="button p-2 pe-0"
               onClick={closePopup}
             >
               <IoCloseOutline size={30} />
@@ -290,13 +290,13 @@ export const EditEducationPopup = ({ user, close }) => {
 
   return (
     <div className="modal-overlay">
-      <div className="modal-cont px-0">
+      <div className="modal-cont px-0 pt-1">
         <div className="d-flex justify-content-between align-items-center px-3">
           <div className="fw-m fs-m">Add Education</div>
           <div className="cursor-p">
             <button
               type="button"
-              className="btn js-e pe-0 pe-lg-1"
+              className="button p-2 pe-0"
               onClick={closePopup}
             >
               <IoCloseOutline size={30} />
@@ -480,13 +480,13 @@ export const EditExperiencePopup = ({ user, close }) => {
 
   return (
     <div className="modal-overlay">
-      <div className="modal-cont px-0">
+      <div className="modal-cont px-0 pt-1">
         <div className="d-flex justify-content-between align-items-center px-3">
           <div className="fw-m fs-m">Add Experience</div>
           <div className="cursor-p">
             <button
               type="button"
-              className="btn js-e pe-0 pe-lg-1"
+              className="button p-2 pe-0"
               onClick={closePopup}
             >
               <IoCloseOutline size={30} />

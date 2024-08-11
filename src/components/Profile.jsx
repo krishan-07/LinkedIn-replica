@@ -13,6 +13,8 @@ import {
 import { profileEdit } from "../store/features/profileEditPopup";
 import { useState } from "react";
 import { usersDataAction } from "../store/features/users";
+import ProfilePictureEditPopup from "./ProfilePictureEditPopup";
+import ProfilePictureViewPopup from "./ProfilePictureViewPopup";
 
 const card = {
   background: "white",
@@ -64,6 +66,12 @@ const ProfileBanner = ({ user, open, isCurrUser, currUserData }) => {
       })
     );
   };
+  const editProfilePicture = () => {
+    open("pfp");
+  };
+  const viewProfilePicture = () => {
+    open("viewPfp");
+  };
 
   return (
     <div className="profile-section w-100 position-relative pb-2">
@@ -71,11 +79,15 @@ const ProfileBanner = ({ user, open, isCurrUser, currUserData }) => {
         <img src={user.profileBanner} alt="banner" />
       </div>
       <div className="position-relative">
-        <div className="position-absolute profile-image-container">
+        <div
+          className="position-absolute profile-image-container cursor-p"
+          onClick={isCurrUser ? editProfilePicture : viewProfilePicture}
+        >
           <ProfileImg
             size={"100%"}
             image={user.profileImg}
             name={user.userName}
+            disable={true}
           />
         </div>
       </div>
@@ -388,6 +400,8 @@ const Profile = () => {
     skills: false,
     education: false,
     experience: false,
+    pfp: false,
+    viewPfp: false,
   });
 
   const open = (name) => {
@@ -418,6 +432,12 @@ const Profile = () => {
       )}
       {editPopup && allowPopup.experience && (
         <EditExperiencePopup user={currUserData} close={close} />
+      )}
+      {editPopup && allowPopup.pfp && (
+        <ProfilePictureEditPopup user={currUserData} close={close} />
+      )}
+      {editPopup && allowPopup.viewPfp && (
+        <ProfilePictureViewPopup user={user} close={close} />
       )}
       <Body>
         <Column className={"col-12 col-md-9 my-4 my-md-0 px-2 px-md-5 px-md-3"}>
