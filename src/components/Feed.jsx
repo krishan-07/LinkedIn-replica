@@ -22,7 +22,7 @@ const card = {
 const FeedProfile = ({ user, posts }) => {
   return (
     <>
-      <div className="profile-section position-sticky" style={{ top: "87px" }}>
+      <div className="profile-section position-sticky" style={{ top: "95px" }}>
         <div className="banner-container">
           <img src={user.profileBanner} alt="banner" />
         </div>
@@ -408,7 +408,7 @@ const Feed = () => {
             </Column>
             <Column className={"col-12 col-lg-4 pe-md-0"}>
               <News />
-              <div className="position-sticky" style={{ top: "87px" }}>
+              <div className="position-sticky" style={{ top: "95px" }}>
                 <Footer className="fs-s py-1" />
               </div>
             </Column>
