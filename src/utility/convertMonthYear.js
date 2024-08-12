@@ -1,4 +1,4 @@
-export function convertMonthYear(dateString) {
+export default function convertMonthYear(dateString) {
   // Split the dateString to extract year and month
   const [year, month] = dateString.split("-");
 

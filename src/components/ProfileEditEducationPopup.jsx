@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { IoCloseOutline } from "react-icons/io5";
 import { useDispatch } from "react-redux";
 import { usersDataAction } from "../store/features/users";
+import convertMonthYear from "../utility/convertMonthYear";
 
 const ProfileEditEducationPopup = ({ user, close }) => {
   const dispatch = useDispatch();
@@ -35,7 +36,7 @@ const ProfileEditEducationPopup = ({ user, close }) => {
           education: {
             school: education.school,
             course: education.course,
-            from: convertMonthYear(education.from),
+            from: Year(education.from),
             to: convertMonthYear(education.to),
           },
         })

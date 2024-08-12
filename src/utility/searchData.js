@@ -1,3 +1,4 @@
+import store from "../store/index";
 export default function searchData(data) {
   if (data === "") return [];
   const state = store.getState();

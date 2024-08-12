@@ -9,10 +9,10 @@ import { CgMenuGridR } from "react-icons/cg";
 import { IoSearch } from "react-icons/io5";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { searchData } from "./Utility";
 import { useEffect, useRef, useState } from "react";
 import Search from "./Search";
 import Dropdown from "./Dropdown";
+import searchData from "../utility/searchData";
 
 const navItems = [
   { icon: <IoMdHome size={25} />, name: "Home", href: "/in" },

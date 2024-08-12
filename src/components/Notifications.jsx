@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import Body from "./Body";
 import Column from "./Column";
 import timeAgo from "../utility/timeaAgo";
+import ProfileImg from "./ProfileImg";
 
 const card = {
   borderRadius: "6px",

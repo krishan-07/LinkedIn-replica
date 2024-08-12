@@ -3,8 +3,7 @@ import defaultbanner from "../../assets/defaultBanner.svg";
 import demoImg from "../../assets/demoimg.jpeg";
 import banner from "../../assets/banner.jpeg";
 import { createSlice } from "@reduxjs/toolkit";
-import { formatDateToYYYYMMM } from "../../components/Utility";
-
+import formatDateToYYYYMMM from "../../utility/formatDateToYYYYMMM";
 const USERS_DATA = [
   {
     email: "krishan.mondal@gmail.com",
