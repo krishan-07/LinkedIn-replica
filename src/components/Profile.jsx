@@ -1,16 +1,14 @@
 import { Body, Column } from "./Utility";
 import { useLoaderData } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  EditEducationPopup,
-  EditExperiencePopup,
-  EditSkillsPopup,
-  EditUserDataPopup,
-} from "./ProfileEditorPopup";
 import { profileEdit } from "../store/features/profileEditPopup";
 import { useState } from "react";
 import ProfilePictureEditPopup from "./ProfilePictureEditPopup";
 import ProfilePictureViewPopup from "./ProfilePictureViewPopup";
+import ProfileEditEducationPopup from "./ProfileEditEducationPopup";
+import ProfileEditExperiencePopup from "./ProfileEditExperiencePopup";
+import ProfileEditSkillsPopup from "./ProfileEditSkillsPopup";
+import ProfileEditUserDataPopup from "./ProfileEditUserDataPopup";
 import ProfilePosts from "./ProfilePosts";
 import ProfileSkillsSection from "./ProfileSkillSection";
 import ProfileEducationSection from "./ProfileEducationSection";
@@ -56,16 +54,16 @@ const Profile = () => {
   return (
     <div style={{ height: "100%" }}>
       {editPopup && allowPopup.profile && (
-        <EditUserDataPopup user={currUserData} close={close} />
+        <ProfileEditUserDataPopup user={currUserData} close={close} />
       )}
       {editPopup && allowPopup.skills && (
-        <EditSkillsPopup user={currUserData} close={close} />
+        <ProfileEditSkillsPopup user={currUserData} close={close} />
       )}
       {editPopup && allowPopup.education && (
-        <EditEducationPopup user={currUserData} close={close} />
+        <ProfileEditEducationPopup user={currUserData} close={close} />
       )}
       {editPopup && allowPopup.experience && (
-        <EditExperiencePopup user={currUserData} close={close} />
+        <ProfileEditExperiencePopup user={currUserData} close={close} />
       )}
       {editPopup && allowPopup.pfp && (
         <ProfilePictureEditPopup user={currUserData} close={close} />
