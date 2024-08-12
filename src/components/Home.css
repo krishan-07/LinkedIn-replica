@@ -448,3 +448,8 @@ textarea {
   background: white;
   border-radius: 7px;
 }
+.network-card {
+  border-radius: 10px;
+  background: white;
+  overflow: clip;
+}
