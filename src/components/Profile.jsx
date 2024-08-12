@@ -1,4 +1,3 @@
-import { Body, Column } from "./Utility";
 import { useLoaderData } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { profileEdit } from "../store/features/profileEditPopup";
@@ -14,6 +13,8 @@ import ProfileSkillsSection from "./ProfileSkillSection";
 import ProfileEducationSection from "./ProfileEducationSection";
 import ProfileExperienceSection from "./ProfileExperienceSection";
 import ProfileBanner from "./ProfileBanner";
+import Body from "./Body";
+import Column from "./Column";
 
 const Profile = () => {
   const dispatch = useDispatch();

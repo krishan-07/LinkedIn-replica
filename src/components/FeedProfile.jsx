@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { ProfileImg } from "./Utility";
+import ProfileImg from "./ProfileImg";
 
 const FeedProfile = ({ user, posts }) => {
   return (

@@ -1,11 +1,12 @@
 import { useDispatch } from "react-redux";
-import { ProfileImg, timeAgo } from "./Utility";
 import { useState } from "react";
 import { postsActions } from "../store/features/post";
 import { usersDataAction } from "../store/features/users";
 import { CiMenuKebab } from "react-icons/ci";
 import { BiLike, BiSolidLike } from "react-icons/bi";
 import { FaRegCommentDots } from "react-icons/fa6";
+import timeAgo from "../utility/timeaAgo";
+import ProfileImg from "./ProfileImg";
 
 export const Post = ({
   post,

@@ -3,9 +3,9 @@ import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { createPostActions } from "../store/features/createPostModal";
 import { FaImage } from "react-icons/fa6";
-import { ProfileImg } from "./Utility";
 import { postsActions } from "../store/features/post";
 import { usersDataAction } from "../store/features/users";
+import ProfileImg from "./ProfileImg";
 
 const PostInputPopup = () => {
   const [imgUrl, setImgUrl] = useState(null);

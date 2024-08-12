@@ -1,8 +1,10 @@
 import { useDispatch, useSelector } from "react-redux";
-import { Body, Column, ProfileImg, timeAgo } from "./Utility";
 import { usersDataAction } from "../store/features/users";
 import { TbGhost3 } from "react-icons/tb";
 import { useNavigate } from "react-router-dom";
+import Body from "./Body";
+import Column from "./Column";
+import timeAgo from "../utility/timeaAgo";
 
 const card = {
   borderRadius: "6px",

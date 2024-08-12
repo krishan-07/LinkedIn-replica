@@ -1,7 +1,7 @@
 import { useDispatch } from "react-redux";
 import { createPostActions } from "../store/features/createPostModal";
 import Post from "./Post";
-import { ProfileImg } from "./Utility";
+import ProfileImg from "./ProfileImg";
 
 const ProfilePosts = ({
   user,

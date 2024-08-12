@@ -1,9 +1,9 @@
 import { IoCloseOutline } from "react-icons/io5";
-import { ProfileImg } from "./Utility";
 import { FaImage } from "react-icons/fa";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { usersDataAction } from "../store/features/users";
+import ProfileImg from "./ProfileImg";
 
 const ProfilePictureEditPopup = ({ user, close }) => {
   const [imgUrl, setImgUrl] = useState(null);

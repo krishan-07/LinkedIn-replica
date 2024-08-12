@@ -1,6 +1,6 @@
 import { useDispatch } from "react-redux";
-import { ProfileImg } from "./Utility";
 import { createPostActions } from "../store/features/createPostModal";
+import ProfileImg from "./ProfileImg";
 
 const PostInput = ({ user }) => {
   const dispatch = useDispatch();

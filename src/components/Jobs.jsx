@@ -1,6 +1,6 @@
-import { Body, Column } from "./Utility";
-import logo from "../assets/company_logo.jpeg";
 import { useSelector } from "react-redux";
+import Body from "./Body";
+import Column from "./Column";
 
 const card = {
   borderRadius: "10px",

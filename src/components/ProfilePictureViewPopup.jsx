@@ -1,5 +1,5 @@
 import { IoCloseOutline } from "react-icons/io5";
-import { ProfileImg } from "./Utility";
+import ProfileImg from "./ProfileImg";
 
 const ProfilePictureViewPopup = ({ user, close }) => {
   const closePopup = () => {

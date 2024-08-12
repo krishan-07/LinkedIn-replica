@@ -1,10 +1,12 @@
-import { Body, Column, ProfileImg } from "./Utility.jsx";
 import { useSelector } from "react-redux";
 import Footer from "./Footer.jsx";
 import FeedProfile from "./FeedProfile.jsx";
 import PostInput from "./PostInput.jsx";
 import Post from "./Post.jsx";
 import News from "./News.jsx";
+import Body from "./Body.jsx";
+import Column from "./Column.jsx";
+import ProfileImg from "./ProfileImg.jsx";
 
 const Feed = () => {
   const posts = useSelector((state) => state.posts);

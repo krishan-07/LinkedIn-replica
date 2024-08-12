@@ -2,8 +2,8 @@ import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { usersDataAction } from "../store/features/users";
 import { messagesActions } from "../store/features/messages";
-import { ProfileImg } from "./Utility";
 import { FaPen } from "react-icons/fa6";
+import ProfileImg from "./ProfileImg";
 
 const ProfileBanner = ({ user, open, isCurrUser, currUserData }) => {
   const openPopup = () => {
