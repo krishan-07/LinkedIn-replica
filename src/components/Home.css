@@ -444,3 +444,7 @@ textarea {
   overflow: hidden;
   border-radius: 7px;
 }
+.profile-card {
+  background: white;
+  border-radius: 7px;
+}
