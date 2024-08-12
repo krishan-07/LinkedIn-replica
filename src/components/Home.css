@@ -436,3 +436,11 @@ textarea {
   border: none;
   background: transparent;
 }
+.feed-card {
+  background: white;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border-radius: 7px;
+}
