@@ -3,7 +3,7 @@ import { FcGoogle } from "react-icons/fc";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { usersDataAction } from "../store/features/users";
-import { CurrUserActions } from "../store/features/currUser";
+import { currUserActions } from "../store/features/currUser";
 
 const SignupForm = () => {
   const [data, setData] = useState({
@@ -61,7 +61,7 @@ const SignupForm = () => {
     }
   };
   const handleRedirect = (email) => {
-    dispatch(CurrUserActions.addUser(email));
+    dispatch(currUserActions.addUser(email));
     setTimeout(() => {
       navigate("/in");
     }, 1000);

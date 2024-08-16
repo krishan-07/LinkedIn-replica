@@ -4,7 +4,7 @@ import { FaApple } from "react-icons/fa";
 import Footer from "./Footer";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { CurrUserActions } from "../store/features/currUser";
+import { currUserActions } from "../store/features/currUser";
 import { useState } from "react";
 
 const Login = () => {
@@ -21,7 +21,7 @@ const Login = () => {
     setData({ ...data, [name]: value });
   };
   const handleRedirect = (email) => {
-    dispatch(CurrUserActions.addUser(email));
+    dispatch(currUserActions.addUser(email));
     setTimeout(() => {
       navigate("/in");
     }, 1000);
