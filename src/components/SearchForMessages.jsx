@@ -1,3 +1,4 @@
+import React from "react";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -31,7 +32,7 @@ const SearchForMessages = ({ show, currUser }) => {
   };
 
   return (
-    <div className="">
+    <div data-testid="search-for-messages">
       <div className="d-flex py-2 px-3 justify-content-between border-bottom-light">
         <div className="fw-m ">New message</div>
       </div>

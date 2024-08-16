@@ -1,3 +1,4 @@
+import React from "react";
 import { IoCloseOutline } from "react-icons/io5";
 import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -82,7 +83,7 @@ const PostInputPopup = () => {
   }, []);
 
   return (
-    <div className="modal-overlay">
+    <div className="modal-overlay" data-testid="postInput-modal">
       <div className="modal-cont mx-2" style={{ maxWidth: "900px" }}>
         <div className="d-flex justify-content-between align-items-center">
           <div className="d-flex align-items-center gap-3 m-0 py-2">

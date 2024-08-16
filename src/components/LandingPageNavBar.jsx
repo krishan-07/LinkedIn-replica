@@ -1,3 +1,4 @@
+import React from "react";
 import logo from "../assets/appLogo.png";
 import NavIcons from "./NavIcons";
 import { MdPeopleAlt } from "react-icons/md";

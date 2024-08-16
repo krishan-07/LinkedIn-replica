@@ -1,3 +1,4 @@
+import React from "react";
 import { useDispatch } from "react-redux";
 import { useState } from "react";
 import { postsActions } from "../store/features/post";
@@ -110,7 +111,11 @@ export const Post = ({
     setText("");
   };
   return (
-    <div className="feed-card mb-3 pb-3" data-post={post.postId}>
+    <div
+      className="feed-card mb-3 pb-3"
+      data-post={post.postId}
+      data-testid="post"
+    >
       <div className="d-flex align-items-center gap-3 m-0 px-3 py-2">
         {profileImg}
         <div className="d-flex flex-column mt-1">

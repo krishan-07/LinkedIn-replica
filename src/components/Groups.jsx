@@ -1,3 +1,4 @@
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { groupsActions } from "../store/features/groups";
 import Column from "./Column";
@@ -8,7 +9,7 @@ const Groups = () => {
   const dispatch = useDispatch();
 
   const joinGroup = (id) => {
-    dispatch(groupsActionss.joined(id));
+    dispatch(groupsActions.joined(id));
   };
   const leaveGroup = (id) => {
     dispatch(groupsActions.leave(id));
@@ -16,7 +17,7 @@ const Groups = () => {
 
   return (
     <>
-      <div className="network-card py-2 mb-4">
+      <div className="network-card py-2 mb-4" data-testid="groups">
         <div className="d-flex justify-content-between">
           <div className="text-secondary fs-m px-3 py-2">
             Groups you may interested in
@@ -33,10 +34,14 @@ const Groups = () => {
                 <div className="connection-card">
                   <div className="d-flex align-items-center justify-content-center">
                     <div className="banner-container">
-                      <img src={group.banner} alt="" />
+                      <img
+                        src={group.banner}
+                        alt=""
+                        data-testid="group-banner"
+                      />
                     </div>
                     <div className="connection-img">
-                      <img src={group.image} alt="" />
+                      <img src={group.image} alt="" data-testid="group-image" />
                     </div>
                   </div>
                   <div style={{ height: "65px" }}></div>
@@ -51,6 +56,7 @@ const Groups = () => {
                   <div
                     className="text-center text-secondary px-1 mb-3"
                     style={{ fontSize: ".9rem" }}
+                    data-testid="group-members"
                   >
                     {group.members} members
                   </div>

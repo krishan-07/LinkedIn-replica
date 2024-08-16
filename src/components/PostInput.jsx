@@ -1,3 +1,4 @@
+import React from "react";
 import { useDispatch } from "react-redux";
 import { createPostActions } from "../store/features/createPostModal";
 import ProfileImg from "./ProfileImg";
@@ -9,7 +10,7 @@ const PostInput = ({ user }) => {
   };
   return (
     <>
-      <div className="feed-card mb-4">
+      <div className="feed-card mb-4" data-testid="post-input">
         <div className="d-flex p-3 gap-3 ">
           <ProfileImg
             size={"50px"}

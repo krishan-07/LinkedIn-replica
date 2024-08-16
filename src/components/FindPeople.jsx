@@ -1,3 +1,4 @@
+import React from "react";
 import { useDispatch } from "react-redux";
 import { usersDataAction } from "../store/features/users";
 import Column from "./Column";
@@ -33,7 +34,7 @@ const FindPeople = ({ currUser, users }) => {
   };
   return (
     <>
-      <div className="network-card pt-2 mb-4">
+      <div className="network-card pt-2 mb-4" data-testid="findPeople">
         <div className="d-flex justify-content-between">
           <div className="text-secondary fs-m px-3 py-2">
             People you may know
@@ -82,7 +83,7 @@ const FindPeople = ({ currUser, users }) => {
                     Based on your profile
                   </div>
 
-                  <div className="mx-4 mb-3">
+                  <div className="mx-4 mb-3" data-testid="button">
                     {!user.requests.includes(currUser.email) ? (
                       <button
                         className="btn btn-view-profile"

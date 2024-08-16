@@ -1,3 +1,4 @@
+import React from "react";
 const Body = ({ children }) => {
   return (
     <div className="container-md">

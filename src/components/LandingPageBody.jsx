@@ -1,3 +1,4 @@
+import React from "react";
 import illustration from "../assets/illustration.svg";
 import { FcGoogle } from "react-icons/fc";
 import { FaApple } from "react-icons/fa6";
@@ -8,7 +9,10 @@ import { Link } from "react-router-dom";
 const LandingPageBody = () => {
   return (
     <>
-      <div className="d-flex mt-sm-5 container-m">
+      <div
+        className="d-flex mt-sm-5 container-m"
+        data-testid="landing-page-body"
+      >
         <div className="left-container ps-4">
           <h1 className="heading">Welcome to your professional community</h1>
           <form className="card ms-lg-0">
@@ -51,6 +55,7 @@ const LandingPageBody = () => {
                   to="/login"
                   className="link-offset-2 link-offset-1-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover"
                   style={{ fontWeight: "500" }}
+                  data-testid="link"
                 >
                   Sign In
                 </Link>

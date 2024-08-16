@@ -1,3 +1,4 @@
+import React from "react";
 import { useDispatch } from "react-redux";
 import { usersDataAction } from "../store/features/users";
 import ProfileImg from "./ProfileImg";
@@ -37,7 +38,7 @@ const Invitations = ({ currUser, users }) => {
   };
   return (
     <>
-      <div className="network-card my-3">
+      <div className="network-card my-3" data-testid="invitations">
         <div className="d-flex justify-content-between">
           <div className="text-secondary fs-m px-3 py-2">Invitations</div>
           <div className="fw-m fs-m px-3 py-2 text-secondary cursor-p">
@@ -50,6 +51,7 @@ const Invitations = ({ currUser, users }) => {
             <div
               className="d-flex py-3 align-items-start align-items-sm-center justify-content-between flex-column flex-sm-row"
               key={user.email}
+              data-testid="invitation-data"
             >
               <div className="profile col-12 col-sm-8 d-flex px-3">
                 <ProfileImg

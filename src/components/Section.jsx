@@ -1,3 +1,4 @@
+import React from "react";
 const Section = ({ heading, body, tags, width }) => {
   return (
     <div className="container-m ps-sm-4 p-3 mb-5 mt-5 ">

@@ -1,3 +1,4 @@
+import React from "react";
 import { useSelector } from "react-redux";
 import Body from "./Body";
 import Column from "./Column";
@@ -24,9 +25,10 @@ const Jobs = () => {
                 className="d-flex align-items-center px-3 cursor-p"
                 style={{ borderBottom: "1px solid rgb(201, 201, 201)" }}
                 key={job.id}
+                data-testid="job"
               >
                 <div className="job-img">
-                  <img src={job.logo} alt="" />
+                  <img src={job.logo} alt="" data-testid="job-logo" />
                 </div>
                 <div className="ms-3 py-2">
                   <span className="text-primary fw-m fs-m">{job.jobName}</span>

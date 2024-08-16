@@ -1,3 +1,4 @@
+import React from "react";
 import "./LandingPage.css";
 import LandingPageNavBar from "./LandingPageNavBar";
 import LandingPageBody from "./LandingPageBody";

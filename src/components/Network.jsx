@@ -1,3 +1,4 @@
+import React from "react";
 import { useSelector } from "react-redux";
 import Body from "./Body";
 import Column from "./Column";
@@ -12,7 +13,7 @@ const Network = () => {
   const remainingUsers = users.filter((user) => user.email !== currUserEmail);
 
   return (
-    <div style={{ height: "100%" }}>
+    <div style={{ height: "100%" }} data-testid="network">
       <Body>
         <Column className={"col-12 col-lg-9"}>
           <Invitations currUser={currUser} users={users} />

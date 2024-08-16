@@ -14,4 +14,4 @@ const currUser = createSlice({
 });
 
 export default currUser;
-export const CurrUserActions = currUser.actions;
+export const currUserActions = currUser.actions;

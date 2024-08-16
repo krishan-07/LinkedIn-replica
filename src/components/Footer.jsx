@@ -1,3 +1,4 @@
+import React from "react";
 import { FaCloud } from "react-icons/fa6";
 import { Link } from "react-router-dom";
 
@@ -14,7 +15,10 @@ const Footer = ({ className = "" }) => {
     "Community Guidelines",
   ];
   return (
-    <footer className="d-flex flex-wrap justify-content-center align-items-center my-4 border-top">
+    <footer
+      className="d-flex flex-wrap justify-content-center align-items-center my-4 border-top"
+      data-testid="footer"
+    >
       <p className=" mb-0 me-4">
         <span className="me-2 ">
           <FaCloud size={25} />

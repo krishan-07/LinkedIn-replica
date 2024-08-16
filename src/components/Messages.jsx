@@ -1,3 +1,4 @@
+import React from "react";
 import { useSelector } from "react-redux";
 import { FiEdit } from "react-icons/fi";
 import { useEffect, useState } from "react";
@@ -55,6 +56,7 @@ const Messages = () => {
                       setShowSearch(true);
                       navigate("/in/messaging");
                     }}
+                    data-testid="add-button"
                   >
                     <FiEdit size={22} />
                   </div>
@@ -73,6 +75,7 @@ const Messages = () => {
                           setShowSearch(false);
                           navigate(`${obj.userName}`);
                         }}
+                        data-testid="mssg-user-card"
                       >
                         <ProfileImg
                           size={"40px"}

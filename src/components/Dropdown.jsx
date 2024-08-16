@@ -1,7 +1,8 @@
+import React from "react";
 import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import { CurrUserActions } from "../store/features/currUser";
+import { currUserActions } from "../store/features/currUser";
 import ProfileImg from "./ProfileImg";
 
 const Dropdown = () => {
@@ -31,7 +32,7 @@ const Dropdown = () => {
     navigate(`/in/${user.userName}`);
   };
   const handleSignout = () => {
-    dispatch(CurrUserActions.addUser(null));
+    dispatch(currUserActions.addUser(null));
   };
 
   return (
@@ -41,16 +42,17 @@ const Dropdown = () => {
         toggleDropdown();
       }}
       ref={dropdownRef}
+      data-testid="dropdown"
     >
       <div className="img-container">
-        <img src={user.profileImg} alt="" />
+        <img src={user.profileImg} alt="" data-testid="dropdown-img" />
       </div>
       <div className="dropdown-toggle d-flex align-items-center">
         <span className="text-secondary fs-sm">Me</span>
       </div>
       {/* dropdown menu */}
       {dropdown && (
-        <ul className="dropdown-m p-0">
+        <ul className="dropdown-m p-0" data-testid="dropdown-content">
           <div className="d-flex justify-content-start gap-2 p-2">
             <div
               className="img-container"

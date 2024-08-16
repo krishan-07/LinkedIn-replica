@@ -1,3 +1,4 @@
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLoaderData } from "react-router-dom";
 import { IoSend } from "react-icons/io5";
@@ -21,6 +22,7 @@ const ChatBox = () => {
   const dispatch = useDispatch();
 
   const handleSend = () => {
+    console.log("clicked");
     dispatch(
       messagesActions.send({
         currUserEmail: currUserEmail,
@@ -54,7 +56,7 @@ const ChatBox = () => {
     };
   }, []);
   return (
-    <div className="position-relative">
+    <div className="position-relative" data-testid="messages">
       <div className="d-flex px-2 py-1 align-items-center border-bottom-light">
         <div className="profile d-flex align-items-center">
           <div className="ms-2">
@@ -80,6 +82,7 @@ const ChatBox = () => {
               className="position-relative my-2"
               key={mssg.message}
               style={{ height: "23px" }}
+              data-testid="chat"
             >
               <div className="position-absolute end-0">
                 <span
@@ -95,6 +98,7 @@ const ChatBox = () => {
               className="position-relative my-2"
               key={mssg.message}
               style={{ height: "23px" }}
+              data-testid="chat"
             >
               <div className="position-absolute start-0">
                 <span
@@ -125,7 +129,11 @@ const ChatBox = () => {
             }}
           />
 
-          <div className="px-2 cursor-p" onClick={handleSend}>
+          <div
+            className="px-2 cursor-p"
+            onClick={handleSend}
+            data-testid="send-button"
+          >
             <IoSend size={20} />
           </div>
         </div>
