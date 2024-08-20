@@ -1,3 +1,4 @@
+import React from "react";
 import { useEffect, useState } from "react";
 import { IoCloseOutline } from "react-icons/io5";
 import { useDispatch } from "react-redux";
@@ -35,8 +36,8 @@ const ProfileEditEducationPopup = ({ user, close }) => {
           id: user.email,
           education: {
             school: education.school,
-            course: education.course,
-            from: Year(education.from),
+            course: education.degree,
+            from: convertMonthYear(education.from),
             to: convertMonthYear(education.to),
           },
         })
@@ -75,6 +76,7 @@ const ProfileEditEducationPopup = ({ user, close }) => {
               type="button"
               className="button p-2 pe-0"
               onClick={closePopup}
+              data-testid="close-add-education"
             >
               <IoCloseOutline size={30} />
             </button>
@@ -162,6 +164,7 @@ const ProfileEditEducationPopup = ({ user, close }) => {
             type="month"
             className="form-control form-control-sm"
             name="to"
+            id="to"
             value={education.to}
             onChange={handleOnChange}
           />

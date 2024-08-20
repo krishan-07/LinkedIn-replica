@@ -118,7 +118,12 @@ const PostInputPopup = () => {
 
           {isImg && (
             <div className="d-flex gap-2">
-              <img src={imgUrl} alt="" className="img-preview" />
+              <img
+                src={imgUrl}
+                alt=""
+                className="img-preview"
+                data-testid="img-preview"
+              />
               <div className="align-self-start" onClick={handleRemove}>
                 <IoCloseOutline size={20} />
               </div>
@@ -136,6 +141,7 @@ const PostInputPopup = () => {
               onChange={handleOnChange}
               className="mb-3"
               id="img-input"
+              data-testid="img-input"
             />
           </span>
           <button className="btn-post bg-primary" onClick={addPost}>

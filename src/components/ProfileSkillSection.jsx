@@ -1,3 +1,4 @@
+import React from "react";
 import { FaPlus } from "react-icons/fa6";
 
 const ProfileSkillsSection = ({ user, open, isCurrUser }) => {
@@ -5,11 +6,15 @@ const ProfileSkillsSection = ({ user, open, isCurrUser }) => {
     open("skills");
   };
   return (
-    <div className="profile-card p-3 mb-2">
+    <div className="profile-card p-3 mb-2" data-testid="profile-skill-section">
       <div className="d-flex justify-content-between mb-1">
         <div className="h5">Skills</div>
         {isCurrUser && (
-          <div className="me-1 cursor-p" onClick={openPopup}>
+          <div
+            className="me-1 cursor-p"
+            onClick={openPopup}
+            data-testid="edit-skills"
+          >
             <FaPlus size={15} />
           </div>
         )}

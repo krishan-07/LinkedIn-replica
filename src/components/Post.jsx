@@ -237,7 +237,11 @@ export const Post = ({
         {post.comments.map((comment) => {
           const user = usersData.find((data) => data.email === comment.email);
           return (
-            <div className="mt-4 d-flex gap-2" key={comment.id}>
+            <div
+              className="mt-4 d-flex gap-2"
+              key={comment.id}
+              data-testid="comment"
+            >
               <div>
                 <ProfileImg
                   size={"42px"}

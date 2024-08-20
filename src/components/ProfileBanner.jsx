@@ -1,3 +1,4 @@
+import React from "react";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { usersDataAction } from "../store/features/users";
@@ -70,7 +71,10 @@ const ProfileBanner = ({ user, open, isCurrUser, currUserData }) => {
   };
 
   return (
-    <div className="profile-section w-100 position-relative pb-2">
+    <div
+      className="profile-section w-100 position-relative pb-2"
+      data-testid="profile-banner"
+    >
       <div className="banner-container">
         <img src={user.profileBanner} alt="banner" />
       </div>
@@ -100,7 +104,11 @@ const ProfileBanner = ({ user, open, isCurrUser, currUserData }) => {
             )}
           </div>
           {isCurrUser && (
-            <div className="me-3 cursor-p" onClick={openPopup}>
+            <div
+              className="me-3 cursor-p"
+              onClick={openPopup}
+              data-testid="edit-profile"
+            >
               <FaPen size={15} />
             </div>
           )}

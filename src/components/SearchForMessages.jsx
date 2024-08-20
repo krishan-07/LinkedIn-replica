@@ -58,6 +58,7 @@ const SearchForMessages = ({ show, currUser }) => {
                   onClick={() => {
                     addMessage(user.email, user.userName);
                   }}
+                  data-testid={`search-${user.userName}`}
                 >
                   <div className="profile d-flex align-items-center">
                     <ProfileImg

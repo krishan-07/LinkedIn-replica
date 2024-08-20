@@ -1,3 +1,4 @@
+import React from "react";
 import { useEffect, useRef } from "react";
 import { IoSearch } from "react-icons/io5";
 import { useNavigate } from "react-router-dom";
@@ -36,6 +37,7 @@ const Search = ({ data, show, setSearch }) => {
                 onClick={() => {
                   directToProfile(user.userName);
                 }}
+                data-testid="link"
               >
                 <div>
                   <IoSearch size={25} />

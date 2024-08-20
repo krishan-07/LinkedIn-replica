@@ -1,3 +1,4 @@
+import React from "react";
 import { useState } from "react";
 import { FcGoogle } from "react-icons/fc";
 import { useDispatch, useSelector } from "react-redux";
@@ -86,7 +87,7 @@ const SignupForm = () => {
     }
   };
   return (
-    <form className="card p-4 mt-4">
+    <form className="card p-4 mt-4" data-testid="signup-form">
       <div className="mb-3">
         <label htmlFor="email" className="form-label">
           Email
@@ -134,7 +135,7 @@ const SignupForm = () => {
       </div>
       <div className="mb-3">
         <label htmlFor="password" className="form-label">
-          Password ( 6+ characters)
+          Password (6+ characters)
         </label>
         <input
           type="password"

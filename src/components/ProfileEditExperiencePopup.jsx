@@ -2,9 +2,10 @@ import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { usersDataAction } from "../store/features/users";
 import { IoCloseOutline } from "react-icons/io5";
+import React from "react";
 import convertMonthYear from "../utility/convertMonthYear";
 
-const profileEditExperiencePopup = ({ user, close }) => {
+const ProfileEditExperiencePopup = ({ user, close }) => {
   const dispatch = useDispatch();
   const [experience, setExperience] = useState({
     companyName: "",
@@ -93,6 +94,7 @@ const profileEditExperiencePopup = ({ user, close }) => {
               type="button"
               className="button p-2 pe-0"
               onClick={closePopup}
+              data-testid="close-add-experience"
             >
               <IoCloseOutline size={30} />
             </button>
@@ -231,4 +233,4 @@ const profileEditExperiencePopup = ({ user, close }) => {
     </div>
   );
 };
-export default profileEditExperiencePopup;
+export default ProfileEditExperiencePopup;

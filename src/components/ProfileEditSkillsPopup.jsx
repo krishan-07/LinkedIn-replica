@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { usersDataAction } from "../store/features/users";
+import React from "react";
 import { IoCloseOutline } from "react-icons/io5";
 
 const ProfileEditSkillsPopup = ({ user, close }) => {
@@ -53,6 +54,7 @@ const ProfileEditSkillsPopup = ({ user, close }) => {
               type="button"
               className="button p-2 pe-0"
               onClick={closePopup}
+              data-testid="close-add-skills"
             >
               <IoCloseOutline size={30} />
             </button>

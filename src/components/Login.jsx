@@ -1,3 +1,4 @@
+import React from "react";
 import { FcGoogle } from "react-icons/fc";
 import logo from "../assets/appLogo.png";
 import { FaApple } from "react-icons/fa";
@@ -40,7 +41,7 @@ const Login = () => {
 
   return (
     <div>
-      <nav className="navbar flex p-0">
+      <nav className="navbar flex p-0" data-testid="login">
         <Link
           className="navbar-brand order-1 "
           to="/"
@@ -115,6 +116,7 @@ const Login = () => {
           type="button"
           className="btn btn-login my-2"
           onClick={authenticateUser}
+          data-testid="button"
         >
           Sign in
         </button>

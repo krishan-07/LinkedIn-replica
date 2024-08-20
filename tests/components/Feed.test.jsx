@@ -50,15 +50,9 @@ describe("Feed", () => {
   });
   it("should render components correctly", () => {
     useSelector.mockImplementation((selector) => {
-      if (selector.toString().includes("usersData")) {
-        return mockUsersData;
-      }
-      if (selector.toString().includes("currUser")) {
-        return mockCurrUserEmail;
-      }
-      if (selector.toString().includes("posts")) {
-        return mockPosts;
-      }
+      if (selector.toString().includes("usersData")) return mockUsersData;
+      if (selector.toString().includes("currUser")) return mockCurrUserEmail;
+      if (selector.toString().includes("posts")) return mockPosts;
       return null;
     });
     render(

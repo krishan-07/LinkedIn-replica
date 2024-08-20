@@ -1,3 +1,4 @@
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { usersDataAction } from "../store/features/users";
 import { TbGhost3 } from "react-icons/tb";
@@ -58,6 +59,7 @@ const Notifications = () => {
                           markAsRead(obj.id);
                           handleNavigate(obj.type, user.userName);
                         }}
+                        data-testid="notification"
                       >
                         <ProfileImg
                           size={"40px"}

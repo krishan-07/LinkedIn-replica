@@ -1,3 +1,4 @@
+import React from "react";
 import { useDispatch } from "react-redux";
 import { createPostActions } from "../store/features/createPostModal";
 import Post from "./Post";

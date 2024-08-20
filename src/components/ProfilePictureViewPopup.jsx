@@ -1,3 +1,4 @@
+import React from "react";
 import { IoCloseOutline } from "react-icons/io5";
 import ProfileImg from "./ProfileImg";
 
@@ -17,7 +18,12 @@ const ProfilePictureViewPopup = ({ user, close }) => {
           </div>
         </div>
         <div className="d-flex justify-content-center p-3 mb-4">
-          <ProfileImg image={user.profileImg} disable={true} size={"350px"} />
+          <ProfileImg
+            image={user.profileImg}
+            disable={true}
+            size={"350px"}
+            name={user.name}
+          />
         </div>
       </div>
     </div>

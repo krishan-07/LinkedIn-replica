@@ -1,3 +1,4 @@
+import React from "react";
 import { FaPlus } from "react-icons/fa6";
 
 const ProfileExperienceSection = ({ user, open, isCurrUser }) => {
@@ -5,11 +6,15 @@ const ProfileExperienceSection = ({ user, open, isCurrUser }) => {
     open("experience");
   };
   return (
-    <div className="profile-card p-3">
+    <div className="profile-card p-3" data-testid="profile-experience-section">
       <div className="d-flex justify-content-between mb-1">
         <div className="h5">Experience</div>
         {isCurrUser && (
-          <div className="me-1 cursor-p" onClick={openPopup}>
+          <div
+            className="me-1 cursor-p"
+            onClick={openPopup}
+            data-testid="edit-experience"
+          >
             <FaPlus size={15} />
           </div>
         )}
@@ -27,7 +32,9 @@ const ProfileExperienceSection = ({ user, open, isCurrUser }) => {
               <span className="mx-1">-</span>
               <span className="fst-italic fs-s text-dark">{obj.mode}</span>
               <div className="text-secondary fs-s">
-                {obj.from} - {obj.to}
+                <span>{obj.from}</span>
+                <span>-</span>
+                <span>{obj.to}</span>
               </div>
             </div>
           ))}

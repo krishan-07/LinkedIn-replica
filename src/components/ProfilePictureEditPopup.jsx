@@ -1,3 +1,4 @@
+import React from "react";
 import { IoCloseOutline } from "react-icons/io5";
 import { FaImage } from "react-icons/fa";
 import { useState } from "react";
@@ -58,13 +59,23 @@ const ProfilePictureEditPopup = ({ user, close }) => {
         <div className="d-flex justify-content-center align-items-center py-2">
           {isImg ? (
             <div className="d-flex">
-              <ProfileImg image={imgUrl} disable={true} size={"300px"} />
+              <ProfileImg
+                image={imgUrl}
+                disable={true}
+                size={"300px"}
+                name="uploading"
+              />
               <div onClick={handleRemove}>
                 <IoCloseOutline size={30} />
               </div>
             </div>
           ) : (
-            <ProfileImg image={user.profileImg} disable={true} size={"300px"} />
+            <ProfileImg
+              image={user.profileImg}
+              disable={true}
+              size={"300px"}
+              name={user.userName}
+            />
           )}
         </div>
         <div className="d-flex justify-content-between mx-2 align-items-center m-2 p-1">
@@ -77,6 +88,7 @@ const ProfilePictureEditPopup = ({ user, close }) => {
               accept="image/*"
               onChange={handleOnChange}
               id="img-input"
+              data-testid="img-input"
             />
           </span>
           <button
