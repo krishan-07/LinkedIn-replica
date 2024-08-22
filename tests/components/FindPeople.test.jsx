@@ -51,7 +51,7 @@ describe("FindPeople", () => {
     );
     expect(screen.getByText(/Entrepreneur/i)).toBeInTheDocument();
   });
-  it("should should change the text of button when clicked on connect", async () => {
+  it("should change the text of button when clicked on connect", async () => {
     const { rerender } = render(
       <MemoryRouter>
         <FindPeople currUser={mockCurrUser} users={mockUsers} />

@@ -77,7 +77,6 @@ describe("Signup form", () => {
         <SignupForm />
       </MemoryRouter>
     );
-    screen.debug();
     const email = "xyz@gmail.com";
     const userName = "xyz";
     const password = "abcdefgh";

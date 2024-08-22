@@ -1,6 +1,6 @@
 import React from "react";
 import logo from "../assets/appLogo.png";
-import NavIcons from "./NavIcons";
+import NavIcon from "./NavIcon";
 import { MdPeopleAlt } from "react-icons/md";
 import { RiNewsLine } from "react-icons/ri";
 import { BsCollectionPlay } from "react-icons/bs";
@@ -41,7 +41,7 @@ const LandingPageNavBar = () => {
         </Link>
         <ul className="navbar-nav ms-auto d-flex flex-row mt-1 second no-scrollbar">
           {navItems.map((navItem) => (
-            <NavIcons
+            <NavIcon
               icon={navItem.icon}
               name={navItem.name}
               key={navItem.name}

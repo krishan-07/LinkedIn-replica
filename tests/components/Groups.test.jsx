@@ -50,7 +50,6 @@ describe("Groups", () => {
         <Groups />
       </MemoryRouter>
     );
-    screen.debug();
 
     const banner = screen.getAllByTestId("group-banner");
     const image = screen.getAllByTestId("group-image");

@@ -85,7 +85,6 @@ describe("Profile picture edit popup", () => {
 
     expect(screen.getByRole("img")).toBeInTheDocument();
     expect(screen.getByRole("img")).toHaveAttribute("src", "mock-url");
-    screen.debug();
 
     const button = screen.getByRole("button", { name: /upload/i });
     await userEvent.click(button);

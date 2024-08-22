@@ -67,7 +67,7 @@ describe("Notifications", () => {
         <Notifications />
       </MemoryRouter>
     );
-    screen.debug();
+
     expect(screen.getByText(/john doe/i)).toBeInTheDocument();
     expect(screen.getByText(/message/i)).toBeInTheDocument();
 

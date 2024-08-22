@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const NavIcons = ({ icon, name, className = "mx-4", href = "#" }) => {
+const NavIcon = ({ icon, name, className = "mx-4", href = "#" }) => {
   return (
     <li className={`nav-item ${className}`}>
       <Link className="nav-link " to={href}>
@@ -15,4 +15,4 @@ const NavIcons = ({ icon, name, className = "mx-4", href = "#" }) => {
     </li>
   );
 };
-export default NavIcons;
+export default NavIcon;

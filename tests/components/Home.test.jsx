@@ -77,5 +77,4 @@ describe("Home", () => {
     expect(screen.getByRole("navigation")).toBeInTheDocument();
     expect(screen.getByTestId("postInput-modal")).toBeInTheDocument();
   });
-  it;
 });

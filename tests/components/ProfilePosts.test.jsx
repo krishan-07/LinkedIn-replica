@@ -78,7 +78,6 @@ describe("Profile posts", () => {
         />
       </MemoryRouter>
     );
-    screen.debug();
     expect(screen.getByText(/my activity/i)).toBeInTheDocument();
 
     posts.forEach((post) => {

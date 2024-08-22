@@ -32,7 +32,6 @@ describe("Profile Edit Experience popup", () => {
   });
   it("should render and take input correctly", async () => {
     render(<ProfileEditUserDataPopup user={currUserData} close={close} />);
-    screen.debug();
 
     expect(screen.getByText(/edit profile/i)).toBeInTheDocument();
 

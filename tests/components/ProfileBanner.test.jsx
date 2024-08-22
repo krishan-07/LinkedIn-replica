@@ -67,7 +67,7 @@ describe("ProfileBanner", () => {
         />
       </MemoryRouter>
     );
-    screen.debug();
+
     expect(screen.getByAltText("banner")).toBeInTheDocument();
     expect(screen.getByAltText("banner")).toHaveAttribute(
       "src",

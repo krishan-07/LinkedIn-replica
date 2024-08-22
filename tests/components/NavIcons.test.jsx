@@ -1,13 +1,12 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
-import NavIcons from "../../src/components/NavIcons";
+import NavIcon from "../../src/components/NavIcon";
 import { MemoryRouter } from "react-router-dom";
-
 describe("NavIcons", () => {
   it("should render correctly", () => {
     render(
       <MemoryRouter>
-        <NavIcons
+        <NavIcon
           icon="icon"
           name="Home"
           href="/in"

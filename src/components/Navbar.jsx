@@ -1,6 +1,6 @@
 import React from "react";
 import logo from "../assets/appLogo.png";
-import NavIcons from "./NavIcons";
+import NavIcon from "./NavIcon";
 import { IoMdHome } from "react-icons/io";
 import { MdPeopleAlt } from "react-icons/md";
 import { PiBagFill } from "react-icons/pi";
@@ -127,7 +127,7 @@ const Navbar = () => {
 
               <ul className="navbar-nav d-flex flex-row no-scrollbar">
                 {navItems.map((navItem) => (
-                  <NavIcons
+                  <NavIcon
                     icon={navItem.icon}
                     name={navItem.name}
                     href={navItem.href}

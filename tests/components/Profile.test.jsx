@@ -102,7 +102,7 @@ describe("Profile", () => {
     ).toBeInTheDocument();
   });
 
-  it("should open and close popup corretly", async () => {
+  it("should open and close popup correctly", async () => {
     render(
       <MemoryRouter>
         <Profile />
