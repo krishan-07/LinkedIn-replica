@@ -251,15 +251,17 @@ export const Post = ({
               </div>
               <div className="text px-3 py-2">
                 <div className="mb-2">
-                  <div className="d-flex justify-content-between">
+                  <div className="d-flex justify-content-between align-items-center gap-2">
                     <div className="fw-m">{user.name}</div>
-                    <div className="text-secondary fs-s">
+                    <div className="text-secondary fs-s ">
                       {timeAgo(comment.createdAt)}
                     </div>
                   </div>
-                  <div className="text-secondary fs-s lh-1">
-                    {user.bio.substring(0, 50) + "..."}
-                  </div>
+                  {user.bio && (
+                    <div className="text-secondary fs-s lh-1">
+                      {user.bio.substring(0, 50) + "..."}
+                    </div>
+                  )}
                 </div>
 
                 <div style={{ fontSize: ".9rem" }}>{comment.text}</div>
