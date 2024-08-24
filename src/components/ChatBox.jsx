@@ -22,7 +22,6 @@ const ChatBox = () => {
   const dispatch = useDispatch();
 
   const handleSend = () => {
-    console.log("clicked");
     dispatch(
       messagesActions.send({
         currUserEmail: currUserEmail,

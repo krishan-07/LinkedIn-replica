@@ -83,7 +83,7 @@ const ProfileEditUserDataPopup = ({ user, close }) => {
               name="pronouns"
               id="pronouns"
               className="form-select form-select-sm text-secondary"
-              value={user.pronouns}
+              value={formData.pronouns}
               onChange={handleOnChange}
             >
               <option value="default">Choose pronouns</option>
