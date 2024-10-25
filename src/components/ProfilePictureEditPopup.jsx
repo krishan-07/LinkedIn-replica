@@ -15,7 +15,12 @@ const ProfilePictureEditPopup = ({ user, close }) => {
     const file = e.target.files[0];
     if (file) {
       setIsImg(true);
-      setImgUrl(URL.createObjectURL(file));
+      const objectUrl = URL.createObjectURL(file);
+      if (isValidBlobUrl(objectUrl)) {
+        setImgUrl(objectUrl);
+      } else {
+        console.error("Invalid image URL");
+      }
     }
   };
   const Upload = () => {
@@ -103,4 +108,9 @@ const ProfilePictureEditPopup = ({ user, close }) => {
     </div>
   );
 };
+
+const isValidBlobUrl = (url) => {
+  return url.startsWith("blob:");
+};
+
 export default ProfilePictureEditPopup;
